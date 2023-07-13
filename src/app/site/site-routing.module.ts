@@ -6,7 +6,13 @@ import { SiteComponent } from './components/site/site.component';
 const routes: Routes = [
   {
     path: '',
-    component: SiteComponent
+    component: SiteComponent,
+    children: [
+      {
+        path: 'home',
+        loadChildren: () => import("../home/home.module").then( m => m.HomeModule )
+      }
+    ]
   }  
 ]
 
