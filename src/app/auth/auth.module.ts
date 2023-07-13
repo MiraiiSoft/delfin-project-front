@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 
 
 
@@ -13,7 +15,9 @@ import { AuthRoutingModule } from './auth-routing.module';
   ],
   imports: [
     AuthRoutingModule,
-    CommonModule
+    CommonModule,
+    MatInputModule,
+    MatToolbarModule
   ]
 })
 export class AuthModule { }
