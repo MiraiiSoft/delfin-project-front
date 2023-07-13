@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SiteComponent } from './components/site/site.component';
 import { SiteRoutingModule } from './site-routing.module';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     SiteRoutingModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ]
 })
 export class SiteModule { }

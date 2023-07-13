@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { SiteComponent } from './components/site/site.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SiteComponent
-  }  
+    component: HomeComponent
+  }
 ]
 
 @NgModule({
@@ -20,4 +20,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class SiteRoutingModule { }
+export class HomeRoutingModule { }

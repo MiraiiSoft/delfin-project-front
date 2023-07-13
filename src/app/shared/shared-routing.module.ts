@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { SiteComponent } from './components/site/site.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SiteComponent
-  }  
+    children:[
+      {
+        path: "home",
+        loadChildren: () => import("../home/home.module").then( m => m.HomeModule )
+      }
+    ]
+  }
 ]
 
 @NgModule({
@@ -20,4 +24,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class SiteRoutingModule { }
+export class SharedRoutingModule { }
