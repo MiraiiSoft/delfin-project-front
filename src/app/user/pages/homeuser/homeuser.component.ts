@@ -9,6 +9,8 @@ export class HomeuserComponent implements OnInit {
 
   constructor() { }
 
+  iconUsr = "assets/img/iconoUsuario.png";
+
   ngOnInit(): void {
   }
 

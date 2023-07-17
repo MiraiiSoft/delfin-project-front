@@ -4,9 +4,21 @@
 }
 
 .aside{
-    background-color: #CEE6FB;
+    background-color: #2977E6;
     height: 100vh;
     width: 30%;
+
+    .aside-icon {
+        margin-top: 20px;
+        margin-left: 20px;
+        width: 100%;
+        padding-right: 2rem;
+    }
+
+    .content-text{
+        padding-top: 1rem;
+    }
+
 }
 
 .data{
