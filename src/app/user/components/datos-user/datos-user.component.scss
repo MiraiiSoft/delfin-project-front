@@ -1,0 +1,27 @@
+.content{
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 2rem;
+}
+
+.datos-user{
+    .datos-user__field{
+        margin-top: 1rem;
+
+        .title{
+            margin: 0;
+            border: 2px solid black;
+            border-radius: 10px 10px 0 0px;
+            width: 10rem;
+            padding-left: 1rem;
+        }
+        .value{
+            display: flex;
+            justify-content: space-between;
+            margin: 0;
+            border: 2px solid black;
+            border-radius: 0 10px 10px 10px;
+            padding-left: 1rem;
+        }
+    }
+}
