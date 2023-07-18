@@ -1,29 +1,31 @@
-<main class="container container_user">
-    <aside class="aside">
-        <img class="aside-icon" [src]="iconUsr" alt="">
-
-        <div class="content-text">
-            <h2 class="text-center">Erick Wladimir</h2>
-            <h4 class="text-center">Arevalo Navarro</h4>
-
-        </div>
-
-        <div class="buttons">
-            <button mat-raised-button class="btn" routerLink="datos">
-                <mat-icon>person</mat-icon>
-                Mis datos
-            </button>
-
-            <button mat-raised-button class="btn" routerLink="compras">
-                <mat-icon>shopping_bag</mat-icon>
-                Mis compras
-            </button>
-        </div>
-
-    </aside>
-
-    <section class="data">
-        <router-outlet></router-outlet>
-    </section>
+<main class="mat-app-background">
+    <div class="container container_user">
+        <aside class="aside">
+            <img class="aside-icon" [src]="iconUsr" alt="">
+    
+            <div class="content-text">
+                <h2 class="text-center">Erick Wladimir</h2>
+                <h4 class="text-center">Arevalo Navarro</h4>
+    
+            </div>
+    
+            <div class="buttons">
+                <button mat-raised-button class="btn" routerLink="datos">
+                    <mat-icon>person</mat-icon>
+                    Mis datos
+                </button>
+    
+                <button mat-raised-button class="btn" routerLink="compras">
+                    <mat-icon>shopping_bag</mat-icon>
+                    Mis compras
+                </button>
+            </div>
+    
+        </aside>
+    
+        <section class="data">
+            <router-outlet></router-outlet>
+        </section>
+    </div>
 
 </main>
