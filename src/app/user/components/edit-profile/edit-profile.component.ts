@@ -7,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditProfileComponent implements OnInit {
 
+  imgLogo = "assets/img/auth/LogoPapeleria.png";
+  prefijos = [ "+52" ];
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  imgLogo = "assets/img/auth/LogoPapeleria.png";
 
 }
