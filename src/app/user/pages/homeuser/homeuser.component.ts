@@ -9,7 +9,7 @@ export class HomeuserComponent implements OnInit {
 
   constructor() { }
 
-  iconUsr = "assets/img/iconoUsuario.png";
+  iconUsr = "assets/img/user/iconoUsuario.png";
 
   ngOnInit(): void {
   }

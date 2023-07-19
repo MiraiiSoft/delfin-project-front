@@ -1,12 +1,22 @@
 .container_user {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+@media (min-width: 700px) {
+    .container_user{
+        flex-direction: row;
+    }
+    .aside{
+        min-height: 50rem;
+        width: 30%;
+    }
 }
 
 .aside{
     background-color: #2977E6;
     height: 100vh;
-    width: 30%;
+    
 
     .aside-icon {
         margin-top: 20px;
@@ -19,9 +29,24 @@
         padding-top: 1rem;
     }
 
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+        padding-top: 2rem;
+
+        .btn{
+            background-color: #60A9ED;
+            color: white;
+        }
+
+    }
+
 }
 
 .data{
-    background-color: green;
+    // background-color: green;
     width: 100%;
 }

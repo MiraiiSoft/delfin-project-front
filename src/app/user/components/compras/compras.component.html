@@ -1,1 +1,8 @@
-<p>compras works!</p>
+<div>
+    <h2>Mis compras</h2>
+
+    <div *ngFor="let compra of compras">
+        <p>{{compra.venta.fecha_venta | date: 'longDate'}}</p>
+    </div>
+
+</div>

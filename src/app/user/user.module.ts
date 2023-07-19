@@ -4,6 +4,7 @@ import { HomeuserComponent } from './pages/homeuser/homeuser.component';
 import { DatosUserComponent } from './components/datos-user/datos-user.component';
 import { ComprasComponent } from './components/compras/compras.component';
 import { UserRoutingModule } from './user-routing.module';
+import { MaterialModule } from '../material/material.module';
 
 
 
@@ -15,7 +16,8 @@ import { UserRoutingModule } from './user-routing.module';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    MaterialModule
   ]
 })
 export class UserModule { }
