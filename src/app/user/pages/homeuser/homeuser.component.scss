@@ -10,20 +10,29 @@
     .aside{
         min-height: 50rem;
         width: 30%;
+
     }
+
 }
 
 .aside{
     background-color: #2977E6;
     height: 100vh;
     
+    .content-icon{
+        display: flex;
+        justify-content: center;
+        height: auto;
+        width: auto;
 
-    .aside-icon {
-        margin-top: 20px;
-        margin-left: 20px;
-        width: 100%;
-        padding-right: 2rem;
+        .aside-icon {
+            margin-top: 20px;
+            margin-left: 20px;
+            width: 70%;
+            padding-right: 2rem;
+        }
     }
+
 
     .content-text{
         padding-top: 1rem;
