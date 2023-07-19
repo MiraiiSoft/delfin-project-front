@@ -5,6 +5,7 @@ import { DatosUserComponent } from './components/datos-user/datos-user.component
 import { ComprasComponent } from './components/compras/compras.component';
 import { UserRoutingModule } from './user-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 
 
@@ -12,7 +13,8 @@ import { MaterialModule } from '../material/material.module';
   declarations: [
     HomeuserComponent,
     DatosUserComponent,
-    ComprasComponent
+    ComprasComponent,
+    EditProfileComponent
   ],
   imports: [
     CommonModule,
