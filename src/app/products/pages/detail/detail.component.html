@@ -1,1 +1,57 @@
-<p>detail works!</p>
+<section class="container flex-space-center">
+
+  <div class="left-container flex-wrap-center">
+    <mat-label class="title uppercase center-text">
+      Lapicero Bic Punta Mediana Caja con 12 pz
+    </mat-label>
+
+    <mat-grid-list class="group-images" cols="1" rowHeight="fit">
+      <img mat-card- *ngFor="let foto of product.imagen.url; let i = index" 
+      class="img border-10px" [class.selected]="i==indexSelected"
+      (mouseenter)="selectImg(i)" [src]=foto alt=foto>
+    </mat-grid-list>
+
+    <img mat-card- class="principal-image" src={{imgSelected}}>
+    
+    <mat-card class="description border-20px">
+      <mat-card-title class="uppercase">
+        descripción
+      </mat-card-title>
+      <mat-card-content>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, reiciendis dolorem. Consequatur, nesciunt, nihil nobis eligendi id sint ea repudiandae tempore ducimus ipsum ut commodi voluptates at placeat quam reprehenderit?
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, ipsa. Quia ab, hic corrupti ipsa minima quod sit totam tempora tenetur accusantium possimus nobis expedita omnis. Ad minus magni nemo.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut officia itaque illo. Reiciendis repudiandae inventore, non, tempora iure possimus temporibus ipsa, assumenda explicabo nulla tempore sit minus placeat voluptate consectetur?
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Products details -->
+  <mat-card class="details border-20px">
+    <mat-card-title class="center-text uppercase separatorydown-25px">
+      Lapicero Bic Punta Mediana Caja con 12 pz
+    </mat-card-title>
+  
+    <mat-card-content>
+      <h4 class="center-text separatory-10px">Precio: $42.00 MXN</h4>
+      <h4 class="center-text separatory-10px">Marca: Bic</h4>
+    
+      <div class="flex-wrap">
+        <h4 class="center-text separatory-10px">Color:</h4>
+        <div class="color">
+
+        </div>
+      </div>
+
+      <button mat-button class="separatory-5px border-10px buy" color="accent">
+        Comprar ahora
+      </button>
+      <button mat-button class="separatory-5px border-10px add-to-cart" color="accent">
+        Agregar al carrito
+      </button>
+    </mat-card-content>
+  </mat-card>
+
+</section>
+
+<router-outlet></router-outlet>
+  
