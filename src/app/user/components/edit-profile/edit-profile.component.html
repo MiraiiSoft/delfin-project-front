@@ -6,7 +6,7 @@
     
     <h3>Editando mis datos</h3>
     
-    <button mat-raised-button class="edit-header__btn">
+    <button mat-raised-button class="edit-header__btn" (click)="closeModal()">
         <mat-icon>close</mat-icon>
     </button>
 </div>
@@ -17,23 +17,23 @@
         <form class="form">
     
             <div class="form__content">
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="form__content-input">
                     <mat-label>Nombre:</mat-label>
                     <input type="text" matInput placeholder="Ejem. Erick">
                 </mat-form-field>
         
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="form__content-input">
                     <mat-label>Apellido:</mat-label>
                     <input type="text" matInput placeholder="Ejem. Arevalo">
                 </mat-form-field>
         
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="form__content-input">
                     <mat-label>Correo:</mat-label>
                     <input type="text" matInput placeholder="Ejem. example@example.com">
                 </mat-form-field>
         
                 <div class="form__telefono">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline" class="form__content-input">
                         <mat-label>Prefijo pais</mat-label>
                         <mat-select>
                             <mat-option *ngFor="let prefijo of prefijos" [value]="prefijo">
@@ -42,19 +42,19 @@
                         </mat-select>
                     </mat-form-field>
             
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline" class="form__content-input">
                         <mat-label>Teléfono:</mat-label>
                         <input type="tel" matInput>
                     </mat-form-field>
                 </div>
         
         
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="form__content-input">
                     <mat-label>Contraseña:</mat-label>
                     <input type="password" matInput placeholder="***********">
                 </mat-form-field>
         
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" class="form__content-input">
                     <mat-label>Confirmas contraseña:</mat-label>
                     <input type="password" matInput placeholder="***********">
                 </mat-form-field>
