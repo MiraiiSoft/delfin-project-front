@@ -1,0 +1,97 @@
+<div class="header">
+    <h2 mat-dialog-title>AGREGA UN DOMICILIO</h2>
+    <button mat-raised-button type="button" (click)="closeModalAddress()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+    <div class="content">
+        <section class="section-form">
+            <form class="form">
+                <div class="form__content">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>País:</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let pais of paises" [value]="pais.id_pais">
+                                {{pais.pais | titlecase}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ciudad:</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id_ciudad">
+                                {{ciudad.ciudad | titlecase}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Código Postal:</mat-label>
+                        <input type="text" matInput placeholder="Ejem. 73173">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Municipio:</mat-label>
+                        <input type="text" matInput placeholder="Ejem. Huauchinango">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Calle:</mat-label>
+                        <input type="text" matInput placeholder="Ejem. #15">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Colonia:</mat-label>
+                        <input type="text" matInput placeholder="Ejem. 14 de octubre">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>N° Exterior:</mat-label>
+                        <input type="text" matInput placeholder="Ejem. ">
+                    </mat-form-field>
+
+                    <div class="form__content-telefono">
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Prefijo pais</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let prefijo of prefijos" [value]="prefijo">
+                                    {{prefijo}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Teléfono Celular</mat-label>
+                            <input type="text" matInput placeholder="Ejem. 55 5544 6677">
+                        </mat-form-field>
+
+                    </div>
+
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Referencias de casa:</mat-label>
+                        <textarea matInput placeholder="Descripción de tu casa, entre que puntos de referencia se encuentra, etc."></textarea>
+                    </mat-form-field>
+
+                </div>
+
+                <button mat-raised-button type="button" class="form__btn">Guardar</button>
+
+            </form>
+        </section>
+
+        <section class="section-user">
+            <div class="content-icon">
+                <img [src]="iconUsr" alt="Usuario">
+            </div>
+
+            <h4>Domicilio de {{data.nombrePersona}}</h4>
+
+        </section>
+    </div>
+</mat-dialog-content>
