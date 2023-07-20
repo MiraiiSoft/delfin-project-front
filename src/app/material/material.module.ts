@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';import { MatDividerModule
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatDividerModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule
   ]
 })
 export class MaterialModule { }
