@@ -1,56 +1,81 @@
-<section class="container flex-space-center">
+<section class="container father-container">
+  
+  <div class="up-container flex-wrap-between">
+    <div class="cont-up-left">
+      <mat-grid-list class="group-images" cols="1" rowHeight="fit">
+        <img mat-card- *ngFor="let foto of product.imagen.url; let i = index" 
+        class="img border-10px" [class.selected]="i==indexSelected"
+        (mouseenter)="selectImg(i)" [src]=foto alt=foto>
+      </mat-grid-list>
 
-  <div class="left-container flex-wrap-center">
-    <mat-label class="title uppercase center-text">
-      Lapicero Bic Punta Mediana Caja con 12 pz
-    </mat-label>
+      <img mat-card- class="principal-image" src={{imgSelected}}>
+    </div>
 
-    <mat-grid-list class="group-images" cols="1" rowHeight="fit">
-      <img mat-card- *ngFor="let foto of product.imagen.url; let i = index" 
-      class="img border-10px" [class.selected]="i==indexSelected"
-      (mouseenter)="selectImg(i)" [src]=foto alt=foto>
-    </mat-grid-list>
+    <!-- card-details and card-button -->
+    <div class="cont-up-right">
+      <mat-card class="details-card border-20px left-text">
+        <div class="cont-title">
+          <mat-label class="title-text uppercase" [textContent]="product.nombre"> </mat-label> <br> <br>
+        </div>
+        
+        <mat-label class="price-text">
+          $ {{product.precio_unitario}} MXM <br>
+        </mat-label> <br>
+        
+        <div class="cont-categories-principal">
+          <mat-label class="details-text">Categoia:</mat-label>
+          <div class="cont-categories">
+            <a class="details-text categorie border-5px">{{product.categoria.categoria}}</a>
+          </div>
+        </div>
 
-    <img mat-card- class="principal-image" src={{imgSelected}}>
-    
-    <mat-card class="description border-20px">
-      <mat-card-title class="uppercase">
-        descripción
-      </mat-card-title>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, reiciendis dolorem. Consequatur, nesciunt, nihil nobis eligendi id sint ea repudiandae tempore ducimus ipsum ut commodi voluptates at placeat quam reprehenderit?
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis, ipsa. Quia ab, hic corrupti ipsa minima quod sit totam tempora tenetur accusantium possimus nobis expedita omnis. Ad minus magni nemo.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut officia itaque illo. Reiciendis repudiandae inventore, non, tempora iure possimus temporibus ipsa, assumenda explicabo nulla tempore sit minus placeat voluptate consectetur?
-      </mat-card-content>
-    </mat-card>
+        <mat-label class="details-text">
+          Tipo: {{product.tipo.tipo}} <br>
+          Marca: {{product.marca}} <br>
+          <div class="cont-colors-principal">
+            <mat-label class="details-text">Color:</mat-label>
+            <div class="cont-colors">
+              <div class="color" *ngFor="let color of product.color;" [ngStyle]="{'background-color':color.hexa}" 
+                #tooltip="matTooltip" matTooltip={{color.color}} matTooltipPosition="below"> </div>
+            </div>
+          </div>
+        </mat-label>
+
+      </mat-card>  
+
+      <mat-card class="button-card border-20px center-text">
+        <div class="cont-counter-principal">
+          <mat-label class="details-text">
+            Cantidad:
+          </mat-label>
+          <div class="cont-counter">
+            <button (click)="decrementCounter()" mat-button class="counter-format-side">-</button>
+            <button mat-button class="counter-format-middle">{{counter}}</button>
+            <button (click)="incrementCounter()" mat-button class="counter-format-side">+</button> <br>
+          </div>
+        </div>
+
+        <mat-label class="details-text">
+          Stock: {{product.inventario.existencias}} disponibles <br> <br>
+        </mat-label>
+        <button mat-button class="button-text border-10px buy" color="accent">
+          Comprar ahora
+        </button>
+        <button mat-button class="button-text border-10px add-to-cart" color="accent">
+          Agregar al carrito
+        </button>
+      </mat-card>
+    </div>
+
   </div>
 
-  <!-- Products details -->
-  <mat-card class="details border-20px">
-    <mat-card-title class="center-text uppercase separatorydown-25px">
-      Lapicero Bic Punta Mediana Caja con 12 pz
-    </mat-card-title>
-  
-    <mat-card-content>
-      <h4 class="center-text separatory-10px">Precio: $42.00 MXN</h4>
-      <h4 class="center-text separatory-10px">Marca: Bic</h4>
-    
-      <div class="flex-wrap">
-        <h4 class="center-text separatory-10px">Color:</h4>
-        <div class="color">
-
-        </div>
-      </div>
-
-      <button mat-button class="separatory-5px border-10px buy" color="accent">
-        Comprar ahora
-      </button>
-      <button mat-button class="separatory-5px border-10px add-to-cart" color="accent">
-        Agregar al carrito
-      </button>
+  <mat-card class="description-card border-20px">
+    <mat-card-title class="uppercase">descripción</mat-card-title>
+    <mat-card-content class="description-text">
+      {{product.descripcion}}
     </mat-card-content>
   </mat-card>
-
+  
 </section>
 
 <router-outlet></router-outlet>
