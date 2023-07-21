@@ -6,6 +6,7 @@ import { ComprasComponent } from './components/compras/compras.component';
 import { UserRoutingModule } from './user-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { EditAddressComponent } from './components/edit-address/edit-address.component';
 
 
 
@@ -14,7 +15,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     HomeuserComponent,
     DatosUserComponent,
     ComprasComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    EditAddressComponent
   ],
   imports: [
     CommonModule,

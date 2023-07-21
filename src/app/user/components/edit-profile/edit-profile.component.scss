@@ -5,13 +5,17 @@
     align-items: center;
 
     .content-img{
-        height: 8rem;
+        // height: 8rem;
         width: 8rem;
 
         img{
-            width: 100%;
+            width: 200%;
         }
 
+    }
+
+    h3{
+        text-align: center;
     }
 
     .edit-header__btn{
@@ -22,10 +26,25 @@
 }
 
 @media (min-width: 700px) {
-    .form__content{
+
+    .edit-header{
+        .content-img{
+            img{
+                width: 100%;
+            }
+        }
+    }
+
+    .container-form{
+
+        .form{
+    
+            .form__content{
+                
+                grid-template-columns: repeat(2, 1fr) !important;
         
-        grid-template-columns: repeat(2, 1fr) !important;
-        
+            }
+        }
     }
 }
 
@@ -45,6 +64,7 @@
             .form__telefono{
                 display: flex;
                 gap: 1rem;
+                flex-wrap: wrap;
             }
     
             .form__direccion{

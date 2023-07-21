@@ -6,7 +6,7 @@ import { DetailComponent } from './pages/detail/detail.component';
 const routes: Routes = [
   {
     path: 'detail',
-    component: DetailComponent
+    component: DetailComponent    //  localhost:4200/site/products/detail
   }
 ]
 

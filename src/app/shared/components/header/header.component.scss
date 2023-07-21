@@ -1,0 +1,151 @@
+.header{
+    height: 8rem;
+    background-color: #2F48CF;
+    color: white;
+    .header-main{
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        gap: 2rem;
+    
+        .header__logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 1rem;
+
+            height: 8rem;
+            width: 8rem;
+    
+            img{
+                width: 100%;
+            }
+        }
+    
+        .header__social{
+            display: none;
+            
+        }
+
+        .header__nav{
+            display: none;
+        }
+
+        .header__search{
+            display: none;
+        }
+
+        .header__user{
+            display: none;
+            
+        }
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .header-main{
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        gap: 2rem;
+    
+        .header__logo{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 1rem;
+
+            height: 8rem;
+            width: 8rem;
+    
+            img{
+                width: 100%;
+            }
+        }
+    
+        .header__social{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+    
+            .header__social-face{
+                height: 3rem;
+                width: 3rem;
+    
+                img{
+                    width: 100%;
+                }
+            }
+        }
+
+        .header__nav{
+            .header__nav-categorias{
+                .btn{
+                    color: white;
+                    font-size: 1.2rem;
+                }
+            }
+        }
+
+        .header__search{
+            .header__search-barra{
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 15rem;
+                border-radius: 2rem;
+                padding-right: 1rem;
+                padding-left: 1rem;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                cursor: pointer;
+
+                p{
+                    margin: 0;
+                    color: gray;
+                }
+
+                mat-icon{
+                    color: black;
+                }
+            }
+        }
+
+        .header__user{
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+
+            .header__user-logo{
+                height: 3rem;
+                width: 3rem;
+                cursor: pointer;
+
+                button{
+                    display: none;
+                }
+
+                img{
+                    width: 100%;
+                }
+            }
+
+            .header__user-saludo{
+                p{
+                    margin: 0;
+                }
+            }
+
+            mat-icon{
+                font-size: 2.5rem;
+            }
+        }
+    }
+}
