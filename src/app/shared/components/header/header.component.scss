@@ -9,6 +9,7 @@
             justify-content: center;
             align-items: center;
             padding-bottom: 1rem;
+            cursor: pointer;
 
             height: 8rem;
             width: 8rem;
@@ -41,7 +42,7 @@
                 .header__social-face{
                     height: 3rem;
                     width: 3rem;
-        
+                    cursor: pointer;
                     img{
                         width: 100%;
                     }
