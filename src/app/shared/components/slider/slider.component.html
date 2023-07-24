@@ -1,0 +1,39 @@
+<ngx-glide 
+    [autoplay]="autoplay"
+    [animationDuration]="animationDuration"
+    [arrowLeftTemplate]="arrowLeftTemplate"
+    [arrowRightTemplate]="arrowRightTemplate"
+    [perView]="perView"
+    [gap]="gap"
+    [showBullets]="showBullets"
+    [rewind]="rewind"
+>
+    <ng-container *ngIf="isImage">
+        <ng-container *ngFor="let img of data">
+            <img class="img" [src]="img.img" [alt]="img.title">
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isImage === false">
+        <ng-container *ngFor="let content of data">
+
+        </ng-container>
+    </ng-container>
+
+</ngx-glide>
+
+<ng-template #arrowLeftTemplate>
+    <div class="custom-arrow custom-arrow-left">
+        <button mat-fab>
+            <mat-icon>chevron_left</mat-icon>
+        </button>        
+    </div>
+</ng-template>
+
+<ng-template #arrowRightTemplate>
+    <div class="custom-arrow custom-arrow-right">
+        <button mat-fab>
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+    </div>
+</ng-template>

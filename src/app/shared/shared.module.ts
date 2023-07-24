@@ -5,23 +5,26 @@ import { RouterModule } from '@angular/router';
 import { SharedRoutingModule } from './shared-routing.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from '../material/material.module';
+import { SliderComponent } from './components/slider/slider.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SliderComponent
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SliderComponent
   ]
 })
 export class SharedModule { }
