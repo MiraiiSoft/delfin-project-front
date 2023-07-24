@@ -16,7 +16,18 @@
 
     <ng-container *ngIf="isImage === false">
         <ng-container *ngFor="let content of data">
+            <div class="content">
+                <div class="content__image">
+                    <img [src]="content.img" [alt]="content.title">
+                </div>
 
+                <mat-divider></mat-divider>
+
+                <div>
+                    <p>{{ content.title | titlecase }}</p>
+                    <h3>${{ content.price | currency: 'MXN' }}</h3>
+                </div>
+            </div>
         </ng-container>
     </ng-container>
 

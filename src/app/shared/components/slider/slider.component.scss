@@ -11,3 +11,27 @@
       right: 2.5%;
     }
 }
+
+.img{
+    height: 70%;
+}
+
+.content{
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    .content__image{
+        height: 10rem;
+        width: 10rem;
+
+        img{
+            width: 100%;
+        }
+    }
+
+}

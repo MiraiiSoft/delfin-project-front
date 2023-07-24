@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf, TitleCasePipe, CurrencyPipe } from '@angular/common';
 import { Component, OnInit, Input, ViewChild, HostListener } from '@angular/core';
 import { NgxGlideComponent, NgxGlideModule } from 'ngx-glide';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -13,6 +13,8 @@ import { IsliderData } from '../../interfaces/slider.interface';
     NgxGlideModule,
     NgFor,
     NgIf,
+    TitleCasePipe,
+    CurrencyPipe,
     MaterialModule
   ]
 })

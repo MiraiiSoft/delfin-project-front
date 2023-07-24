@@ -19,6 +19,29 @@ export class HomeComponent implements OnInit {
     }
   ];
 
+  products: IsliderData[] = [
+    {
+      title: "lapicero negro",
+      img: "assets/img/products/img1.png",
+      price: 30
+    },
+    {
+      title: "lapicero rojo",
+      img: "assets/img/products/img2.png",
+      price: 25
+    },
+    {
+      title: "lapicero azul",
+      img: "assets/img/products/img3.png",
+      price: 20
+    },
+    {
+      title: "lapicero morado",
+      img: "assets/img/products/img4.png",
+      price: 15
+    }
+  ];
+
   constructor() { }
 
   ngOnInit(): void {

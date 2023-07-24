@@ -1,3 +1,19 @@
-<app-slider [data]="imgSlider"
-        [showBullets]="false"
-></app-slider>
+<main>
+        <app-slider [data]="imgSlider"
+                [showBullets]="false"
+        ></app-slider>
+
+        <div>
+                <app-slider [data]="products"
+                        [showBullets]="false"
+                        [isClickable]="true"
+                        [isImage]="false"
+                        [autoplay]="false"
+                        [rewind]="false"
+                        [gap]="15"
+                        [perView]="4"
+                ></app-slider>
+        </div>
+
+</main>
+
