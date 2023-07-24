@@ -6,52 +6,60 @@
         </div>
 
         <div class="header__menu">
-
+            <button mat-mini-fab class="header__menu-btn" color="primary" (click)="activateNav()">
+                <mat-icon>{{iconActivate}}</mat-icon>
+            </button>
         </div>
     
-        <div class="header__social">
-            <div class="header__social-face">
-                <img [src]="imgLogoFace" alt="Facebook logo">
+        <nav class="nav" [ngClass]="_activateNav ? 'nav-open' : 'nav-close'">
+            <div class="header__social">
+                <div class="header__social-face">
+                    <img [src]="imgLogoFace" alt="Facebook logo">
+                </div>
+                <h4>Contáctenos</h4>
             </div>
-            <h4>Contáctenos</h4>
-        </div>
-    
-        <div class="header__nav">
-            <div class="header__nav-categorias">
-                <button mat-button [matMenuTriggerFor]="menu" class="btn">
-                    Categorias
-                    <mat-icon>expand_more</mat-icon>
-                </button>
-
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item *ngFor="let categoria of categorias">
-                        {{categoria.categoria | titlecase}}
+        
+            <div class="header__nav">
+                <div class="header__nav-categorias">
+                    <button mat-button [matMenuTriggerFor]="menu" class="btn">
+                        Categorias
+                        <mat-icon>expand_more</mat-icon>
                     </button>
-                </mat-menu>
-
-            </div>
-        </div>
     
-        <div class="header__search">
-            <div class="header__search-barra">
-                <p>BUSCAR</p>
-                <mat-icon>search</mat-icon>
-
-            </div>
-        </div>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item *ngFor="let categoria of categorias">
+                            {{categoria.categoria | titlecase}}
+                        </button>
+                    </mat-menu>
     
-        <div class="header__user">
-            <div class="header__user-logo" (click)="redirectRoute('/site/user')">
-                <img [src]="iconUsr" alt="usuario">
+                </div>
+            </div>
+        
+            <div class="header__search">
+                <div class="header__search-barra">
+                    <p>BUSCAR</p>
+                    <mat-icon>search</mat-icon>
+    
+                </div>
+            </div>
+        
+            <div class="header__user">
+                <div class="header__user-logo" (click)="redirectRoute('/site/user')">
+                    <img [src]="iconUsr" alt="usuario">
+                </div>
+    
+                <div class="header__user-saludo">
+                    <p>Hola!</p>
+                    <p>Erick</p>
+                </div>
+    
+                <button mat-icon-button>
+                    <mat-icon>shopping_cart</mat-icon>
+                </button>
             </div>
 
-            <div class="header__user-saludo">
-                <p>Hola!</p>
-                <p>Erick</p>
-            </div>
+        </nav>
 
-            <mat-icon>shopping_cart</mat-icon>
-        </div>
 
     </div>
 </header>
