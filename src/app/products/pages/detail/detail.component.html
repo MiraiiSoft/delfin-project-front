@@ -1,5 +1,4 @@
 <section class="container father-container">
-  
   <div class="up-container flex-wrap-between">
     <div class="cont-up-left">
       <mat-grid-list class="group-images" cols="1" rowHeight="fit">
@@ -13,16 +12,13 @@
       </div>
     </div>
 
-    <!-- card-details and card-button -->
     <div class="cont-up-right">
       <mat-card class="details-card border-20px left-text">
         <div class="cont-title">
           <mat-label class="title-text uppercase" [textContent]="product.nombre"> </mat-label> <br> <br>
         </div>
         
-        <mat-label class="price-text" >
-          $ {{product.precio_unitario}} MXM <br>
-        </mat-label> <br>
+        <mat-label class="price-text" >$ {{current_price}} MXM <br></mat-label> <br>
         
         <div class="cont-categories-principal">
           <mat-label class="details-text">Categoia:</mat-label>
@@ -34,15 +30,14 @@
         <mat-label class="details-text">
           Tipo: {{product.tipo.tipo}} <br>
           Marca: {{product.marca}} <br>
-          <div class="cont-colors-principal">
-            <mat-label class="details-text">Color:</mat-label>
-            <div class="cont-colors">
-              <div class="color" *ngFor="let color of product.color;" [ngStyle]="{'background-color':color.hexa}" 
-                #tooltip="matTooltip" matTooltip={{color.color}} matTooltipPosition="below"> </div>
-            </div>
-          </div>
         </mat-label>
-
+        <div class="cont-colors-principal">
+          <mat-label class="details-text">Color:</mat-label>
+          <div class="cont-colors">
+            <div class="color" *ngFor="let color of product.color;" [ngStyle]="{'background-color':color.hexa}" 
+              #tooltip="matTooltip" matTooltip={{color.color}} matTooltipPosition="below"> </div>
+          </div>
+        </div>
       </mat-card>  
 
       <mat-card class="button-card border-20px center-text">
@@ -51,24 +46,19 @@
             Cantidad:
           </mat-label>
           <div class="cont-counter">
-            <button (click)="decrementCounter()" mat-button class="counter-format-side">-</button>
+            <button (click)="actionsBtnDecrement()" mat-button class="counter-format-side">-</button>
             <button mat-button class="counter-format-middle">{{counter}}</button>
-            <button (click)="incrementCounter()" mat-button class="counter-format-side">+</button> <br>
+            <button (click)="actionsBtnIncrement()" mat-button class="counter-format-side">+</button> <br>
           </div>
         </div>
 
         <mat-label class="details-text">
           Stock: {{product.inventario.existencias}} disponibles <br> <br>
         </mat-label>
-        <button mat-button class="button-text border-10px buy" color="accent">
-          Comprar ahora
-        </button>
-        <button mat-button class="button-text border-10px add-to-cart" color="accent">
-          Agregar al carrito
-        </button>
+        <button mat-button class="button-text border-10px buy" color="accent" [hidden]="product.inventario.existencias==0" >Comprar ahora</button>
+        <button mat-button class="button-text border-10px add-to-cart" color="accent" [hidden]="product.inventario.existencias==0">Agregar al carrito</button>
       </mat-card>
     </div>
-
   </div>
 
   <mat-card class="description-card border-20px">
@@ -77,7 +67,6 @@
       {{product.descripcion}}
     </mat-card-content>
   </mat-card>
-
 </section>
 
 <router-outlet></router-outlet>

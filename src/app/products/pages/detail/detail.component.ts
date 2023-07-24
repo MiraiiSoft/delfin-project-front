@@ -10,6 +10,7 @@ export class DetailComponent implements OnInit {
   public indexSelected = 0;
   public imgSelected: string = "";
   public counter = 1;
+  public current_price;
 
   product: any = {
     id_producto: 1,
@@ -36,10 +37,10 @@ export class DetailComponent implements OnInit {
     },
     compra: "5",
     precio_unitario: "42.00",
-    precio_mayoreo: "7",
-    precio_caja: "5",
-    inicio_mayoreo: 10,
-    inicio_caja: 20,
+    precio_mayoreo: "40.00",
+    precio_caja: "35.99",
+    inicio_mayoreo: 3,
+    inicio_caja: 5,
     id_color: 2,
     id_categoria: 1,
     id_tipo: 1,
@@ -55,34 +56,33 @@ export class DetailComponent implements OnInit {
         hexa: "#ff0000"
       },
       { 
-        id_color: 2,
+        id_color: 3,
         color: "Negro",
         hexa: "#000000"
       },
-
       { 
-        id_color: 2,
-        color: "negro",
+        id_color: 4,
+        color: "Negro",
         hexa: "#000000"
       },
       { 
-        id_color: 2,
-        color: "negro",
+        id_color: 5,
+        color: "Negro",
         hexa: "#000000"
       },
       { 
-        id_color: 2,
-        color: "negro",
+        id_color: 6,
+        color: "Negro",
         hexa: "#000000"
       },
       { 
-        id_color: 2,
-        color: "negro",
+        id_color: 7,
+        color: "Negro",
         hexa: "#000000"
       },
       { 
-        id_color: 2,
-        color: "negro",
+        id_color: 8,
+        color: "Negro",
         hexa: "#000000"
       }
     ],
@@ -103,7 +103,9 @@ export class DetailComponent implements OnInit {
     }
   }
   
-  constructor() { }
+  constructor() {
+    this.current_price = this.product.precio_unitario; 
+   }
 
   public selectImg(index: any) {
     this.indexSelected = index;
@@ -122,6 +124,26 @@ export class DetailComponent implements OnInit {
       this.counter = 1;
     else
       this.counter -= 1;
+  }
+
+  public checkCounter() {
+    if(this.counter >= this.product.inicio_mayoreo) {
+      this.current_price = this.product.precio_mayoreo
+      if(this.counter >= this.product.inicio_caja) 
+        this.current_price = this.product.precio_caja
+    } 
+    else
+      this.current_price = this.product.precio_unitario
+  }
+
+  public actionsBtnIncrement() {
+    this.incrementCounter();
+    this.checkCounter();
+  }
+
+  public actionsBtnDecrement() {
+    this.decrementCounter();
+    this.checkCounter();
   }
 
   ngOnInit(): void {

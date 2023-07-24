@@ -6,8 +6,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';import { MatDividerModule } from '@angular/material/divider'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [],
@@ -21,6 +26,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatGridListModule,
     MatCardModule,
+    MatDividerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatMenuModule,
     MatTooltipModule,
   ]
 })

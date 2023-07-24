@@ -70,7 +70,6 @@
 
 .icons:hover {
     border: #ffffff .5px solid;
-    width: 35px;
 }
 
 .logos-cont-principal {
@@ -104,14 +103,19 @@
 @media(max-width: 800px) {
     .cont-footer {
         align-items: center;
+    } 
+
+    .cont-explorer-principal {
+        margin-bottom: 10px;
     }
 
     .cont-explorer {
-        margin: 0px 10%;
+        margin: 15px 10%;
+        text-align: center;
     }
 
     .icons-container {
-        margin-top: 5px;
+        justify-content: center;
     }
 
 }

@@ -1,0 +1,31 @@
+.mybuys{
+    margin-left: 2rem;
+}
+
+.mybuys__buy{
+    border: 2px solid black;
+    border-radius: 2rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.mybuys__buy-product{
+    
+    .content{
+
+        display: flex;
+        gap: 2rem;
+        margin-top: 1rem;
+
+        .content-image{
+            height: 10rem;
+            width: 10rem;
+    
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+}

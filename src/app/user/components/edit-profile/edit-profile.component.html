@@ -1,0 +1,78 @@
+<div class="edit-header">
+    
+    <div class="content-img">
+        <img [src]="imgLogo" alt="Pepeleria en linea">
+    </div>
+    
+    <h3>Editando mis datos</h3>
+    
+    <button mat-raised-button class="edit-header__btn" (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+
+<mat-dialog-content>
+
+    <div class="container-form">
+        <form class="form">
+    
+            <div class="form__content">
+                <mat-form-field appearance="outline" class="form__content-input">
+                    <mat-label>Nombre:</mat-label>
+                    <input type="text" matInput placeholder="Ejem. Erick">
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline" class="form__content-input">
+                    <mat-label>Apellido:</mat-label>
+                    <input type="text" matInput placeholder="Ejem. Arevalo">
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline" class="form__content-input">
+                    <mat-label>Correo:</mat-label>
+                    <input type="text" matInput placeholder="Ejem. example@example.com">
+                </mat-form-field>
+        
+                <div class="form__telefono">
+                    <mat-form-field appearance="outline" class="form__content-input">
+                        <mat-label>Prefijo pais</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let prefijo of prefijos" [value]="prefijo">
+                                {{prefijo}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+            
+                    <mat-form-field appearance="outline" class="form__content-input">
+                        <mat-label>Teléfono:</mat-label>
+                        <input type="tel" matInput>
+                    </mat-form-field>
+                </div>
+        
+        
+                <mat-form-field appearance="outline" class="form__content-input">
+                    <mat-label>Contraseña:</mat-label>
+                    <input type="password" matInput placeholder="***********">
+                </mat-form-field>
+        
+                <mat-form-field appearance="outline" class="form__content-input">
+                    <mat-label>Confirmas contraseña:</mat-label>
+                    <input type="password" matInput placeholder="***********">
+                </mat-form-field>
+        
+                <div class="form__direccion">
+                    <mat-label>Dirección:</mat-label>
+                    <button mat-raised-button type="button" (click)="openEditAddress()">
+                        Editar
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+    
+            </div>
+    
+            <button mat-raised-button type="button">
+                Guardar
+            </button>
+    
+        </form>
+    </div>
+</mat-dialog-content>
