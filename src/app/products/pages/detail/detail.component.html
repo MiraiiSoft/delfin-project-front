@@ -8,7 +8,9 @@
         (mouseenter)="selectImg(i)" [src]=foto alt=foto>
       </mat-grid-list>
 
-      <img mat-card- class="principal-image" src={{imgSelected}}>
+      <div class="principal-image-contain">
+        <img mat-card- class="principal-image" src={{imgSelected}} alt="photo">
+      </div>
     </div>
 
     <!-- card-details and card-button -->
@@ -18,7 +20,7 @@
           <mat-label class="title-text uppercase" [textContent]="product.nombre"> </mat-label> <br> <br>
         </div>
         
-        <mat-label class="price-text">
+        <mat-label class="price-text" >
           $ {{product.precio_unitario}} MXM <br>
         </mat-label> <br>
         
@@ -75,7 +77,7 @@
       {{product.descripcion}}
     </mat-card-content>
   </mat-card>
-  
+
 </section>
 
 <router-outlet></router-outlet>

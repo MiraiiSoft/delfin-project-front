@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class DetailComponent implements OnInit {
-  value = 'Clear me';
   public indexSelected = 0;
   public imgSelected: string = "";
   public counter = 1;
@@ -20,7 +19,7 @@ export class DetailComponent implements OnInit {
     descripcion: "Pluma Bolígarfo BIC Cláscio Dura + de Trazo Mediano Punto de Aguja 1 mm con tinta de baja viscosidad que brinda un flujo de tinta instantáneo, haciendo que la escritura sea suave, continua, con colores nítidos y brillantes.",
     imagen: {
       url: [
-        "assets/img/products/img1.png",
+        "assets/img/products/img0.png",
         "assets/img/products/img2.png",
         "assets/img/products/img3.png",
         "assets/img/products/img4.png",
