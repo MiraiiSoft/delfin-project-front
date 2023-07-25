@@ -3,6 +3,7 @@ import { Component, OnInit, Input, ViewChild, HostListener } from '@angular/core
 import { NgxGlideComponent, NgxGlideModule } from 'ngx-glide';
 import { MaterialModule } from 'src/app/material/material.module';
 import { IsliderData } from '../../interfaces/slider.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-slider',
@@ -25,6 +26,7 @@ export class SliderComponent implements OnInit {
   @Input() data!: IsliderData[];
   @Input() isClickable: boolean = false;
   @Input() isImage: boolean = true;
+  @Input() isText: boolean = false;
   @Input() routerName?: string;
   @Input() nameQueryParam?: string;
 
@@ -39,7 +41,7 @@ export class SliderComponent implements OnInit {
   public getScreenWidth: any;
   public getScreenHeight: any;
 
-  constructor() { }
+  constructor( private router: Router ) { }
 
   ngOnInit(): void {
     if( !this.isImage ){
@@ -48,6 +50,32 @@ export class SliderComponent implements OnInit {
       this.changePerView();
     }
 
+  }
+
+  open( param: string ){
+    if( this.isClickable ){
+      if( this.routerName && this.nameQueryParam){
+        
+        if( this.nameQueryParam == "category" ){
+          this.router.navigate([`/${this.routerName}`], { 
+            queryParams: {
+              category: param
+            }
+          });
+
+        }
+
+        if( this.nameQueryParam == "product" ){
+          this.router.navigate([`/${this.routerName}`],{
+            queryParams: {
+              product: param
+            }
+          });
+        }
+
+      }
+      
+    }
   }
 
   changePerView(){

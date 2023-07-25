@@ -14,9 +14,9 @@
         </ng-container>
     </ng-container>
 
-    <ng-container *ngIf="isImage === false">
+    <ng-container *ngIf="isImage === false && isText === false">
         <ng-container *ngFor="let content of data">
-            <div class="content">
+            <div class="content" (click)="open( content.link! )">
                 <div class="content__image">
                     <img [src]="content.img" [alt]="content.title">
                 </div>
@@ -27,6 +27,14 @@
                     <p>{{ content.title | titlecase }}</p>
                     <h3>${{ content.price | currency: 'MXN' }}</h3>
                 </div>
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isImage === false && isText === true">
+        <ng-container *ngFor="let content of data">
+            <div class="content" (click)="open( content.link! )">
+                <h4>{{content.title | titlecase}}</h4>
             </div>
         </ng-container>
     </ng-container>

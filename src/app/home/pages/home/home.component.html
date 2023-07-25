@@ -3,18 +3,43 @@
                 [showBullets]="false"
         ></app-slider>
 
-        <div class="content__slider-products">
-                <app-slider [data]="products"
-                        [isClickable]="true"
-                        [isImage]="false"
-                        
-                        [gap]="15"
-                        [showBullets]="false"
-                        [autoplay]="false"
-                        [rewind]="false"
-                        [perView]="4"
-                ></app-slider>
+        <div class="container">
+                <div class="content__slider">
+                        <h4>PRODUCTOS</h4>
+                        <app-slider [data]="products"
+                                [isClickable]="true"
+                                [isImage]="false"
+                                [routerName]="'site/products/detail'"
+                                [nameQueryParam]="'product'"
+                                
+                                [gap]="15"
+                                [showBullets]="false"
+                                [autoplay]="false"
+                                [rewind]="false"
+                                [perView]="4"
+                        ></app-slider>
+                </div>
+        
+                <div class="content__slider">
+                        <h4>CATEGORIAS</h4>
+
+                        <app-slider [data]="categorias"
+                                [isClickable]="true"
+                                [isImage]="false"
+                                [isText]="true"
+                                [routerName]="'site/products'"
+                                [nameQueryParam]="'category'"
+
+                                [gap]="15"
+                                [showBullets]="false"
+                                [autoplay]="false"
+                                [rewind]="false"
+                                [perView]="4"
+                        ></app-slider>
+                </div>
+
         </div>
+
 
 </main>
 
