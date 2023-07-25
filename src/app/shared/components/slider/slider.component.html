@@ -1,0 +1,60 @@
+<ngx-glide #ngxGlide 
+    [autoplay]="autoplay"
+    [animationDuration]="animationDuration"
+    [arrowLeftTemplate]="arrowLeftTemplate"
+    [arrowRightTemplate]="arrowRightTemplate"
+    [perView]="perView"
+    [gap]="gap"
+    [showBullets]="showBullets"
+    [rewind]="rewind"
+>
+    <ng-container *ngIf="isImage">
+        <ng-container *ngFor="let img of data">
+            <img class="img" [src]="img.img" [alt]="img.title">
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isImage === false && isText === false">
+        <ng-container *ngFor="let content of data">
+            <div class="content" (click)="open( content.link! )">
+                <div class="content__image">
+                    <img [src]="content.img" [alt]="content.title">
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div>
+                    <p>{{ content.title | titlecase }}</p>
+                    <h3>${{ content.price | currency: 'MXN' }}</h3>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="isImage === false && isText === true">
+        <ng-container *ngFor="let content of data">
+            <div class="content text" (click)="open( content.link! )">
+                <div>
+                    <h4>{{content.title | titlecase}}</h4>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+
+</ngx-glide>
+
+<ng-template #arrowLeftTemplate>
+    <div class="custom-arrow custom-arrow-left">
+        <button mat-fab>
+            <mat-icon>chevron_left</mat-icon>
+        </button>        
+    </div>
+</ng-template>
+
+<ng-template #arrowRightTemplate>
+    <div class="custom-arrow custom-arrow-right">
+        <button mat-fab>
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+    </div>
+</ng-template>

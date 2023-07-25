@@ -5,23 +5,31 @@ import { RouterModule } from '@angular/router';
 import { SharedRoutingModule } from './shared-routing.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from '../material/material.module';
-
-
+import { SliderComponent } from './components/slider/slider.component';
+import { NgxGlideModule } from 'ngx-glide';
+import { CardComponent } from './components/card/card.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    CardComponent,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SliderComponent,
+    NgxGlideModule
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    SliderComponent,
+    CardComponent
   ]
 })
 export class SharedModule { }

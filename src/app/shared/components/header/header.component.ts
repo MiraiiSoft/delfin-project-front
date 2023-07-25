@@ -13,6 +13,9 @@ export class HeaderComponent implements OnInit {
   iconUsr = "assets/img/user/iconoUsuario.png";
   imgLogo = "assets/img/auth/LogoPapeleria.png";
   imgLogoFace = "assets/img/social/Vectorface.png";
+  iconActivate: string = "menu";
+  _activateNav: boolean = false;
+  quantity_products: number = 1;
 
   categorias = [
     {
@@ -54,6 +57,15 @@ export class HeaderComponent implements OnInit {
 
   redirectRoute( route: string ){
     this.router.navigate([route]);
+  }
+
+  activateNav(){
+    this._activateNav = !this._activateNav;
+    if( this.iconActivate == "menu" ){
+      this.iconActivate = "close";
+    }else{
+      this.iconActivate = "menu";
+    }
   }
 
 }
