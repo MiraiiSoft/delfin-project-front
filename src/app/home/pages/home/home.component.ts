@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IcardData } from 'src/app/shared/interfaces/card.interface';
 import { IsliderData } from 'src/app/shared/interfaces/slider.interface';
 
 @Component({
@@ -84,6 +85,44 @@ export class HomeComponent implements OnInit {
       link: "6"
     }
   ];
+
+  newProducts: IcardData[] = [
+    {
+      title: "Lapicero tres colores",
+      img: "assets/img/products/img1.png",
+      id: 1
+    },
+    {
+      title: "Lapicero azul",
+      img: "assets/img/products/img3.png",
+      id: 2
+    },
+    {
+      title: "Lapicero verde",
+      img: "assets/img/products/img4.png",
+      id: 3
+    },
+    {
+      title: "Lapicero rojo",
+      img: "assets/img/products/img2.png",
+      id: 4
+    },
+    {
+      title: "Lapicero negro",
+      img: "assets/img/products/img3.png",
+      id: 5
+    },
+    {
+      title: "Lapicero morado",
+      img: "assets/img/products/img4.png",
+      id: 6
+    },
+    {
+      title: "Lapicero naranja",
+      img: "assets/img/products/img2.png",
+      id: 7
+    }
+  ]
 
   constructor() { }
 

@@ -26,7 +26,8 @@ import { CardComponent } from './components/card/card.component';
   exports: [
     HeaderComponent,
     FooterComponent,
-    SliderComponent
+    SliderComponent,
+    CardComponent
   ]
 })
 export class SharedModule { }
