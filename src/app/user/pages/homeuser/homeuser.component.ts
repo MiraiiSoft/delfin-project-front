@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingSpinnerService } from 'src/app/services/loading-spinner.service';
 
 @Component({
   selector: 'app-homeuser',
@@ -7,11 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeuserComponent implements OnInit {
 
-  constructor() { }
+  constructor( private loadingSpinner: LoadingSpinnerService ) { }
 
   iconUsr = "assets/img/user/iconoUsuario.png";
 
   ngOnInit(): void {
+    this.loadingSpinner.openSpinner();
   }
 
 }
