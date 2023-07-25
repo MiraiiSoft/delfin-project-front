@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatSelectModule,
     MatMenuModule,
     MatTooltipModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }
