@@ -3,6 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+// importing glide SCSS
+// @use '@glidejs/glide/src/assets/sass/glide.core.scss';
+// @use '@glidejs/glide/src/assets/sass/glide.theme.scss';
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 

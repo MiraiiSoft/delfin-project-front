@@ -36,9 +36,38 @@ export class SliderComponent implements OnInit {
   @Input() showBullets: boolean = true;
   @Input() rewind: boolean = true;
 
+  public getScreenWidth: any;
+  public getScreenHeight: any;
+
   constructor() { }
 
   ngOnInit(): void {
+    if( !this.isImage ){
+      this.getScreenHeight = window.innerHeight;
+      this.getScreenWidth = window.innerWidth;
+      this.changePerView();
+    }
+
+  }
+
+  changePerView(){
+    if( this.getScreenWidth <= 500){
+      this.perView = 1;
+    }else if( this.getScreenWidth <= 900 ){
+      this.perView = 2;
+    }else{
+      this.perView = 4;
+    }
+    
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize(){
+    if( this.isImage === false ){
+      this.getScreenHeight = window.innerHeight;
+      this.getScreenWidth = window.innerWidth;
+      this.changePerView();
+    }
   }
 
 }

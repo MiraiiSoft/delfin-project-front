@@ -3,14 +3,15 @@
                 [showBullets]="false"
         ></app-slider>
 
-        <div>
+        <div class="content__slider-products">
                 <app-slider [data]="products"
-                        [showBullets]="false"
                         [isClickable]="true"
                         [isImage]="false"
+                        
+                        [gap]="15"
+                        [showBullets]="false"
                         [autoplay]="false"
                         [rewind]="false"
-                        [gap]="15"
                         [perView]="4"
                 ></app-slider>
         </div>

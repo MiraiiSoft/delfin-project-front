@@ -24,10 +24,14 @@
     border-radius: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 
     .content__image{
-        height: 10rem;
-        width: 10rem;
+        min-width: 7rem;
+        max-height: 10rem;
+        max-width: 10rem;
+        margin: 0 auto;
 
         img{
             width: 100%;
