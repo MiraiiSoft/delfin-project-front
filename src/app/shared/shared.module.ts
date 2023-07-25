@@ -7,11 +7,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MaterialModule } from '../material/material.module';
 import { SliderComponent } from './components/slider/slider.component';
 import { NgxGlideModule } from 'ngx-glide';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
+    CardComponent,
   ],
   imports: [
     CommonModule,
