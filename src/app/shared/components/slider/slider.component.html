@@ -33,8 +33,10 @@
 
     <ng-container *ngIf="isImage === false && isText === true">
         <ng-container *ngFor="let content of data">
-            <div class="content" (click)="open( content.link! )">
-                <h4>{{content.title | titlecase}}</h4>
+            <div class="content text" (click)="open( content.link! )">
+                <div>
+                    <h4>{{content.title | titlecase}}</h4>
+                </div>
             </div>
         </ng-container>
     </ng-container>
