@@ -52,9 +52,7 @@
           </div>
         </div>
 
-        <mat-label class="details-text">
-          Stock: {{product.inventario.existencias}} disponibles <br> <br>
-        </mat-label>
+        <mat-label class="details-text">Stock: {{product.inventario.existencias}} disponibles <br> <br></mat-label>
         <button mat-button class="button-text border-10px buy" color="accent" [hidden]="product.inventario.existencias==0" >Comprar ahora</button>
         <button mat-button class="button-text border-10px add-to-cart" color="accent" [hidden]="product.inventario.existencias==0">Agregar al carrito</button>
       </mat-card>
