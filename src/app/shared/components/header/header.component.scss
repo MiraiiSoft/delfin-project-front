@@ -1,5 +1,5 @@
 .header{
-    min-height: 8rem;
+    min-height: 6rem;
     background-color: #2F48CF;
     color: white;
     .header-main{
@@ -8,11 +8,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-bottom: 1rem;
+            // padding-bottom: 1rem;
             cursor: pointer;
 
-            height: 8rem;
-            width: 8rem;
+            height: 6rem;
+            width: 6rem;
     
             img{
                 width: 100%;
@@ -140,13 +140,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-top: 1rem;
+        // padding-top: 1rem;
 
         .header__logo{
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-bottom: 1rem;
+            // padding-bottom: 1rem;
 
             height: 8rem;
             width: 8rem;
