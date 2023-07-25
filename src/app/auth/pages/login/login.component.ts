@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   logoUrl: string = 'assets/img/auth/LogoPapeleria.png';
+  iconUser: string = 'assets/img/user/iconUser3.png';
   constructor() { }
 
   ngOnInit(): void {
