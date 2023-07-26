@@ -79,7 +79,12 @@
     justify-content: start;
 }
 
+.group-images::-webkit-scrollbar {
+    display: none;
+}
+
 .principal-image-contain {
+    min-width: 300px;
     width: 450px;
     height: 450px;
     display: flex;
@@ -345,8 +350,8 @@
     }
 
     .principal-image-contain {
-        width: 350px;
-        height: 350px;
+        width: 65%;
+        height: 340px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -354,13 +359,15 @@
     
     .principal-image {
         width: 90%;
+        margin: 0;
     }
 
     .group-images {
+        min-width: 55px;
         margin: 0px;
-        margin-right: 1%;
+        margin: 0px 1%;
         height: 310px;
-        width: 55px;
+        width: 35%;
     }
 
     .img {

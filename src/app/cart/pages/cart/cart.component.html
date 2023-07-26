@@ -2,26 +2,28 @@
     <mat-card class="cont-products-principal border-5px">
         <mat-card-title>PRODUCTOS</mat-card-title>
         <mat-card-content class="cont-products">
-            <div class="cont-single-product" *ngFor="let product of cart.carrito_producto; let i = index;">
-                <div class="cont-img">
-                    <img src={{product.producto.imagen.url[0]}} alt="product-img" class="img">
-                </div>
-                <div class="product-cont-details">
-                    <mat-label class="details-text-title">{{product.producto.nombre}}</mat-label> <br>
-                    <mat-label class="details-text-body">Color: {{product.producto.color.color}} &nbsp;&nbsp; Tipo: {{product.producto.tipo.tipo}}</mat-label>
-                    <div class="details-cont-buttons">
-                        <button mat-button class="button">
-                            <mat-icon><span class="material-symbols-outlined">delete</span></mat-icon>
-                            Eliminar
-                        </button>
-                        <button mat-button class="button">
-                            <mat-icon><span class="material-symbols-outlined">edit</span></mat-icon>
-                            Modificar
-                        </button>
-                        <button mat-button class="button button-buy">
-                            <mat-icon><span class="material-symbols-outlined">attach_money</span></mat-icon>
-                            Comprar ahora
-                        </button>
+            <div class="cont-single-product" *ngFor="let product of cart.carrito_producto.producto; let i = index;">
+                <div class="cont-mix-img-details">
+                    <div class="cont-img">
+                        <img src={{product.imagen.url[0]}} alt="product-img" class="img">
+                    </div>
+                    <div class="product-cont-details">
+                        <mat-label class="details-text-title">{{product.nombre}}</mat-label> 
+                        <mat-label class="details-text-body">Color: {{product.color.color}} &nbsp;&nbsp; Tipo: {{product.tipo.tipo}}</mat-label>
+                        <div class="details-cont-buttons">
+                            <button mat-button class="button">
+                                <mat-icon><span class="material-symbols-outlined border-5px">delete</span></mat-icon>
+                                Eliminar
+                            </button>
+                            <button mat-button class="button border-5px">
+                                <mat-icon><span class="material-symbols-outlined">edit</span></mat-icon>
+                                Modificar
+                            </button>
+                            <button mat-button class="button button-buy border-5px">
+                                <mat-icon><span class="material-symbols-outlined">attach_money</span></mat-icon>
+                                Comprar ahora
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="cont-counter-stock-price">
@@ -31,7 +33,7 @@
                             <button mat-button class="counter-format-middle">{{counter[i]}}</button>
                             <button  mat-button (click)="actionsBtnIncrement(i)" class="counter-format-side">+</button>
                         </div>
-                        <mat-label class="details-text-body">Stock: {{product.producto.inventario.existencias}} disponibles</mat-label>
+                        <mat-label class="details-text-body">Stock: {{product.inventario.existencias}} disponibles</mat-label>
                     </div>
                     <div class="cont-price">
                         <mat-label class="price-text">${{current_price[i]}} MXM</mat-label>
@@ -46,10 +48,10 @@
 
 
             <!-- Falta -->
-            <mat-label>Productos: {{cart.carrito_producto[0].cantidad_producto}}</mat-label> <br>
+            <mat-label>Productos: 5</mat-label> <br>
             <mat-label class="total-text-price">Total: ${{total_price}} MXM</mat-label>
         </div>
-        <button mat-button class="total-button">
+        <button mat-button class="total-button border-5px">
             <mat-icon><span class="material-symbols-outlined">attach_money</span></mat-icon>
             Comprar ahora
         </button>
