@@ -1,71 +1,76 @@
-<section class="container father-container">
-  <div class="up-container flex-wrap-between">
-    <div class="cont-up-left">
-      <mat-grid-list class="group-images" cols="1" rowHeight="fit">
-        <img mat-card- *ngFor="let foto of product.imagen.url; let i = index" 
-        class="img border-10px" [class.selected]="i==indexSelected"
-        (mouseenter)="selectImg(i)" [src]=foto alt=foto>
-      </mat-grid-list>
-
-      <div class="principal-image-contain">
-        <img mat-card- class="principal-image" src={{imgSelected}} alt="photo">
+<main class=" mat-app-background"> 
+  <section class="container father-container">
+    <div class="up-container flex-wrap-between">
+      <div class="cont-up-left">
+        <mat-grid-list class="group-images" cols="1" rowHeight="fit">
+          <img mat-card- *ngFor="let foto of product.imagen.url; let i = index" 
+          class="img border-10px" [class.selected]="i==indexSelected"
+          (mouseenter)="selectImg(i)" [src]=foto alt=foto>
+        </mat-grid-list>
+  
+        <div class="principal-image-contain">
+          <img mat-card- class="principal-image" src={{imgSelected}} alt="photo">
+        </div>
+      </div>
+  
+      <div class="cont-up-right">
+        <mat-card class="details-card border-20px left-text">
+          <div class="cont-title">
+            <mat-label class="title-text uppercase" [textContent]="product.nombre"> </mat-label> <br> <br>
+          </div>
+          
+          <mat-label class="price-text" >$ {{current_price}} MXM <br></mat-label> <br>
+          
+          <div class="cont-categories-principal">
+            <mat-label class="details-text">Categoia:</mat-label>
+            <div class="cont-categories">
+              <a class="details-text categorie border-5px">{{product.categoria.categoria}}</a>
+            </div>
+          </div>
+  
+          <mat-label class="details-text">
+            Tipo: {{product.tipo.tipo}} <br>
+            Marca: {{product.marca}} <br>
+          </mat-label>
+          <div class="cont-colors-principal">
+            <mat-label class="details-text">Color:</mat-label>
+            <div class="cont-colors">
+              <div class="color" *ngFor="let color of product.color;" [ngStyle]="{'background-color':color.hexa}" 
+                #tooltip="matTooltip" matTooltip={{color.color}} matTooltipPosition="below"> </div>
+            </div>
+          </div>
+        </mat-card>  
+  
+        <mat-card class="button-card border-20px center-text">
+          <div class="cont-counter-principal">
+            <mat-label class="details-text">
+              Cantidad:
+            </mat-label>
+            <div class="cont-counter">
+              <button (click)="actionsBtnDecrement()" mat-button class="counter-format-side">-</button>
+              <button mat-button class="counter-format-middle">{{counter}}</button>
+              <button (click)="actionsBtnIncrement()" mat-button class="counter-format-side">+</button> <br>
+            </div>
+          </div>
+  
+          <mat-label class="details-text">Stock: {{product.inventario.existencias}} disponibles <br> <br></mat-label>
+          <button mat-button class="button-text border-10px buy" color="accent" [hidden]="product.inventario.existencias==0" >
+            Comprar ahora
+          </button>
+          <button mat-button class="button-text border-10px add-to-cart" color="accent" [hidden]="product.inventario.existencias==0">
+            Agregar al carrito
+          </button>
+        </mat-card>
       </div>
     </div>
+  
+    <mat-card class="description-card border-20px">
+      <mat-card-title class="uppercase">descripción</mat-card-title>
+      <mat-card-content class="description-text">
+        {{product.descripcion}}
+      </mat-card-content>
+    </mat-card>
+  </section>
+</main>
 
-    <div class="cont-up-right">
-      <mat-card class="details-card border-20px left-text">
-        <div class="cont-title">
-          <mat-label class="title-text uppercase" [textContent]="product.nombre"> </mat-label> <br> <br>
-        </div>
-        
-        <mat-label class="price-text" >$ {{current_price}} MXM <br></mat-label> <br>
-        
-        <div class="cont-categories-principal">
-          <mat-label class="details-text">Categoia:</mat-label>
-          <div class="cont-categories">
-            <a class="details-text categorie border-5px">{{product.categoria.categoria}}</a>
-          </div>
-        </div>
-
-        <mat-label class="details-text">
-          Tipo: {{product.tipo.tipo}} <br>
-          Marca: {{product.marca}} <br>
-        </mat-label>
-        <div class="cont-colors-principal">
-          <mat-label class="details-text">Color:</mat-label>
-          <div class="cont-colors">
-            <div class="color" *ngFor="let color of product.color;" [ngStyle]="{'background-color':color.hexa}" 
-              #tooltip="matTooltip" matTooltip={{color.color}} matTooltipPosition="below"> </div>
-          </div>
-        </div>
-      </mat-card>  
-
-      <mat-card class="button-card border-20px center-text">
-        <div class="cont-counter-principal">
-          <mat-label class="details-text">
-            Cantidad:
-          </mat-label>
-          <div class="cont-counter">
-            <button (click)="actionsBtnDecrement()" mat-button class="counter-format-side">-</button>
-            <button mat-button class="counter-format-middle">{{counter}}</button>
-            <button (click)="actionsBtnIncrement()" mat-button class="counter-format-side">+</button> <br>
-          </div>
-        </div>
-
-        <mat-label class="details-text">Stock: {{product.inventario.existencias}} disponibles <br> <br></mat-label>
-        <button mat-button class="button-text border-10px buy" color="accent" [hidden]="product.inventario.existencias==0" >Comprar ahora</button>
-        <button mat-button class="button-text border-10px add-to-cart" color="accent" [hidden]="product.inventario.existencias==0">Agregar al carrito</button>
-      </mat-card>
-    </div>
-  </div>
-
-  <mat-card class="description-card border-20px">
-    <mat-card-title class="uppercase">descripción</mat-card-title>
-    <mat-card-content class="description-text">
-      {{product.descripcion}}
-    </mat-card-content>
-  </mat-card>
-</section>
-
-<router-outlet></router-outlet>
   
