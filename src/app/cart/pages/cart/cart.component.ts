@@ -162,7 +162,7 @@ export class CartComponent implements OnInit {
     this.checkCounter(index, product)
     this.refreshTotalPrice()
   }
-
+  
   ngOnInit(): void {
   }
 

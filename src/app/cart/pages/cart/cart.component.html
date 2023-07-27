@@ -11,15 +11,15 @@
                         <mat-label class="details-text-title">{{product.nombre}}</mat-label> 
                         <mat-label class="details-text-body">Color: {{product.color.color}} &nbsp;&nbsp; Tipo: {{product.tipo.tipo}}</mat-label>
                         <div class="details-cont-buttons">
-                            <button mat-button class="button">
-                                <mat-icon><span class="material-symbols-outlined border-5px">delete</span></mat-icon>
+                            <button mat-raised-button class="button border-5px">
+                                <mat-icon><span class="material-symbols-outlined">delete</span></mat-icon>
                                 Eliminar
                             </button>
-                            <button mat-button class="button border-5px">
+                            <button mat-raised-button class="button border-5px">
                                 <mat-icon><span class="material-symbols-outlined">edit</span></mat-icon>
                                 Modificar
                             </button>
-                            <button mat-button class="button button-buy border-5px">
+                            <button mat-raised-button class="button button-buy border-5px">
                                 <mat-icon><span class="material-symbols-outlined">attach_money</span></mat-icon>
                                 Comprar ahora
                             </button>
@@ -45,13 +45,11 @@
     <mat-card class="cont-total-principal border-5px">
         <mat-label class="total-text-title">Resumen de compra</mat-label>
         <div class="total-resume">
-
-
             <!-- Falta -->
             <mat-label>Productos: 5</mat-label> <br>
             <mat-label class="total-text-price">Total: ${{total_price}} MXM</mat-label>
         </div>
-        <button mat-button class="total-button border-5px">
+        <button mat-raised-button class="total-button border-5px">
             <mat-icon><span class="material-symbols-outlined">attach_money</span></mat-icon>
             Comprar ahora
         </button>

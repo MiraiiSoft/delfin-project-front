@@ -159,6 +159,10 @@
     text-decoration: none;
 }
 
+.categorie:hover {
+    background-color: #60FFFF;
+}
+
 .cont-colors-principal {
     display: flex;
     justify-content: left;
@@ -245,18 +249,24 @@
 }
 
 .buy {
-    background-color: #172EB0;
-    color: white;
     width: 100%;
     padding: 4px;
     margin-bottom: 10px;
 }
 
-.add-to-cart {
-    background-color: #60A9ED;
+.buy:hover {
+    background-color: #172EB0;
     color: white;
+}
+
+.add-to-cart {
     width: 100%;
     padding: 4px;
+}
+
+.add-to-cart:hover {
+    background-color: #60A9ED;
+    color: white;
 }
 
 .description-text {

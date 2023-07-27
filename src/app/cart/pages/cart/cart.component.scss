@@ -79,9 +79,12 @@
 }
 
 .button {
+    margin-right: 1%;
+}
+
+.button:hover {
     background-color: #2F48CF;
     color: #ffffff;
-    margin-right: 1%;
 }
 
 .cont-counter-stock-price {
@@ -166,10 +169,12 @@
 
 .total-button {
     width: 100%;
+}
+
+.total-button:hover {
     background-color: #2F48CF;
     color: #ffffff;
 }
-
 
 @media (max-width: 1200px) {
     .product-cont-details {
