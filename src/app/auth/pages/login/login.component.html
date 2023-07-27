@@ -20,7 +20,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline" class="input-style">
             <mat-label>Contraseña:</mat-label>
-            <input type="password" matInput placeholder="***********" formControlName="pass">
+            <input type="password" matInput placeholder="***********" formControlName="pass" (keydown.enter)="ingresar()">
             <mat-icon matSuffix class="custom-icon">lock</mat-icon>
           </mat-form-field>
 
