@@ -29,7 +29,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     HeaderComponent,
     FooterComponent,
     SliderComponent,
-    CardComponent
+    CardComponent,
+    SpinnerComponent
   ]
 })
 export class SharedModule { }

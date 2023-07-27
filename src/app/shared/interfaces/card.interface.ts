@@ -1,5 +1,6 @@
 export interface IcardData {
     title: string,
     img: string,
-    id: number
+    id: number,
+    price?: number
 }
