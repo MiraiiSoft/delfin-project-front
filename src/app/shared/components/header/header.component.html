@@ -44,8 +44,12 @@
             </div>
         
             <div class="header__user">
-                <div class="header__user-logo" (click)="redirectRoute('/site/user')">
-                    <img [src]="iconUsr" alt="usuario">
+                <div class="header__user-logo">
+                    <img [src]="iconUsr" alt="usuario" [matMenuTriggerFor]="menuAccount">
+                    <mat-menu #menuAccount="matMenu">
+                        <button mat-menu-item (click)="redirectRoute('/site/user')">Cuenta</button>
+                        <button mat-menu-item>Cerrar sesión</button>
+                    </mat-menu>
                 </div>
     
                 <div class="header__user-saludo">
