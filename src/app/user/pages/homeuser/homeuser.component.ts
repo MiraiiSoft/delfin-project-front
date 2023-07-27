@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingSpinnerService } from 'src/app/services/loading-spinner.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-homeuser',
@@ -8,12 +9,21 @@ import { LoadingSpinnerService } from 'src/app/services/loading-spinner.service'
 })
 export class HomeuserComponent implements OnInit {
 
-  constructor( private loadingSpinner: LoadingSpinnerService ) { }
+  constructor( private dialog: MatDialog ) { }
 
   iconUsr = "assets/img/user/iconoUsuario.png";
 
   ngOnInit(): void {
-    this.loadingSpinner.openSpinner();
+  }
+
+  openSpinner(){
+    this.dialog.open( SpinnerComponent, {
+      disableClose: true
+    } );
+  }
+
+  closeSpinner(){
+    this.dialog.closeAll();
   }
 
 }
