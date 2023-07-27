@@ -34,7 +34,7 @@
   }
   #celular .font {
     font-size: 12vw;
-    -webkit-text-stroke: 1.5px black;
+    text-shadow: -3px -3px 0 black, 3px -3px 0 black, -3px 3px 0 black, 3px 3px 0 black;
   }
   #letra .sesion {
     font-size: 8vw;
@@ -75,14 +75,14 @@
 }
 .font {
   color: #FFF;
-  font-family: Baloo Thambi;
-  font-size: 7vw;
+  font-family: 'Baloo Thambi 2', cursive;
+  font-size: 6.5vw;
   font-weight: bold;
-  -webkit-text-stroke: 3px black; //para agregar borde negro a la letra
+  text-shadow: -3px -3px 0 black, 3px -3px 0 black, -3px 3px 0 black, 3px 3px 0 black;
 }
 .contenedor-registro {
-  width: 55%;
-  height: 85%;
+  width: 60%;
+  height: auto;
   border-radius: 40px;
   display: flex;
   flex-direction: column;
