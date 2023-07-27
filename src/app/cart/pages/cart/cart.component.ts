@@ -10,6 +10,7 @@ export class CartComponent implements OnInit {
   public counter: any = [];
   public current_price: any = [];
   public total_price = 0;
+  public total_products = 0;
   cart: any = {
     id_carrito: 1,
     id_login: 1,
@@ -34,7 +35,7 @@ export class CartComponent implements OnInit {
             ]
           },
           compra: "5",
-          precio_unitario: "42.00",
+          precio_unitario: "4.00",
           precio_mayoreo: "40.00",
           precio_caja: "35.99",
           inicio_mayoreo: 3,
@@ -49,10 +50,6 @@ export class CartComponent implements OnInit {
           },
           tipo: {
             tipo: "Caja"
-          },
-          categoria: {
-            id_categoria: 1,
-            categoria: "Lapiceros"
           },
           inventario: {
             id_inventario: 1,
@@ -76,9 +73,9 @@ export class CartComponent implements OnInit {
             ]
           },
           compra: "5",
-          precio_unitario: "42.00",
-          precio_mayoreo: "40.00",
-          precio_caja: "35.99",
+          precio_unitario: "20.00",
+          precio_mayoreo: "16.00",
+          precio_caja: "10.99",
           inicio_mayoreo: 3,
           inicio_caja: 5,
           id_color: 2,
@@ -92,14 +89,10 @@ export class CartComponent implements OnInit {
           tipo: {
             tipo: "Caja"
           },
-          categoria: {
-            id_categoria: 1,
-            categoria: "Lapiceros"
-          },
           inventario: {
             id_inventario: 1,
             id_producto: 1,
-            existencias: 7,
+            existencias: 10,
             unidadesPaquete: 4,
             numPaquete: 20
           }
@@ -114,6 +107,7 @@ export class CartComponent implements OnInit {
       this.counter.push(1);
       this.current_price.push(element);
       this.total_price += parseInt(element);
+      this.total_products += 1;
     }  
   }
   
@@ -149,20 +143,26 @@ export class CartComponent implements OnInit {
     this.total_price = parseFloat(this.total_price.toFixed(2))
   }
 
-  public actionsBtnIncrement(index: any) {
-    const product = this.cart.carrito_producto.producto[index]
-    this.incrementCounter(index, product)
-    this.checkCounter(index, product)
-    this.refreshTotalPrice()
+  public refreshTotalProducts() {
+    this.total_products = 0;
+    this.counter.forEach((element: any) => {
+      this.total_products += element
+    });
   }
 
-  public actionsBtnDecrement(index: any) {
+  public actionsBtn(index: any, increment: boolean) {
     const product = this.cart.carrito_producto.producto[index]
-    this.decrementCounter(index)
+
+    if( increment == true )
+      this.incrementCounter(index, product)
+    else
+      this.decrementCounter(index)
+
     this.checkCounter(index, product)
     this.refreshTotalPrice()
+    this.refreshTotalProducts()
   }
-  
+
   ngOnInit(): void {
   }
 
