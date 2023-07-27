@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroComponent implements OnInit {
 
+  logoUrl: string = 'assets/img/auth/LogoPapeleria.png';
+
   constructor() { }
 
   ngOnInit(): void {
