@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 })
 export class AuthService {
 
-  baseUrl = environment.API_URL;
+  private baseUrl = environment.API_URL;
 
   constructor( private http: HttpClient ) { }
 
@@ -18,7 +18,7 @@ export class AuthService {
 
     const url = `${ this.baseUrl }/auth/login`;
 
-    this.http.post<IResponseAuth>( url, credenciales, { observe: 'response' } )
+    return this.http.post<IResponseAuth>( url, credenciales, { observe: 'response' } )
       .pipe(
         tap( res => {
           if( res.body?.success ){
@@ -28,7 +28,7 @@ export class AuthService {
           }
         } ),
         map( res => res.body?.success ),
-        catchError( err => of(err) )
+        catchError( err => of(err.error) )
       );
 
   }
