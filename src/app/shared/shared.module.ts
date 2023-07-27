@@ -8,12 +8,14 @@ import { MaterialModule } from '../material/material.module';
 import { SliderComponent } from './components/slider/slider.component';
 import { NgxGlideModule } from 'ngx-glide';
 import { CardComponent } from './components/card/card.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
     CardComponent,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { CardComponent } from './components/card/card.component';
     HeaderComponent,
     FooterComponent,
     SliderComponent,
-    CardComponent
+    CardComponent,
+    SpinnerComponent
   ]
 })
 export class SharedModule { }

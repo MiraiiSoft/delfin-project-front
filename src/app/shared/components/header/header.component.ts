@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   imgLogoFace = "assets/img/social/Vectorface.png";
   iconActivate: string = "menu";
   _activateNav: boolean = false;
+  quantity_products: number = 1;
 
   categorias = [
     {

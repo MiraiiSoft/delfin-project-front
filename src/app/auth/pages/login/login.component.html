@@ -1,6 +1,5 @@
 <div class="component-body">
-  <div class="component-izq">
-    <img class="imagen-fondo">
+  <div class="component-izq" id="celular">
     <div class="contenedor-component-izq">
       <!-- Contenido encima del fondo de imagen -->
       <img [src]="logoUrl" alt="Logo" class="imagen-contenedor">
@@ -9,8 +8,30 @@
   </div>
   <div class="component-der">
     <!-- Contenido de la parte izquierda (blanco) -->
-    <div class="contenedor-registro">
-      
+    <div class="contenedor-registro" id="letra">
+      <h1 class="sesion">Inicio de Sesión</h1>
+      <img class="icono" [src]="iconUser" alt="user">
+      <form class="form">
+        <div class="example-form">
+          <mat-form-field appearance="outline" class="input-style">
+            <mat-label >Correo electrónico:</mat-label>
+            <input  type="text" matInput placeholder="Ejem. example@example.com">
+            <mat-icon matSuffix class="custom-icon">person_outline</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input-style">
+            <mat-label>Contraseña:</mat-label>
+            <input type="password" matInput placeholder="***********">
+            <mat-icon matSuffix class="custom-icon">lock</mat-icon>
+          </mat-form-field>
+
+        </div>
+        <button mat-raised-button type="button">
+          Iniciar Sesión
+        </button>
+        <h5 class="account">¿No tienes cuenta?</h5>
+        <h6><a routerLink="/auth/registro" >Regístrate</a></h6>
+
+      </form>
     </div>
   </div>
 </div>
