@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Detail } from '../../interfaces/detail.interface';
 
 @Component({
   selector: 'app-detail',
@@ -12,7 +13,7 @@ export class DetailComponent implements OnInit {
   public counter = 1;
   public current_price;
 
-  product: any = {
+  product: Detail = {
     id_producto: 1,
     codigo_barras: "1234567890",
     nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
@@ -94,13 +95,15 @@ export class DetailComponent implements OnInit {
       id_categoria: 1,
       categoria: "Lapiceros"
     },
-    inventario: {
-      id_inventario: 1,
-      id_producto: 1,
-      existencias: 7,
-      unidadesPaquete: 4,
-      numPaquete: 20
-    }
+    inventario: [
+      {
+        id_inventario: 1,
+        id_producto: 1,
+        existencias: 10,
+        unidadesPaquete: 4,
+        numPaquete: 20
+      }
+    ]
   }
   
   constructor() {
@@ -113,8 +116,8 @@ export class DetailComponent implements OnInit {
   }
 
   public incrementCounter() {
-    if(this.counter == this.product.inventario.existencias)
-      this.counter = this.product.inventario.existencias
+    if(this.counter == this.product.inventario[0].existencias)
+      this.counter = this.product.inventario[0].existencias
     else
       this.counter += 1;
   }

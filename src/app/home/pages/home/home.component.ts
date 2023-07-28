@@ -90,37 +90,44 @@ export class HomeComponent implements OnInit {
     {
       title: "Lapicero tres colores",
       img: "assets/img/products/img1.png",
-      id: 1
+      id: 1,
+      price: 30
     },
     {
       title: "Lapicero azul",
       img: "assets/img/products/img3.png",
-      id: 2
+      id: 2,
+      price: 30
     },
     {
       title: "Lapicero verde",
       img: "assets/img/products/img4.png",
-      id: 3
+      id: 3,
+      price: 30
     },
     {
       title: "Lapicero rojo",
       img: "assets/img/products/img2.png",
-      id: 4
+      id: 4,
+      price: 30
     },
     {
       title: "Lapicero negro",
       img: "assets/img/products/img3.png",
-      id: 5
+      id: 5,
+      price: 30
     },
     {
       title: "Lapicero morado",
       img: "assets/img/products/img4.png",
-      id: 6
+      id: 6,
+      price: 30
     },
     {
       title: "Lapicero naranja",
       img: "assets/img/products/img2.png",
-      id: 7
+      id: 7,
+      price: 30
     }
   ]
 

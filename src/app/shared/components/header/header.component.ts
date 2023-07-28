@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private router: Router ) { }
+  constructor( private router: Router, private authService: AuthService ) { }
 
   iconUsr = "assets/img/user/iconoUsuario.png";
   imgLogo = "assets/img/auth/LogoPapeleria.png";
@@ -16,6 +17,9 @@ export class HeaderComponent implements OnInit {
   iconActivate: string = "menu";
   _activateNav: boolean = false;
   quantity_products: number = 1;
+
+  inLogin: boolean = false;
+  nameUser: string = '';
 
   categorias = [
     {
@@ -53,6 +57,14 @@ export class HeaderComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.nameUser = localStorage.getItem('user') || '';
+
+    if( localStorage.getItem('token') == '' || localStorage.getItem('token') == undefined ){
+      this.inLogin = false;
+    }else{
+      this.inLogin = true;
+    }
+
   }
 
   redirectRoute( route: string ){
@@ -66,6 +78,11 @@ export class HeaderComponent implements OnInit {
     }else{
       this.iconActivate = "menu";
     }
+  }
+
+  logout(){
+    this.authService.logout();
+    this.nameUser = '';
   }
 
 }
