@@ -136,13 +136,12 @@ export class DetailComponent implements OnInit {
       this.current_price = this.product.precio_unitario
   }
 
-  public actionsBtnIncrement() {
-    this.incrementCounter();
-    this.checkCounter();
-  }
+  public actionsBtn(increment: boolean) {
+    if (increment == true)
+      this.incrementCounter();
+    else
+      this.decrementCounter();
 
-  public actionsBtnDecrement() {
-    this.decrementCounter();
     this.checkCounter();
   }
 

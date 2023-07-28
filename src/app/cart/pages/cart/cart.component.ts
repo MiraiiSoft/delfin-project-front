@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
             ]
           },
           compra: "5",
-          precio_unitario: "4.00",
+          precio_unitario: "45.80",
           precio_mayoreo: "40.00",
           precio_caja: "35.99",
           inicio_mayoreo: 3,
@@ -60,7 +60,7 @@ export class CartComponent implements OnInit {
           }
         },
         {
-          id_producto: 1,
+          id_producto: 2,
           codigo_barras: "1234567890",
           nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
           marca: "Bic",
@@ -87,6 +87,7 @@ export class CartComponent implements OnInit {
             hexa: "#ff0000"
           },
           tipo: {
+            id_tipo: 1,
             tipo: "Caja"
           },
           inventario: {
@@ -152,7 +153,6 @@ export class CartComponent implements OnInit {
 
   public actionsBtn(index: any, increment: boolean) {
     const product = this.cart.carrito_producto.producto[index]
-
     if( increment == true )
       this.incrementCounter(index, product)
     else
