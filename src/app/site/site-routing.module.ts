@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { SiteComponent } from './components/site/site.component';
+import { ValidarTokenGuard } from '../auth/guards/validar-token.guard';
 
 const routes: Routes = [
   {
@@ -19,7 +20,10 @@ const routes: Routes = [
       },
       {
         path: 'user',
-        loadChildren: () => import("../user/user.module").then( m => m.UserModule )
+        loadChildren: () => import("../user/user.module").then( m => m.UserModule ),
+        canActivate: [ ValidarTokenGuard ],
+        canActivateChild: [ ValidarTokenGuard ],
+        canLoad: [ ValidarTokenGuard ]
       },
       {
         path: 'products',
