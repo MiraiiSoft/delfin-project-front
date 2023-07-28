@@ -11,25 +11,25 @@
     <div class="contenedor-registro" id="letra">
       <h1 class="sesion">Inicio de Sesión</h1>
       <img class="icono" [src]="iconUser" alt="user">
-      <form class="form">
+      <form [formGroup]="loginForm" class="form">
         <div class="example-form">
           <mat-form-field appearance="outline" class="input-style">
-            <mat-label >Correo electrónico</mat-label>
-            <input  type="text" matInput placeholder="Ejem. example@example.com">
+            <mat-label>Correo electrónico:</mat-label>
+            <input type="text" matInput placeholder="Ejem. example@example.com" formControlName="user">
             <mat-icon matSuffix class="custom-icon">person_outline</mat-icon>
           </mat-form-field>
           <mat-form-field appearance="outline" class="input-style">
-            <mat-label>Contraseña</mat-label>
-            <input type="password" matInput placeholder="***********">
+            <mat-label>Contraseña:</mat-label>
+            <input type="password" matInput placeholder="***********" formControlName="pass" (keydown.enter)="ingresar()">
             <mat-icon matSuffix class="custom-icon">lock</mat-icon>
           </mat-form-field>
 
         </div>
-        <button mat-raised-button type="button">
+        <button mat-raised-button type="button" (click)="ingresar()">
           Iniciar Sesión
         </button>
         <h5 class="account">¿No tienes cuenta?</h5>
-        <h6><a routerLink="/auth/registro" >Regístrate</a></h6>
+        <h6><a routerLink="/auth/registro">Regístrate</a></h6>
 
       </form>
     </div>

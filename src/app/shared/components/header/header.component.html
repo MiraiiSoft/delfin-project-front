@@ -44,13 +44,18 @@
             </div>
         
             <div class="header__user">
-                <div class="header__user-logo" (click)="redirectRoute('/site/user')">
-                    <img [src]="iconUsr" alt="usuario">
+                <div class="header__user-logo">
+                    <img [src]="iconUsr" alt="usuario" [matMenuTriggerFor]="menuAccount">
+                    <mat-menu #menuAccount="matMenu">
+                        <button *ngIf="!inLogin" mat-menu-item (click)="redirectRoute('/auth/login')">Login</button>
+                        <button *ngIf="inLogin" mat-menu-item (click)="redirectRoute('/site/user')">Cuenta</button>
+                        <button *ngIf="inLogin" mat-menu-item (click)="logout()">Cerrar sesión</button>
+                    </mat-menu>
                 </div>
     
                 <div class="header__user-saludo">
                     <p>Hola!</p>
-                    <p>Erick</p>
+                    <p>{{nameUser | titlecase}}</p>
                 </div>
     
                 <button mat-icon-button>
