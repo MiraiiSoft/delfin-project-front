@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ILogin, IResponseAuth } from '../interfaces/login.interface';
+import { ILogin, IRegistro, IResponseAuth } from '../interfaces/login.interface';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
@@ -46,6 +46,15 @@ export class AuthService {
         } ),
         catchError( err => of(false) )
       );
+  }
+
+  registro( datos: IRegistro ): Observable<IResponseAuth | unknown>{
+    const url = `${ this.baseUrl }/auth/register`;
+
+    return this.http.post<IResponseAuth>( url, datos )
+      .pipe(
+        catchError( err => err.error )
+      )
   }
 
   logout(){
