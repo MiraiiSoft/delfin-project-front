@@ -5,7 +5,7 @@ export interface ILogin {
 
 export interface IResponseAuth{
     success: boolean,
-    message: string
+    message?: string
     data?: Login
 }
 

@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ILogin, IResponseAuth } from '../interfaces/login.interface';
 import { catchError, map, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,21 @@ export class AuthService {
         catchError( err => of(err.error) )
       );
 
+  }
+
+  validarToken(): Observable<boolean>{
+    const url = `${ this.baseUrl }/user/perfil`;
+
+    const headers = new HttpHeaders()
+      .set('token', localStorage.getItem('token') || '')
+
+    return this.http.get<IResponseAuth>( url, { headers } )
+      .pipe(
+        map( res => {
+          return res.success
+        } ),
+        catchError( err => of(false) )
+      );
   }
 
   logout(){
