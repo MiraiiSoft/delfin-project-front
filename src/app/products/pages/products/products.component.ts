@@ -142,7 +142,7 @@ export class ProductsComponent implements OnInit {
       descripcion: "Bolígrafo de tinta azul",
       imagen: {
         url: [
-          '/assets/img/products/img1.png', '/assets/img/products/img1.png'
+          '/assets/img/products/img2.png', '/assets/img/products/img1.png'
         ]
       },
       compra: "5",
@@ -172,11 +172,11 @@ export class ProductsComponent implements OnInit {
       descripcion: "Bolígrafo de tinta azul",
       imagen: {
         url: [
-          '/assets/img/products/img1.png', '/assets/img/products/img1.png'
+          '/assets/img/products/img3.png', '/assets/img/products/img1.png'
         ]
       },
       compra: "5",
-      precio_unitario: "569",
+      precio_unitario: "1000",
       precio_mayoreo: "7",
       precio_caja: "5",
       inicio_mayoreo: 10,
