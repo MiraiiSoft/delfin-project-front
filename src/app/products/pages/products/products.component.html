@@ -1,39 +1,60 @@
+<main class="mat-app-background">
+    <section class="container cont-father">
+        <nav class="cont-left-filter">
+            <mat-label class="filter-title">Filtros</mat-label>
+            <ul class="filter-first-group">
+                <li class="filter-single" (click)="categoryPanel = !categoryPanel">
+                    <mat-label class="single-text">
+                        Categorias
+                        <mat-icon class="single-icon-expand">expand_more</mat-icon>
+                    </mat-label>
+                    <ul *ngIf="categoryPanel" class="filter-second-group">
+                        <li *ngFor="let categorie of categories; let i = index" class="single-text just-one" (click)="selected = categories[i].categoria">
+                            {{categorie.categoria}}
+                        </li>
+                    </ul>
+                </li>
 
-<body>
-    <nav class="nav">
-        <ul class="list">
-            <li class="list_item">
-                <div>
-                    <a href="#" class="nav_link">Filtro</a>
+                <li class="filter-single" (click)="colorPanel = !colorPanel">
+                    <mat-label class="single-text">
+                        Colores
+                        <mat-icon class="single-icon-expand">expand_more</mat-icon>
+                    </mat-label>
+                    <ul *ngIf="colorPanel" class="filter-second-group">
+                        <li *ngFor="let color of colors; let i = index" class="single-text just-one" (click)="selected = colors[i].color">
+                            {{color.color}}
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="filter-single" (click)="brandPanel = !brandPanel">
+                    <mat-label class="single-text">
+                        Marcas
+                        <mat-icon class="single-icon-expand">expand_more</mat-icon>
+                    </mat-label>
+                    <ul *ngIf="brandPanel" class="filter-second-group">
+                        <li *ngFor="let brand of brands; let i = index" class="single-text just-one" (click)="selected = brands[i].marca">
+                            {{brand}}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <mat-grid-list class="cont-right" cols="5" rowHeight="1:1.9">
+            <mat-grid-tile *ngFor="let product of products" (click)="openDetailPage(product.id_producto)">
+                <div class="single-product">
+                    <div class="product-cont-img">
+                        <img class="img" [src]="product.imagen.url[0]">
+                    </div>
+                    <div class="product-cont-details">
+                        <mat-label class="details-title">{{product.nombre}}</mat-label> <br><br>
+                        <mat-label class="details-price">${{product.precio_unitario}} MXM</mat-label> <br>
+                    </div>
                 </div>
-            </li>
+            </mat-grid-tile>
+        </mat-grid-list>
 
-            <li class="list_item">
-                <div class="list_button list_button--click">
-                    <a href="#" class="nav_link">Categoría</a>
-                    <img src="assets/arrow.svg" class="list_arrow">
-                </div>
-                <ul class="list_show">
-                    <li class="list_inside">
-                        <a href="#" class="nav_link nav_link--inside">Estoy dentro</a>
-                    </li>
-
-                    <li class="list_inside">
-                        <a href="#" class="nav_link nav_link--inside">Estoy dentro</a>
-                    </li>
-
-                    <li class="list_inside">
-                        <a href="#" class="nav_link nav_link--inside">Estoy dentro</a>
-                    </li>
-
-                    <li class="list_item">
-                        <div class="list_button">
-                            <a href="#" class="nav_link">Color</a>
-                        </div>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-</body>
+    </section>
+</main>
 

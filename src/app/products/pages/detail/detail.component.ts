@@ -28,11 +28,7 @@ export class DetailComponent implements OnInit {
         "assets/img/products/img1.png",
         "assets/img/products/img2.png",
         "assets/img/products/img3.png",
-        "assets/img/products/img1.png",
-        "assets/img/products/img2.png",
-        "assets/img/products/img3.png",
         "assets/img/products/img4.png",
-        "assets/img/products/img1.png",
         "assets/img/products/img2.png",
       ]
     },

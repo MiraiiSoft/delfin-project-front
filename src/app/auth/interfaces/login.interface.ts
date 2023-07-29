@@ -5,8 +5,17 @@ export interface ILogin {
 
 export interface IResponseAuth{
     success: boolean,
-    message: string
+    message?: string
     data?: Login
+}
+
+export interface IRegistro{
+    nombre:     string;
+    apellido:   string;
+    telefono:   string;
+    correo:     string;
+    usuario:    string;
+    contraseña: string;
 }
 
 interface Login {
