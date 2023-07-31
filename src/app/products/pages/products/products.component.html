@@ -42,7 +42,7 @@
         </nav>
 
         <mat-grid-list class="cont-right" cols="5" rowHeight="1:1.9">
-            <mat-grid-tile *ngFor="let product of products" (click)="openDetailPage(product.id_producto)">
+            <mat-grid-tile *ngFor="let product of products" (click)="appendQueryParams(product.id_producto)">
                 <div class="single-product">
                     <div class="product-cont-img">
                         <img class="img" [src]="product.imagen.url[0]">

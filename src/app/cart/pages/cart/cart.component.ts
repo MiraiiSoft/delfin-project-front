@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart } from '../../interfaces/cart.interface';
+import { CartOne, UpdateCarritoProducto } from '../../interfaces/cart.interface';
+import { CartService } from '../../services/cart.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -8,11 +10,11 @@ import { Cart } from '../../interfaces/cart.interface';
 })
 
 export class CartComponent implements OnInit {
-  public counter: any = [];
+  id: string = ""
   public current_price: any = [];
   public total_price = 0;
   public total_products = 0;
-  cart: Cart = {
+  cart: CartOne = {
     id_carrito: 1,
     id_login: 1,
     carrito_producto: [
@@ -63,7 +65,7 @@ export class CartComponent implements OnInit {
       },
       {
         id_carrito_producto: 1,
-        id_producto: 1,
+        id_producto: 2,
         id_carrito: 2,
         cantidad_producto: 1,
         producto: {
@@ -109,34 +111,53 @@ export class CartComponent implements OnInit {
     ]
   }
 
-  constructor() {
-    for (let index = 0; index < this.cart.carrito_producto.length; index++) {
-      const element = this.cart.carrito_producto[index].producto.precio_unitario;
-      this.counter.push(1);
-      this.current_price.push(element);
-      this.total_price += parseInt(element);
-      this.total_products += 1;
-    }  
+  constructor(private activatedRoute:ActivatedRoute, public cartService: CartService, private router:Router) {
+    this.activatedRoute.paramMap.subscribe(link => {
+      this.id = String( link.get('cartId') )
+    })
+
+    cartService.getCartById(this.id).subscribe( data => {
+      this.cart = data.data
+      this.cart.carrito_producto.forEach( (carrito_producto, i) => {
+        this.total_products += carrito_producto.cantidad_producto;
+        this.current_price.push(0);
+        this.checkCounter(i, carrito_producto.producto)
+        this.refreshTotalPrice()
+      });
+    })
   }
+
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.cart.carrito_producto.forEach( carrito_producto => {
+      const { id_carrito_producto, id_carrito, id_producto, cantidad_producto } = carrito_producto
+      
+      this.cartService.updateCartById( String(id_carrito_producto), carrito_producto ).subscribe( data => {
+        console.log(data)
+      })
+    });
+  } 
   
   public incrementCounter(index: any, product: any) {
-    if(this.counter[index] == product.inventario.existencias)
-      this.counter[index] = product.inventario.existencias
+    if(this.cart.carrito_producto[index].cantidad_producto == product.inventario.existencias)
+      this.cart.carrito_producto[index].cantidad_producto = product.inventario.existencias
     else
-      this.counter[index] += 1;
+      this.cart.carrito_producto[index].cantidad_producto += 1;
   }
 
   public decrementCounter(index: any) {
-    if(this.counter[index] <= 1) 
-      this.counter[index] = 1;
+    if(this.cart.carrito_producto[index].cantidad_producto <= 1) 
+      this.cart.carrito_producto[index].cantidad_producto = 1;
     else
-      this.counter[index] -= 1;
+      this.cart.carrito_producto[index].cantidad_producto -= 1;
   }
 
   public checkCounter(index: any, product: any) {
-    if(this.counter[index] >= product.inicio_mayoreo) {
+    if(this.cart.carrito_producto[index].cantidad_producto >= product.inicio_mayoreo) {
       this.current_price[index] = product.precio_mayoreo
-      if(this.counter[index] >= product.inicio_caja) 
+      if(this.cart.carrito_producto[index].cantidad_producto >= product.inicio_caja) 
         this.current_price[index] = product.precio_caja
     } 
     else
@@ -145,16 +166,16 @@ export class CartComponent implements OnInit {
 
   public refreshTotalPrice() {
     this.total_price = 0;
-    for (let index = 0; index < this.counter.length; index++) {
-      this.total_price += this.current_price[index] * this.counter[index]
+    for (let index = 0; index < this.cart.carrito_producto.length; index++) {
+      this.total_price += this.current_price[index] * this.cart.carrito_producto[index].cantidad_producto
     }
     this.total_price = parseFloat(this.total_price.toFixed(2))
   }
 
   public refreshTotalProducts() {
     this.total_products = 0;
-    this.counter.forEach((element: any) => {
-      this.total_products += element
+    this.cart.carrito_producto.forEach((element: any) => {
+      this.total_products += element.cantidad_producto
     });
   }
 
@@ -170,7 +191,12 @@ export class CartComponent implements OnInit {
     this.refreshTotalProducts()
   }
 
-  ngOnInit(): void {
+  public appendQueryParams(id: number) {
+    this.router.navigate(['/site/products/detail'],{
+      queryParams: {
+        product: id
+      }
+    });
   }
 
 }
