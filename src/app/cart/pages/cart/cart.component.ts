@@ -29,8 +29,7 @@ export class CartComponent implements OnInit {
       this.cart = data.data
       this.cart.carrito_producto.forEach( (carrito_producto, i) => {
         this.total_products += carrito_producto.cantidad_producto;
-        this.current_price.push(0);
-        this.checkCounter(i, carrito_producto.producto)
+        this.current_price.push(this.checkCounter(i, carrito_producto.producto))
         this.refreshTotalPrice()
       });
     })
