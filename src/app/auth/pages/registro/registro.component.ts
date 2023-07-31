@@ -18,7 +18,7 @@ export class RegistroComponent implements OnInit {
   registerForm: FormGroup = this.fb.group({
     nombre:     [ '', [ Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z ]{2,254}$/) ] ],
     apellido:   [ '', [ Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z ]{2,254}$/) ] ],
-    telefono:   [ '', [ Validators.required, Validators.minLength(10), Validators.pattern(/^[0-9]$/), Validators.maxLength(10) ] ],
+    telefono:   [ '', [ Validators.required, Validators.minLength(10), Validators.pattern(/^[0-9]{10}$/), Validators.maxLength(10) ] ],
     correo:     [ '', [ Validators.required, Validators.pattern(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/) ] ],
     usuario:    [ '', [ Validators.required, Validators.minLength(5), Validators.maxLength(15) ] ],
     contraseña: [ '', [ Validators.required, Validators.minLength(8) ] ],
@@ -40,7 +40,7 @@ export class RegistroComponent implements OnInit {
   }
 
   register(){
-    console.log(this.registerForm.errors)
+    console.log(this.registerForm.get('telefono')?.errors)
     console.log(this.registerForm.valid)
     console.log(this.registerForm.value)
   }
