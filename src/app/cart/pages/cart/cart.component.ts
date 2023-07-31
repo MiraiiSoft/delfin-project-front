@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartOne, UpdateCarritoProducto } from '../../interfaces/cart.interface';
+import { CartOne } from '../../interfaces/cart.interface';
 import { CartService } from '../../services/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class CartComponent implements OnInit {
   id: string = ""
-  public current_price: any = [];
+  public current_price: number[] = [];
   public total_price = 0;
   public total_products = 0;
   cart: CartOne = {
@@ -29,7 +29,8 @@ export class CartComponent implements OnInit {
       this.cart = data.data
       this.cart.carrito_producto.forEach( (carrito_producto, i) => {
         this.total_products += carrito_producto.cantidad_producto;
-        this.current_price.push(this.checkCounter(i, carrito_producto.producto))
+        this.current_price.push(0)
+        this.checkCounter(i, carrito_producto.producto)
         this.refreshTotalPrice()
       });
     })
