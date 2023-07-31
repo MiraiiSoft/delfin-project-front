@@ -41,7 +41,7 @@ export class CartComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.cart.carrito_producto.forEach( carrito_producto => {
-      const { id_carrito_producto, id_carrito, id_producto, cantidad_producto } = carrito_producto
+      const { id_carrito_producto } = carrito_producto
       
       this.cartService.updateCartById( String(id_carrito_producto), carrito_producto ).subscribe( data => {
         console.log(data)
