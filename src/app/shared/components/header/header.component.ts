@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
 
   inLogin: boolean = false;
   nameUser: string = '';
+  carrito: string = '';
 
   categorias = [
     {
@@ -58,6 +59,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.nameUser = localStorage.getItem('user') || '';
+    this.carrito = localStorage.getItem('carrito') || '';
 
     if( localStorage.getItem('token') == '' || localStorage.getItem('token') == undefined ){
       this.inLogin = false;

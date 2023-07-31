@@ -29,6 +29,7 @@ interface Login {
     is_active:   boolean;
     persona:     Persona;
     roll:        Roll;
+    id_carrito:  number;
 }
 
 interface Persona {
