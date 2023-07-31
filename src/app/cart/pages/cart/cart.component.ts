@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartOne } from '../../interfaces/cart.interface';
+import { ICartOne } from '../../interfaces/cart.interface';
 import { CartService } from '../../services/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
   public current_price: number[] = [];
   public total_price = 0;
   public total_products = 0;
-  cart: CartOne = {
+  cart: ICartOne = {
     id_carrito: 0,
     id_login: 0,
     carrito_producto: []
@@ -42,10 +42,7 @@ export class CartComponent implements OnInit {
   ngOnDestroy(): void {
     this.cart.carrito_producto.forEach( carrito_producto => {
       const { id_carrito_producto } = carrito_producto
-      
-      this.cartService.updateCartById( String(id_carrito_producto), carrito_producto ).subscribe( data => {
-        console.log(data)
-      })
+      this.cartService.updateCartProductById( String(id_carrito_producto), carrito_producto ).subscribe()
     });
   } 
   

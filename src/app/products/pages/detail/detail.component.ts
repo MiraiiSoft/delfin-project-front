@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Detail } from '../../interfaces/detail.interface';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from 'src/app/cart/services/cart.service';
 
 @Component({
   selector: 'app-detail',
@@ -13,7 +14,7 @@ export class DetailComponent implements OnInit {
   public indexSelected = 0;
   public imgSelected: string = "";
   public counter = 1;
-  public current_price;
+  public current_price: string;
 
   product: Detail = {
     id_producto: 1,
@@ -104,10 +105,10 @@ export class DetailComponent implements OnInit {
     ]
   }
   
-  constructor(private activateRoute: ActivatedRoute) {
+  constructor(private cartService:CartService, private activateRoute: ActivatedRoute) {
+    
     this.current_price = this.product.precio_unitario; 
     this.id = this.activateRoute.snapshot.queryParamMap.get('product')
-    
    }
 
   public selectImg(index: any) {
