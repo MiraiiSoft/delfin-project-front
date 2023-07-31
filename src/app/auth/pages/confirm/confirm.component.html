@@ -7,7 +7,8 @@
   </div>
   <div class="component-bellow">
     <!-- Contenido de la parte de abajo-->
-    <img [src]="logoCorrect" alt="">
-    <h1>Cuenta Verificada Correctamente</h1>
+    <img *ngIf="resConfirm.success === true" [src]="logoCorrect" alt="Correcto">
+    <img *ngIf="!resConfirm.success" [src]="logoError" alt="Error">
+    <h1>{{resConfirm.message | titlecase}}</h1>
   </div>
 </div>

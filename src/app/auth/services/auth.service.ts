@@ -58,6 +58,15 @@ export class AuthService {
       
   }
 
+  confimAccount( token: string ){
+    const url = `${ this.baseUrl }/auth/confirm/${token}`;
+
+    return this.http.get<IResponseAuth>(url)
+      .pipe(
+        catchError( err => of(err.error) )
+      );
+  }
+
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('user');

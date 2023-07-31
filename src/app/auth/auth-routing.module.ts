@@ -15,7 +15,7 @@ const routes: Routes = [
     component: RegistroComponent
   },
   {
-    path: 'confirm',
+    path: 'confirm/:token',
     component: ConfirmComponent
   }
 ]
