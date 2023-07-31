@@ -17,14 +17,14 @@ export class AuthService {
   login( credenciales: ILogin ){
 
     const url = `${ this.baseUrl }/auth/login`;
-
+    
     return this.http.post<IResponseAuth>( url, credenciales, { observe: 'response' } )
       .pipe(
         tap( res => {
           if( res.body?.success ){
             localStorage.setItem('token', res.headers.get('token') || '');
             localStorage.setItem('user', res.body.data?.usuario || '');
-            localStorage.setItem('carrito', res.body.data?.id_carrito.toString() || '');
+            localStorage.setItem('carrito', res.body.data?.id_carrito.toString() || '');            
           }
         } ),
         map( res => res.body?.success ),

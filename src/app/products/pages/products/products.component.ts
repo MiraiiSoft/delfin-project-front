@@ -36,7 +36,7 @@ export class ProductsComponent implements OnInit {
       id_tipo: 1,
       inventario: [
         {
-          id_inventario: 1,
+          id_inventario: 2,
           id_producto: 1,
           existencias: 100,
           unidadesPaquete: 10,
@@ -304,7 +304,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public openDetailPage(id: number) {
+  public appendQueryParams(id: number) {
     this.router.navigate(['/site/products/detail'],{
       queryParams: {
         product: id
