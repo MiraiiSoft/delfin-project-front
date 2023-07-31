@@ -48,13 +48,23 @@ export class AuthService {
       );
   }
 
-  registro( datos: IRegistro ): Observable<IResponseAuth | unknown>{
+  registro( datos: IRegistro ): Observable<IResponseAuth>{
     const url = `${ this.baseUrl }/auth/register`;
 
     return this.http.post<IResponseAuth>( url, datos )
       .pipe(
-        catchError( err => err.error )
+        catchError( err => of(err.error) )
       )
+      
+  }
+
+  confimAccount( token: string ){
+    const url = `${ this.baseUrl }/auth/confirm/${token}`;
+
+    return this.http.get<IResponseAuth>(url)
+      .pipe(
+        catchError( err => of(err.error) )
+      );
   }
 
   logout(){
