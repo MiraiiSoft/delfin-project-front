@@ -10,7 +10,7 @@ import { CartService } from 'src/app/cart/services/cart.service';
 })
 
 export class DetailComponent implements OnInit {
-  id: any = ''
+  id_product: any = ''
   public indexSelected = 0;
   public imgSelected: string = "";
   public counter = 1;
@@ -107,7 +107,7 @@ export class DetailComponent implements OnInit {
   
   constructor(public cartService:CartService, private activateRoute: ActivatedRoute) {
     this.current_price = this.product.precio_unitario; 
-    this.id = this.activateRoute.snapshot.queryParamMap.get('product')
+    this.id_product = this.activateRoute.snapshot.queryParamMap.get('product')
    }
 
   ngOnInit(): void {
@@ -150,22 +150,18 @@ export class DetailComponent implements OnInit {
       this.incrementCounter();
     else
       this.decrementCounter();
--
+
     this.checkCounter();
   }
 
   public addToCart() {
-    const a = localStorage.getItem('carrito')
-    console.log(a)
+    const id_cart = localStorage.getItem('carrito') || '';
     const data = {
-      id_producto: parseInt(this.id),
-      id_carrito: 1,
+      id_producto: parseInt(this.id_product),
+      id_carrito: parseInt(id_cart),
       cantidad_producto: this.counter
     }
-
-    this.cartService.addProductToCart(data).subscribe( data => {
-      console.log(data)
-    })
+    this.cartService.addProductToCart(data).subscribe()
   }
 }
 
