@@ -57,7 +57,7 @@
           <button mat-raised-button class="button-text border-10px buy" [hidden]="product.inventario[0].existencias==0">
             Comprar ahora
           </button>
-          <button mat-raised-button class="button-text border-10px add-to-cart" [hidden]="product.inventario[0].existencias==0">
+          <button mat-raised-button class="button-text border-10px add-to-cart" [hidden]="product.inventario[0].existencias==0" (click)="addToCart()">
             Agregar al carrito
           </button>
         </mat-card>

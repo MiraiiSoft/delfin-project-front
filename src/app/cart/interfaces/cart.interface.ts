@@ -1,16 +1,16 @@
-export interface GetObeCart {
+export interface ICartOne {
     success?: boolean;
     message?: string;
-    data:    CartOne;
+    data:    IDataCartOne;
 }
 
-export interface CartOne {
+export interface IDataCartOne {
     id_carrito:       number;
     id_login:         number;
     carrito_producto: CarritoProducto[];
 }
 
-export interface CarritoProducto {
+interface CarritoProducto {
     id_carrito_producto: number;
     id_producto:         number;
     id_carrito:          number;
@@ -18,7 +18,7 @@ export interface CarritoProducto {
     producto:            Producto;
 }
 
-export interface Producto {
+interface Producto {
     id_producto:     number;
     codigo_barras:   string;
     nombre:          string;
@@ -39,17 +39,17 @@ export interface Producto {
     color:           Color;
 }
 
-export interface Color {
+interface Color {
     id_color: number;
     color:    string;
     hexa:     string;
 }
 
-export interface Imagen {
+interface Imagen {
     url: string[];
 }
 
-export interface Inventario {
+interface Inventario {
     id_inventario:   number;
     id_producto:     number;
     existencias:     number;
@@ -57,13 +57,28 @@ export interface Inventario {
     numPaquete:      number;
 }
 
-export interface Tipo {
+interface Tipo {
     id_tipo: number;
     tipo:    string;
 }
 
-export interface UpdateCarritoProducto {
+export interface ICartProduct_add_update {
     id_producto:         number;
     id_carrito:          number;
     cantidad_producto:   number;
 }
+
+
+export interface ICartProductDelete {
+    success?: boolean;
+    message?: string;
+    data?:    DataCartProductDelete;
+}
+
+interface DataCartProductDelete {
+    id_carrito_producto: number;
+    id_producto:         number;
+    id_carrito:          number;
+    cantidad_producto:   number;
+}
+
