@@ -1,10 +1,10 @@
-export interface ICartOneRes {
+export interface ICartOne {
     success?: boolean;
     message?: string;
-    data:    ICartOne;
+    data:    IDataCartOne;
 }
 
-export interface ICartOne {
+export interface IDataCartOne {
     id_carrito:       number;
     id_login:         number;
     carrito_producto: CarritoProducto[];
@@ -62,13 +62,20 @@ interface Tipo {
     tipo:    string;
 }
 
-export interface IUpdateCarritoProducto {
+export interface ICartProduct_add_update {
     id_producto:         number;
     id_carrito:          number;
     cantidad_producto:   number;
 }
 
-export interface IAddProductToCart {
+
+export interface ICartProductDelete {
+    success?: boolean;
+    message?: string;
+    data?:    DataCartProductDelete;
+}
+
+interface DataCartProductDelete {
     id_carrito_producto: number;
     id_producto:         number;
     id_carrito:          number;

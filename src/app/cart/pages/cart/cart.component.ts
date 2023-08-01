@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICartOne } from '../../interfaces/cart.interface';
+import { IDataCartOne } from '../../interfaces/cart.interface';
 import { CartService } from '../../services/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
   public current_price: number[] = [];
   public total_price = 0;
   public total_products = 0;
-  cart: ICartOne = {
+  cart: IDataCartOne = {
     id_carrito: 0,
     id_login: 0,
     carrito_producto: []
@@ -27,6 +27,7 @@ export class CartComponent implements OnInit {
 
     cartService.getCartById(this.id).subscribe( data => {
       this.cart = data.data
+      console.log(data)
       this.cart.carrito_producto.forEach( (carrito_producto, i) => {
         this.total_products += carrito_producto.cantidad_producto;
         this.current_price.push(0)

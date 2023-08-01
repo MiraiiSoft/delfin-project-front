@@ -105,11 +105,16 @@ export class DetailComponent implements OnInit {
     ]
   }
   
-  constructor(private cartService:CartService, private activateRoute: ActivatedRoute) {
-    
+  constructor(public cartService:CartService, private activateRoute: ActivatedRoute) {
     this.current_price = this.product.precio_unitario; 
     this.id = this.activateRoute.snapshot.queryParamMap.get('product')
    }
+
+  ngOnInit(): void {
+    if(this.product.imagen.url.length >= 0){
+      this.selectImg(0);
+    }
+  }
 
   public selectImg(index: any) {
     this.indexSelected = index;
@@ -145,14 +150,22 @@ export class DetailComponent implements OnInit {
       this.incrementCounter();
     else
       this.decrementCounter();
-
+-
     this.checkCounter();
   }
 
-  ngOnInit(): void {
-    if(this.product.imagen.url.length >= 0){
-      this.selectImg(0);
+  public addToCart() {
+    const a = localStorage.getItem('carrito')
+    console.log(a)
+    const data = {
+      id_producto: parseInt(this.id),
+      id_carrito: 1,
+      cantidad_producto: this.counter
     }
+
+    this.cartService.addProductToCart(data).subscribe( data => {
+      console.log(data)
+    })
   }
 }
 
