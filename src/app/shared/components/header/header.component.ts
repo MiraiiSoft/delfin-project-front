@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { TransferDataLocalService } from 'src/app/services/transfer-data-local.service';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +10,14 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private router: Router, private authService: AuthService ) { }
+  constructor( private router: Router, private authService: AuthService, private transferDataLocal: TransferDataLocalService ) { }
 
   iconUsr = "assets/img/user/iconoUsuario.png";
   imgLogo = "assets/img/auth/LogoPapeleria.png";
   imgLogoFace = "assets/img/social/Vectorface.png";
   iconActivate: string = "menu";
   _activateNav: boolean = false;
-  quantity_products: number = 1;
+  quantity_products: number = 0;
 
   inLogin: boolean = false;
   nameUser: string = '';
@@ -71,6 +72,10 @@ export class HeaderComponent implements OnInit {
     }else{
       this.inLogin = true;
     }
+
+    this.transferDataLocal.quantityCart.subscribe( quantity => {
+      this.quantity_products += quantity;
+    });
 
   }
 
