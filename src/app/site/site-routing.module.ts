@@ -31,7 +31,10 @@ const routes: Routes = [
       },
       {
         path: 'cart',
-        loadChildren: () => import("../cart/cart.module").then( m=> m.CartModule)
+        loadChildren: () => import("../cart/cart.module").then( m=> m.CartModule),
+        canActivate: [ ValidarTokenGuard ],
+        canActivateChild: [ ValidarTokenGuard ],
+        canLoad: [ ValidarTokenGuard ]
       }
 
     ]

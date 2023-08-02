@@ -24,7 +24,7 @@ export class AuthService {
           if( res.body?.success ){
             localStorage.setItem('token', res.headers.get('token') || '');
             localStorage.setItem('user', res.body.data?.usuario || '');
-            
+            localStorage.setItem('carrito', res.body.data?.id_carrito.toString() || '');            
           }
         } ),
         map( res => res.body?.success ),
@@ -70,6 +70,7 @@ export class AuthService {
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('carrito');
   }
 
 }
