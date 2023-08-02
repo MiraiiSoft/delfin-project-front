@@ -18,7 +18,7 @@ export interface IRegistro{
     contraseña: string;
 }
 
-interface Login {
+export interface Login {
     id_login:    number;
     correo:      string;
     usuario:     string;
