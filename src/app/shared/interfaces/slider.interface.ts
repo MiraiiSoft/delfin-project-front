@@ -1,6 +1,6 @@
 export interface IsliderData{
     img?: string,
     title?: string,
-    price?: string,
+    price?: number,
     link?: string
 }
