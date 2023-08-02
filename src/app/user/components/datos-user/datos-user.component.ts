@@ -30,7 +30,7 @@ export class DatosUserComponent implements OnInit {
     this.$user = this.userService.getPerfil().subscribe( res => {
       
       if( res.data ){
-        
+
         this.user = res.data;
 
         this.transferDataLocal.nameUser.emit({
@@ -38,14 +38,14 @@ export class DatosUserComponent implements OnInit {
           apellido: this.user.persona.apellido
         });
       }
-      console.log(this.user)
+      
       this.closeSpinner();
     });
   }
 
   public openModalEditProfile(){
     this.dialog.open( EditProfileComponent,{
-      
+      data: this.user
     } )
   };
 

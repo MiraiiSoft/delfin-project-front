@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IResponseUser } from '../interfaces/user.interface';
+import { IRequestUpdateUser, IResponseUser } from '../interfaces/user.interface';
 import { catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
@@ -24,6 +24,19 @@ export class UserService {
       .pipe(
         catchError( err => of(err.error) )
       )
+  }
+
+  updateDataUser( id_login: number, data_user: IRequestUpdateUser ): Observable<IResponseUser>{
+    const url = `${this.baseUrl}/user/update/${id_login}`;
+
+    const headers = new HttpHeaders()
+      .set('token', localStorage.getItem('token') || '');
+
+    return this.http.put<IResponseUser>( url, data_user, { headers } )
+      .pipe(
+        catchError( err => of(err.error) )
+      );
+
   }
 
 }

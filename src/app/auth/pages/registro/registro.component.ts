@@ -44,8 +44,8 @@ export class RegistroComponent implements OnInit {
 
   register(){
     this.openSpinneer();
-    const tel = `+52${this.registerForm.get('telefono')?.value}`;
-    this.registerForm.get('telefono')?.setValue(tel);
+    // const tel = `+52${this.registerForm.get('telefono')?.value}`;
+    // this.registerForm.get('telefono')?.setValue(tel);
 
     this.authService.registro( this.registerForm.value ).subscribe( res => {
       
@@ -58,11 +58,11 @@ export class RegistroComponent implements OnInit {
       if( !res.success ){
         this.closeSpinner();
 
-        let tell: string = this.registerForm.get('telefono')?.value;
-        for( let i = 0; i <= 2; i++ ){
-          tell = tell.slice(1);
-        }
-        this.registerForm.get('telefono')?.setValue(tell);
+        // let tell: string = this.registerForm.get('telefono')?.value;
+        // for( let i = 0; i <= 2; i++ ){
+        //   tell = tell.slice(1);
+        // }
+        // this.registerForm.get('telefono')?.setValue(tell);
         mensajeError( res.message! );
       }
     });

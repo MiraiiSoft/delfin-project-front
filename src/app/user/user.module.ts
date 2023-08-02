@@ -7,6 +7,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { EditAddressComponent } from './components/edit-address/edit-address.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,7 +22,9 @@ import { EditAddressComponent } from './components/edit-address/edit-address.com
   imports: [
     CommonModule,
     UserRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class UserModule { }
