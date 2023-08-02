@@ -62,7 +62,6 @@ export class EditProfileComponent implements OnInit {
       this.formUser.removeControl('correo');
     }
 
-    console.log(this.formUser.value)
     this.userService.updateDataUser( this.data.id_login, this.formUser.value ).subscribe( res => {
       
       if( !res.success ){

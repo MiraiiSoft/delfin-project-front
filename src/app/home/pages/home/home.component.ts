@@ -25,8 +25,7 @@ export class HomeComponent implements OnInit {
 
   categorias: IsliderData[] = [];
 
-  newProducts: IcardData[] = [
-  ]
+  newProducts: IcardData[] = []
 
   constructor(private productosServices: ProductosService, private categoriasService: CategoriasService) { }
 
@@ -43,39 +42,39 @@ export class HomeComponent implements OnInit {
       this.categorias = categoriasData;
     })
 
-    this.productosServices.getProductos().subscribe (data =>{
-      console.log(data);
+    // this.productosServices.getProductos().subscribe (data =>{
+    //   console.log(data);
 
-      const productsData: IsliderData[] = data.data.map(item =>{
-        return{
-          title: item.nombre,
-          img: item.imagen.url[0],
-          price: parseFloat(item.precio_unitario),
-          link: item.id_producto.toString()
-        }
-      })
-      const randomProducts: number [] = [];
-      while (randomProducts.length < 10){
-        const randomProduct = Math.floor(Math.random() * productsData.length);
-        if (!randomProducts.includes(randomProduct)){
-          randomProducts.push(randomProduct);
-        }
-      }
-      this.products = randomProducts.map(index => productsData[index])
-    })
+    //   const productsData: IsliderData[] = data.data.map(item =>{
+    //     return{
+    //       title: item.nombre,
+    //       img: item.imagen.url[0],
+    //       price: parseFloat(item.precio_unitario),
+    //       link: item.id_producto.toString()
+    //     }
+    //   })
+    //   const randomProducts: number [] = [];
+    //   while (randomProducts.length < 10){
+    //     const randomProduct = Math.floor(Math.random() * productsData.length);
+    //     if (!randomProducts.includes(randomProduct)){
+    //       randomProducts.push(randomProduct);
+    //     }
+    //   }
+    //   this.products = randomProducts.map(index => productsData[index])
+    // })
 
-    this.productosServices.getProductos().subscribe ( data =>{
+    // this.productosServices.getProductos().subscribe ( data =>{
 
-      const productsData: IcardData[] = data.data.map(item =>{
-        return{
-          title: item.nombre,
-          img: item.imagen.url[0],
-          id: item.id_producto,
-          price: parseFloat(item.precio_unitario),
-        }
-      })
-      this.newProducts = productsData;
-    })
+    //   const productsData: IcardData[] = data.data.map(item =>{
+    //     return{
+    //       title: item.nombre,
+    //       img: item.imagen.url[0],
+    //       id: item.id_producto,
+    //       price: parseFloat(item.precio_unitario),
+    //     }
+    //   })
+    //   this.newProducts = productsData;
+    // })
 
 
 
