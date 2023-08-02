@@ -23,7 +23,7 @@
                 <div class="content__slider">
                         <h4>CATEGORIAS</h4>
 
-                        <app-slider *ngIf="categorias" [data]="categorias"
+                        <app-slider *ngIf="categorias.length > 0" [data]="categorias"
                                 [isClickable]="true"
                                 [isImage]="false"
                                 [isText]="true"
