@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Detail } from '../../interfaces/detail.interface';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/cart/services/cart.service';
+import { TransferDataLocalService } from 'src/app/services/transfer-data-local.service';
 
 @Component({
   selector: 'app-detail',
@@ -10,7 +11,7 @@ import { CartService } from 'src/app/cart/services/cart.service';
 })
 
 export class DetailComponent implements OnInit {
-  id_product: any = ''
+  id_product: string = ''
   public indexSelected = 0;
   public imgSelected: string = "";
   public counter = 1;
@@ -105,9 +106,9 @@ export class DetailComponent implements OnInit {
     ]
   }
   
-  constructor(public cartService:CartService, private activateRoute: ActivatedRoute) {
+  constructor(public cartService:CartService, public transferDataLocalService: TransferDataLocalService, private activateRoute: ActivatedRoute) {
     this.current_price = this.product.precio_unitario; 
-    this.id_product = this.activateRoute.snapshot.queryParamMap.get('product')
+    this.id_product = this.activateRoute.snapshot.queryParamMap.get('product') || '0'
    }
 
   ngOnInit(): void {
@@ -155,13 +156,17 @@ export class DetailComponent implements OnInit {
   }
 
   public addToCart() {
-    const id_cart = localStorage.getItem('carrito') || '';
+    const id_cart = localStorage.getItem('carrito') || '0'
     const data = {
       id_producto: parseInt(this.id_product),
       id_carrito: parseInt(id_cart),
       cantidad_producto: this.counter
     }
-    this.cartService.addProductToCart(data).subscribe()
+    
+    this.cartService.addProductToCart(data).subscribe( () => {
+      this.transferDataLocalService.quantity += 1
+      this.transferDataLocalService.emitQuantityToCart()
+    })
   }
 }
 

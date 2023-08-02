@@ -1,10 +1,10 @@
-export interface ICartOne {
-    success?: boolean;
+export interface IResCartOne {
+    success: boolean;
     message?: string;
-    data:    IDataCartOne;
+    data?:    ICartOne;
 }
 
-export interface IDataCartOne {
+export interface ICartOne {
     id_carrito:       number;
     id_login:         number;
     carrito_producto: CarritoProducto[];
@@ -62,20 +62,26 @@ interface Tipo {
     tipo:    string;
 }
 
+//Carrito_producto
+export interface IResCartProduct_add_update {
+    success: boolean;
+    message?: string;
+    data?:    ICartProduct_add_update;
+}
+
 export interface ICartProduct_add_update {
     id_producto:         number;
     id_carrito:          number;
     cantidad_producto:   number;
 }
 
-
-export interface ICartProductDelete {
-    success?: boolean;
+export interface IResDeleteCartProduct {
+    success: boolean;
     message?: string;
-    data?:    DataCartProductDelete;
+    data?:    IDeleteCartProduct;
 }
 
-interface DataCartProductDelete {
+interface IDeleteCartProduct {
     id_carrito_producto: number;
     id_producto:         number;
     id_carrito:          number;
