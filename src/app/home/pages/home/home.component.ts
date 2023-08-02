@@ -57,11 +57,9 @@ export class HomeComponent implements OnInit {
       img: "assets/img/products/img4.png",
       price: 15,
       link: "4"
-    }
-  ];
+    }];
 
-  categorias: IsliderData[] = [
-  ];
+  categorias: IsliderData[] = [];
 
   newProducts: IcardData[] = [
     {
