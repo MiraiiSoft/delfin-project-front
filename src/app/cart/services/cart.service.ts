@@ -7,7 +7,10 @@ import { ICartOne, ICartProduct_add_update, ICartProductDelete } from '../interf
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class CartService {
+  public totalProductsOnCart: number = 0 
   private urlBase = environment.API_URL;
 
   constructor(private http:HttpClient) { }

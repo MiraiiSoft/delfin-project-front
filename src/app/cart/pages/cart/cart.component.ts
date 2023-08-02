@@ -13,7 +13,8 @@ export class CartComponent implements OnInit {
   id: string = ""
   public current_price: number[] = [];
   public total_price = 0;
-  public total_products = 0;
+  public total_allProducts = 0;
+  total_individualProducts = 0;
   cart: IDataCartOne = {
     id_carrito: 0,
     id_login: 0,
@@ -27,9 +28,8 @@ export class CartComponent implements OnInit {
 
     cartService.getCartById(this.id).subscribe( data => {
       this.cart = data.data
-      console.log(data)
       this.cart.carrito_producto.forEach( (carrito_producto, i) => {
-        this.total_products += carrito_producto.cantidad_producto;
+        this.total_allProducts += carrito_producto.cantidad_producto;
         this.current_price.push(0)
         this.checkCounter(i, carrito_producto.producto)
         this.refreshTotalPrice()
@@ -44,7 +44,10 @@ export class CartComponent implements OnInit {
     this.cart.carrito_producto.forEach( carrito_producto => {
       const { id_carrito_producto } = carrito_producto
       this.cartService.updateCartProductById( String(id_carrito_producto), carrito_producto ).subscribe()
+
+      this.total_individualProducts += 1 
     });
+    this.cartService.totalProductsOnCart = this.total_individualProducts
   } 
   
   public incrementCounter(index: any, product: any) {
@@ -80,9 +83,9 @@ export class CartComponent implements OnInit {
   }
 
   public refreshTotalProducts() {
-    this.total_products = 0;
+    this.total_allProducts = 0;
     this.cart.carrito_producto.forEach((element: any) => {
-      this.total_products += element.cantidad_producto
+      this.total_allProducts += element.cantidad_producto
     });
   }
 
