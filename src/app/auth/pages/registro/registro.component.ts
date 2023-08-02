@@ -33,7 +33,7 @@ export class RegistroComponent implements OnInit {
 
   validConfirmPass(): boolean | undefined | null {
     let res!: ValidationErrors | null;
-
+    
     if( !this.registerForm.get('contraseña')?.dirty && this.registerForm.get('confirmContra')?.dirty ) return null;
 
     res = CustomValidator.validationConfirmPass( this.registerForm.get('contraseña')?.value, this.registerForm.get('confirmContra')?.value );
