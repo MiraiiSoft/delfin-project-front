@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IcardData } from 'src/app/shared/interfaces/card.interface';
 import { IsliderData } from 'src/app/shared/interfaces/slider.interface';
-
+import { ProductosService } from 'src/app/services/productos.service';
+import { CategoriasService } from 'src/app/services/categorias.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -60,30 +61,6 @@ export class HomeComponent implements OnInit {
   ];
 
   categorias: IsliderData[] = [
-    {
-      title: "lapiz",
-      link: "1"
-    },
-    {
-      title: "lapicero",
-      link: "2"
-    },
-    {
-      title: "borrador",
-      link: "3"
-    },
-    {
-      title: "corrector",
-      link: "4"
-    },
-    {
-      title: "cuadernos",
-      link: "5"
-    },
-    {
-      title: "marcadores",
-      link: "6"
-    }
   ];
 
   newProducts: IcardData[] = [
@@ -131,9 +108,25 @@ export class HomeComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private productosServices: ProductosService, private categoriasService: CategoriasService) { }
+
 
   ngOnInit(): void {
+    this.categoriasService.getCategorias().subscribe (data =>{
+      console.log(data);
+
+      const categoriasData: IsliderData[] = data.data.map(item =>{
+        return{
+          title: item.categoria,
+          link: item.id_categoria.toString()
+        }
+      })
+      this.categorias = categoriasData;
+    })
+
+    this.productosServices.getProductos().subscribe (data =>{
+      console.log(data);
+    })
   }
 
 }
