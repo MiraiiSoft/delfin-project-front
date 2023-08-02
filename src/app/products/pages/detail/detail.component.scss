@@ -1,5 +1,5 @@
 .father-container{
-    padding: 100px 0PX 20px 0PX;
+    padding: 100px 0px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -85,11 +85,12 @@
 
 .principal-image-contain {
     min-width: 300px;
-    width: 550px;
+    width: 500px;
     height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .principal-image {
@@ -329,6 +330,10 @@
 }
 
 @media (max-width:800px) {
+    .father-container {
+        padding: 50px 0px;
+    }
+
     .cont-title {
         text-align: center;
     }
