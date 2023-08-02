@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { CartService } from 'src/app/cart/services/cart.service';
 import { TransferDataLocalService } from 'src/app/services/transfer-data-local.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { TransferDataLocalService } from 'src/app/services/transfer-data-local.s
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private router: Router, private authService: AuthService, private transferDataLocal: TransferDataLocalService ) { }
+  constructor( private router: Router, private authService: AuthService, public cartService:CartService, private transferDataLocal: TransferDataLocalService ) { }
 
   iconUsr = "assets/img/user/iconoUsuario.png";
   imgLogo = "assets/img/auth/LogoPapeleria.png";
@@ -73,10 +74,16 @@ export class HeaderComponent implements OnInit {
       this.inLogin = true;
     }
 
+    this.cartService.getCartById(this.carrito).subscribe( res => {
+      res.data.carrito_producto.forEach( () => {
+        this.transferDataLocal.quantity += 1
+      });
+      this.transferDataLocal.emitQuantityToCart()
+    })
+    
     this.transferDataLocal.quantityCart.subscribe( quantity => {
-      this.quantity_products += quantity;
+      this.quantity_products = quantity;
     });
-
   }
 
   redirectRoute( route: string ){

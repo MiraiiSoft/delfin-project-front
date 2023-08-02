@@ -35,7 +35,7 @@ export class AuthService {
 
   validarToken(): Observable<boolean>{
     const url = `${ this.baseUrl }/user/perfil`;
-
+    
     const headers = new HttpHeaders()
       .set('token', localStorage.getItem('token') || '')
 

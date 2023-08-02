@@ -16,9 +16,9 @@
                                     <mat-icon><span class="material-symbols-outlined">attach_money</span></mat-icon>
                                     Comprar ahora
                                 </button>
-                                <button mat-raised-button class="button button-delete border-5px">
+                                <button mat-raised-button class="button button-delete border-5px" (click)="deleteProduct(i)">
                                     <mat-icon><span class="material-symbols-outlined">delete</span></mat-icon>
-                                    <span class="text-delete" >Eliminar</span>
+                                    <span class="text-delete">Eliminar</span>
                                 </button>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
         <mat-card class="cont-total-principal">
             <mat-label class="total-text-title">Resumen de compra</mat-label>
             <div class="total-resume">
-                <mat-label>No. de productos: {{total_products}}</mat-label> <br>
+                <mat-label>No. de productos: {{total_allProducts}}</mat-label> <br>
                 <mat-label class="total-text-price">Total: ${{total_price}} MXM</mat-label>
             </div>
             <button mat-raised-button class="total-button border-5px">

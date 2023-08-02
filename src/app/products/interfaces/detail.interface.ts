@@ -20,22 +20,22 @@ export interface Detail {
     inventario:      Inventario[];
 }
 
-export interface Categoria {
+interface Categoria {
     id_categoria: number;
     categoria:    string;
 }
 
-export interface Color {
+interface Color {
     id_color: number;
     color:    string;
     hexa:     string;
 }
 
-export interface Imagen {
-    url: any[];
+interface Imagen {
+    url: string[];
 }
 
-export interface Inventario {
+interface Inventario {
     id_inventario:   number;
     id_producto:     number;
     existencias:     number;
@@ -43,7 +43,7 @@ export interface Inventario {
     numPaquete:      number;
 }
 
-export interface Tipo {
+interface Tipo {
     id_tipo: number;
     tipo:    string;
 }
