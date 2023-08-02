@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IResProductos } from '../interfaces/producto.interface';
+import { IResOneProduct, IResProductos } from '../interfaces/producto.interface';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -16,6 +16,13 @@ export class ProductosService {
   getProductos(): Observable<IResProductos> {
     const url = `${this.urlBase}/producto`
     return this.http.get<IResProductos>(url).pipe(
+      catchError (e => of(e.error))
+    )
+  }
+
+  getOneProduct( id:number ): Observable<IResOneProduct> {
+    const url = `${this.urlBase}/producto/${ id }`
+    return this.http.get<IResOneProduct>(url).pipe(
       catchError (e => of(e.error))
     )
   }

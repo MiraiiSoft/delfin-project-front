@@ -6,7 +6,7 @@
         <div class="container">
                 <div class="content__slider">
                         <h4>PRODUCTOS</h4>
-                        <app-slider [data]="products"
+                        <app-slider *ngIf="products.length > 0" [data]="products"
                                 [isClickable]="true"
                                 [isImage]="false"
                                 [routerName]="'site/products/detail'"

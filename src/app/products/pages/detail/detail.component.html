@@ -52,7 +52,7 @@
               <button (click)="actionsBtn(true)" mat-button class="counter-format-side">+</button> <br>
             </div>
           </div>
-  
+          
           <mat-label class="details-text">Stock: {{product.inventario[0].existencias}} disponibles <br> <br></mat-label>
           <button mat-raised-button class="button-text border-10px buy" [hidden]="product.inventario[0].existencias==0">
             Comprar ahora

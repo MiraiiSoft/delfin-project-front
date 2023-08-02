@@ -74,16 +74,16 @@ export class HeaderComponent implements OnInit {
       this.inLogin = true;
     }
 
-    this.cartService.getCartById(this.carrito).subscribe( res => {
-      res.data.carrito_producto.forEach( () => {
-        this.transferDataLocal.quantity += 1
-      });
-      this.transferDataLocal.emitQuantityToCart()
-    })
+    // this.cartService.getCartById(this.carrito).subscribe( res => {
+    //   res.data.carrito_producto.forEach( () => {
+    //     this.transferDataLocal.quantity += 1
+    //   });
+    //   this.transferDataLocal.emitQuantityToCart()
+    // })
     
-    this.transferDataLocal.quantityCart.subscribe( quantity => {
-      this.quantity_products = quantity;
-    });
+    // this.transferDataLocal.quantityCart.subscribe( quantity => {
+    //   this.quantity_products = quantity;
+    // });
   }
 
   redirectRoute( route: string ){
