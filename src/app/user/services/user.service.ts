@@ -20,7 +20,7 @@ export class UserService {
     const headers = new HttpHeaders()
       .set('token', localStorage.getItem('token') || '');
 
-    return this.http.get<IResponseUser>( url )
+    return this.http.get<IResponseUser>( url, { headers } )
       .pipe(
         catchError( err => of(err.error) )
       )
