@@ -1,12 +1,13 @@
 <main class= "mat-app-background">
     <section class="container cont-father">
         
-        <button mat-mini-fab color="primary">
+        <button mat-mini-fab color="primary" (click)= "openBottomSheet()">
             <mat-icon>filter_list</mat-icon>
+            
         </button>
         
         <nav class="cont-left-filter">
-            <mat-label class="filter-title"> Filtros </mat-label>
+            <mat-label class="filter-title"> Filtro </mat-label>
             <ul class="filter-first-group">
                 <li class="filter-single" (click)= "categoryPanel = !categoryPanel">
                     <mat-label class="single-text">
@@ -47,7 +48,7 @@
         </nav>
 
         <div class="content__product-cards">
-            <app-card *ngFor= "let product of products2" [data]= "product" [height]= "10" [width]= "10"></app-card>
+            <app-card *ngFor= "let product of products" [data]= "product" [height]= "10" [width]= "10"></app-card>
         </div>
 
     </section>

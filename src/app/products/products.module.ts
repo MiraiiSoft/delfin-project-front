@@ -5,11 +5,13 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { ProductsComponent } from './pages/products/products.component';
 import { SharedModule } from "../shared/shared.module";
+import { BottomSheetComponent } from './components/bottom-sheet/bottom-sheet.component';
 
 @NgModule({
     declarations: [
         DetailComponent,
-        ProductsComponent
+        ProductsComponent,
+        BottomSheetComponent
     ],
     imports: [
         CommonModule,

@@ -1,4 +1,4 @@
-<main class=" mat-app-background"> 
+<main class="mat-app-background"> 
   <section class="container father-container">
     <div class="up-container flex-wrap-between">
       <div class="cont-up-left">
@@ -22,7 +22,7 @@
           <mat-label class="price-text" >$ {{current_price}} MXM <br></mat-label> <br>
           
           <div class="cont-categories-principal">
-            <mat-label class="details-text">Categoia:</mat-label>
+            <mat-label class="details-text">Categoria:</mat-label>
             <div class="cont-categories">
               <a class="details-text categorie border-5px">{{product.categoria.categoria}}</a>
             </div>
@@ -42,22 +42,22 @@
         </mat-card>  
   
         <mat-card class="button-card border-20px center-text">
-          <div class="cont-counter-principal">
+          <div class="cont-counter-principal" [hidden]="product.inventario[0].existencias==0">
             <mat-label class="details-text">
               Cantidad:
             </mat-label>
             <div class="cont-counter">
-              <button (click)="actionsBtnDecrement()" mat-button class="counter-format-side">-</button>
+              <button (click)="actionsBtn(false)" mat-button class="counter-format-side">-</button>
               <button mat-button class="counter-format-middle">{{counter}}</button>
-              <button (click)="actionsBtnIncrement()" mat-button class="counter-format-side">+</button> <br>
+              <button (click)="actionsBtn(true)" mat-button class="counter-format-side">+</button> <br>
             </div>
           </div>
   
-          <mat-label class="details-text">Stock: {{product.inventario.existencias}} disponibles <br> <br></mat-label>
-          <button mat-button class="button-text border-10px buy" color="accent" [hidden]="product.inventario.existencias==0" >
+          <mat-label class="details-text">Stock: {{product.inventario[0].existencias}} disponibles <br> <br></mat-label>
+          <button mat-raised-button class="button-text border-10px buy" [hidden]="product.inventario[0].existencias==0">
             Comprar ahora
           </button>
-          <button mat-button class="button-text border-10px add-to-cart" color="accent" [hidden]="product.inventario.existencias==0">
+          <button mat-raised-button class="button-text border-10px add-to-cart" [hidden]="product.inventario[0].existencias==0" (click)="addToCart()">
             Agregar al carrito
           </button>
         </mat-card>

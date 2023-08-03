@@ -11,51 +11,54 @@
     <!-- Contenido de la parte izquierda (blanco) -->
     <div class="contenedor-registro" id="letra">
       <h1 class="registro">Regístrate</h1>
-      <form class="form">
-        <div class="example-form">
+      <form [formGroup]="registerForm" class="form">
+
+        <p>Los campos con * son obligatorios</p>
+
+        <div class="example-form form-column">
           <mat-form-field appearance="outline" class="input-style">
-            <mat-label>Apellidos:</mat-label>
-            <input type="text" matInput placeholder="Apellidos">
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput placeholder="Nombre" formControlName="nombre">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="input-style">
-            <mat-label>Nombre:</mat-label>
-            <input type="text" matInput placeholder="Nombre">
+            <mat-label>Apellidos</mat-label>
+            <input type="text" matInput placeholder="Apellidos" formControlName="apellido">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="input-style">
-            <mat-label>Celular:</mat-label>
+            <mat-label>Celular</mat-label>
             <span matPrefix>+52 &nbsp;</span>
-            <input type="tel" matInput placeholder="Ejem. 555 455 6677">
+            <input type="tel" matInput placeholder="Ejem. 555 455 6677" formControlName="telefono">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="input-style">
-            <mat-label>Correo electrónico:</mat-label>
-            <input type="text" matInput placeholder="Ejem. example@example.com">
+            <mat-label>Correo electrónico</mat-label>
+            <input type="email" matInput placeholder="Ejem. example@example.com" formControlName="correo">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="input-style">
-            <mat-label>Usuario:</mat-label>
-            <input type="text" matInput placeholder="Ejem. User34">
+            <mat-label>Usuario</mat-label>
+            <input type="text" matInput placeholder="Ejem. User34" formControlName="usuario">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="input-style">
-            <mat-label>Contraseña:</mat-label>
-            <input type="password" matInput placeholder="***********">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput placeholder="***********" formControlName="contraseña">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="input-style">
-            <mat-label>Confirmar Contraseña:</mat-label>
-            <input type="password" matInput placeholder="***********">
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input type="password" matInput placeholder="***********" formControlName="confirmContra">
+            <mat-error *ngIf="validConfirmPass()">La contraseña no coincide </mat-error>
           </mat-form-field>
 
 
 
         </div>
-        <button mat-raised-button type="button">
+        <button mat-raised-button type="button" (click)="register()">
           Registrarse
         </button>
-        <h6><a routerLink="/auth/registro">Regístrate</a></h6>
 
       </form>
     </div>

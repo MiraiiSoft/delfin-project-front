@@ -1,0 +1,42 @@
+<nav class="cont-left-filter">
+    <mat-label class="filter-title"> Filtro </mat-label>
+    <ul class="filter-first-group">
+
+        <li class="filter-single"(click)= "categoryPanel = !categoryPanel">
+            <mat-label class="single-text">
+                Categorias
+                <mat-icon class="single-icon-expand">expand_more</mat-icon>
+            </mat-label>
+            <ul *ngIf= "categoryPanel" class="filter-second-group">
+                <li *ngFor= "let categorie of categories; let i = index" class="single-text just-one" >
+                    {{categorie.categoria}}
+                </li>
+            </ul>
+        </li>
+
+        <li class="filter-single" (click)= "colorPanel = !colorPanel" >
+            <mat-label class="single-text">
+                Colores
+                <mat-icon class= "single-icon-expand" >expand_more</mat-icon>
+            </mat-label>
+            <ul *ngIf= "colorPanel" class="filter-second-group">
+                <li *ngFor= "let color of colors; let i = index" class="single-text just-one">
+                    {{color.color}}
+                </li>
+            </ul>
+        </li>
+
+        <li class="filter-single" (click)= "brandPanel = !brandPanel" >
+            <mat-label class="single-text">
+                Marcas
+                <mat-icon class="single-icon-expand" >expand_more</mat-icon>
+            </mat-label>
+            <ul *ngIf= "brandPanel" class="filter-second-group">
+                <li *ngFor= "let brand of brands; let i = index" class="single-text just-one" >
+                    {{brand}}
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</nav>

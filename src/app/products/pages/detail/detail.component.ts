@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Detail } from '../../interfaces/detail.interface';
+import { ActivatedRoute } from '@angular/router';
+import { CartService } from 'src/app/cart/services/cart.service';
+import { TransferDataLocalService } from 'src/app/services/transfer-data-local.service';
 
 @Component({
   selector: 'app-detail',
@@ -7,12 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class DetailComponent implements OnInit {
+  id_product: string = ''
   public indexSelected = 0;
   public imgSelected: string = "";
   public counter = 1;
-  public current_price;
+  public current_price: string;
 
-  product: any = {
+  product: Detail = {
     id_producto: 1,
     codigo_barras: "1234567890",
     nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
@@ -27,11 +32,7 @@ export class DetailComponent implements OnInit {
         "assets/img/products/img1.png",
         "assets/img/products/img2.png",
         "assets/img/products/img3.png",
-        "assets/img/products/img1.png",
-        "assets/img/products/img2.png",
-        "assets/img/products/img3.png",
         "assets/img/products/img4.png",
-        "assets/img/products/img1.png",
         "assets/img/products/img2.png",
       ]
     },
@@ -94,18 +95,27 @@ export class DetailComponent implements OnInit {
       id_categoria: 1,
       categoria: "Lapiceros"
     },
-    inventario: {
-      id_inventario: 1,
-      id_producto: 1,
-      existencias: 7,
-      unidadesPaquete: 4,
-      numPaquete: 20
-    }
+    inventario: [
+      {
+        id_inventario: 1,
+        id_producto: 1,
+        existencias: 10,
+        unidadesPaquete: 4,
+        numPaquete: 20
+      }
+    ]
   }
   
-  constructor() {
+  constructor(public cartService:CartService, public transferDataLocalService: TransferDataLocalService, private activateRoute: ActivatedRoute) {
     this.current_price = this.product.precio_unitario; 
+    this.id_product = this.activateRoute.snapshot.queryParamMap.get('product') || '0'
    }
+
+  ngOnInit(): void {
+    if(this.product.imagen.url.length >= 0){
+      this.selectImg(0);
+    }
+  }
 
   public selectImg(index: any) {
     this.indexSelected = index;
@@ -113,8 +123,8 @@ export class DetailComponent implements OnInit {
   }
 
   public incrementCounter() {
-    if(this.counter == this.product.inventario.existencias)
-      this.counter = this.product.inventario.existencias
+    if(this.counter == this.product.inventario[0].existencias)
+      this.counter = this.product.inventario[0].existencias
     else
       this.counter += 1;
   }
@@ -136,20 +146,27 @@ export class DetailComponent implements OnInit {
       this.current_price = this.product.precio_unitario
   }
 
-  public actionsBtnIncrement() {
-    this.incrementCounter();
+  public actionsBtn(increment: boolean) {
+    if (increment == true)
+      this.incrementCounter();
+    else
+      this.decrementCounter();
+
     this.checkCounter();
   }
 
-  public actionsBtnDecrement() {
-    this.decrementCounter();
-    this.checkCounter();
-  }
-
-  ngOnInit(): void {
-    if(this.product.imagen.url.length >= 0){
-      this.selectImg(0);
+  public addToCart() {
+    const id_cart = localStorage.getItem('carrito') || '0'
+    const data = {
+      id_producto: parseInt(this.id_product),
+      id_carrito: parseInt(id_cart),
+      cantidad_producto: this.counter
     }
+    
+    this.cartService.addProductToCart(data).subscribe( () => {
+      this.transferDataLocalService.quantity += 1
+      this.transferDataLocalService.emitQuantityToCart()
+    })
   }
 }
 

@@ -6,12 +6,12 @@ import { ProductsComponent } from './pages/products/products.component';
 
 const routes: Routes = [
   {
-    path: 'detail',
-    component: DetailComponent    //  localhost:4200/site/products/detail
-  },
-  {
     path: '',
     component: ProductsComponent   //  localhost:4200/site/products/
+  },
+  {
+    path: 'detail',
+    component: DetailComponent    //  localhost:4200/site/products/detail
   }
 ]
 

@@ -4,6 +4,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { ConfirmComponent } from './pages/confirm/confirm.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -11,12 +13,15 @@ import { MaterialModule } from '../material/material.module';
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    ConfirmComponent
   ],
   imports: [
     AuthRoutingModule,
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }

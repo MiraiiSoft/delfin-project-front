@@ -1,0 +1,14 @@
+<div class="component-body">
+  <div class="component-above">
+    <!-- Contenido de la parte de arriba-->
+    <div class="contenedor-component-above">
+      <img [src]="logoUrl" alt="Logo" class="imagen-contenedor">
+    </div>
+  </div>
+  <div class="component-bellow">
+    <!-- Contenido de la parte de abajo-->
+    <img *ngIf="resConfirm.success === true" [src]="logoCorrect" alt="Correcto">
+    <img *ngIf="!resConfirm.success" [src]="logoError" alt="Error">
+    <h1>{{resConfirm.message | titlecase}}</h1>
+  </div>
+</div>

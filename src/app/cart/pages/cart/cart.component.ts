@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ICartOne } from '../../interfaces/cart.interface';
+import { CartService } from '../../services/cart.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TransferDataLocalService } from 'src/app/services/transfer-data-local.service';
 
 @Component({
   selector: 'app-cart',
@@ -7,259 +11,123 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class CartComponent implements OnInit {
-  public counter: any = [];
-  public current_price: any = [];
-  cart: any = {
-    id_carrito: 1,
-    detalle_venta: [
-      {
-        id_producto: 1,
-        codigo_barras: "1234567890",
-        nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-        marca: "Bic",
-        descripcion: "Pluma Bolígarfo BIC Cláscio Dura + de Trazo Mediano Punto de Aguja 1 mm con tinta de baja viscosidad que brinda un flujo de tinta instantáneo, haciendo que la escritura sea suave, continua, con colores nítidos y brillantes.",
-        imagen: {
-          url: [
-            "assets/img/products/img0.png",
-            "assets/img/products/img2.png",
-            "assets/img/products/img3.png",
-            "assets/img/products/img4.png"
-          ]
-        },
-        compra: "5",
-        precio_unitario: "42.00",
-        precio_mayoreo: "40.00",
-        precio_caja: "35.99",
-        inicio_mayoreo: 3,
-        inicio_caja: 5,
-        id_color: 2,
-        id_categoria: 1,
-        id_tipo: 1,
-        color: {
-          id_color: 1,
-          color: "Rojo",
-          hexa: "#ff0000"
-        },
-        tipo: {
-          tipo: "Caja"
-        },
-        categoria: {
-          id_categoria: 1,
-          categoria: "Lapiceros"
-        },
-        inventario: {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 7,
-          unidadesPaquete: 4,
-          numPaquete: 20
-        }
-      },
-      {
-        id_producto: 2,
-        codigo_barras: "1234567890",
-        nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-        marca: "Bic",
-        descripcion: "Pluma Bolígarfo BIC Cláscio Dura + de Trazo Mediano Punto de Aguja 1 mm con tinta de baja viscosidad que brinda un flujo de tinta instantáneo, haciendo que la escritura sea suave, continua, con colores nítidos y brillantes.",
-        imagen: {
-          url: [
-            "assets/img/products/img2.png",
-            "assets/img/products/img3.png",
-            "assets/img/products/img4.png"
-          ]
-        },
-        compra: "5",
-        precio_unitario: "52.00",
-        precio_mayoreo: "30.00",
-        precio_caja: "25.99",
-        inicio_mayoreo: 3,
-        inicio_caja: 5,
-        id_color: 2,
-        id_categoria: 1,
-        id_tipo: 1,
-        color: {
-          color: "Verde"
-        },
-        tipo: {
-          tipo: "Empaque"
-        },
-        categoria: {
-          id_categoria: 1,
-          categoria: "Lapiceros"
-        },
-        inventario: {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 10,
-          unidadesPaquete: 4,
-          numPaquete: 20
-        }
-      },
-      {
-        id_producto: 2,
-        codigo_barras: "1234567890",
-        nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-        marca: "Bic",
-        descripcion: "Pluma Bolígarfo BIC Cláscio Dura + de Trazo Mediano Punto de Aguja 1 mm con tinta de baja viscosidad que brinda un flujo de tinta instantáneo, haciendo que la escritura sea suave, continua, con colores nítidos y brillantes.",
-        imagen: {
-          url: [
-            "assets/img/products/img2.png",
-            "assets/img/products/img3.png",
-            "assets/img/products/img4.png"
-          ]
-        },
-        compra: "5",
-        precio_unitario: "52.00",
-        precio_mayoreo: "30.00",
-        precio_caja: "25.99",
-        inicio_mayoreo: 3,
-        inicio_caja: 5,
-        id_color: 2,
-        id_categoria: 1,
-        id_tipo: 1,
-        color: {
-          color: "Verde"
-        },
-        tipo: {
-          tipo: "Empaque"
-        },
-        categoria: {
-          id_categoria: 1,
-          categoria: "Lapiceros"
-        },
-        inventario: {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 10,
-          unidadesPaquete: 4,
-          numPaquete: 20
-        }
-      },
-      {
-        id_producto: 2,
-        codigo_barras: "1234567890",
-        nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-        marca: "Bic",
-        descripcion: "Pluma Bolígarfo BIC Cláscio Dura + de Trazo Mediano Punto de Aguja 1 mm con tinta de baja viscosidad que brinda un flujo de tinta instantáneo, haciendo que la escritura sea suave, continua, con colores nítidos y brillantes.",
-        imagen: {
-          url: [
-            "assets/img/products/img2.png",
-            "assets/img/products/img3.png",
-            "assets/img/products/img4.png"
-          ]
-        },
-        compra: "5",
-        precio_unitario: "52.00",
-        precio_mayoreo: "30.00",
-        precio_caja: "25.99",
-        inicio_mayoreo: 3,
-        inicio_caja: 5,
-        id_color: 2,
-        id_categoria: 1,
-        id_tipo: 1,
-        color: {
-          color: "Verde"
-        },
-        tipo: {
-          tipo: "Empaque"
-        },
-        categoria: {
-          id_categoria: 1,
-          categoria: "Lapiceros"
-        },
-        inventario: {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 10,
-          unidadesPaquete: 4,
-          numPaquete: 20
-        }
-      },
-      {
-        id_producto: 2,
-        codigo_barras: "1234567890",
-        nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-        marca: "Bic",
-        descripcion: "Pluma Bolígarfo BIC Cláscio Dura + de Trazo Mediano Punto de Aguja 1 mm con tinta de baja viscosidad que brinda un flujo de tinta instantáneo, haciendo que la escritura sea suave, continua, con colores nítidos y brillantes.",
-        imagen: {
-          url: [
-            "assets/img/products/img2.png",
-            "assets/img/products/img3.png",
-            "assets/img/products/img4.png"
-          ]
-        },
-        compra: "5",
-        precio_unitario: "52.00",
-        precio_mayoreo: "30.00",
-        precio_caja: "25.99",
-        inicio_mayoreo: 3,
-        inicio_caja: 5,
-        id_color: 2,
-        id_categoria: 1,
-        id_tipo: 1,
-        color: {
-          color: "Verde"
-        },
-        tipo: {
-          tipo: "Empaque"
-        },
-        categoria: {
-          id_categoria: 1,
-          categoria: "Lapiceros"
-        },
-        inventario: {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 10,
-          unidadesPaquete: 4,
-          numPaquete: 20
-        }
-      },
-    ]
+  id: string = ""
+  public current_price: number[] = [];
+  public total_price = 0;
+  public total_allProducts = 0;
+  cart: ICartOne = {
+    id_carrito: 0,
+    id_login: 0,
+    carrito_producto: []
   }
 
-  constructor() {
-    for (let index = 0; index < this.cart.detalle_venta.length; index++) {
-      const element = this.cart.detalle_venta[index];
-      this.counter.push(1);
-      this.current_price.push(element.precio_unitario);
-    }
-  }
+  constructor(private activatedRoute:ActivatedRoute, public cartService: CartService, public transferDataLocalService: TransferDataLocalService, private router:Router) {
+    this.activatedRoute.paramMap.subscribe(link => {
+      this.id = String( link.get('cartId') )
+    })
 
-  public incrementCounter(index: any) {
-    if(this.counter[index] == this.cart.detalle_venta[index].inventario.existencias)
-      this.counter[index] = this.cart.detalle_venta[index].inventario.existencias
-    else
-      this.counter[index] += 1;
-  }
-
-  public decrementCounter(index: any) {
-    if(this.counter[index] <= 1) 
-      this.counter[index] = 1;
-    else
-      this.counter[index] -= 1;
-  }
-
-  public checkCounter(index: any) {
-    if(this.counter[index] >= this.cart.detalle_venta[index].inicio_mayoreo) {
-      this.current_price[index] = this.cart.detalle_venta[index].precio_mayoreo
-      if(this.counter[index] >= this.cart.detalle_venta[index].inicio_caja) 
-        this.current_price[index] = this.cart.detalle_venta[index].precio_caja
-    } 
-    else
-      this.current_price[index] = this.cart.detalle_venta[index].precio_unitario
-  }
-
-  public actionsBtnIncrement(index: any) {
-    this.incrementCounter(index);
-    this.checkCounter(index);
-  }
-
-  public actionsBtnDecrement(index: any) {
-    this.decrementCounter(index);
+    this.reloadCart()
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    this.cart.carrito_producto.forEach( carrito_producto => {
+      const { id_carrito_producto } = carrito_producto
+      this.cartService.updateCartProductById( String(id_carrito_producto), carrito_producto ).subscribe()
+    });
+  }
+  
+  public incrementCounter(index: any, product: any) {
+    if(this.cart.carrito_producto[index].cantidad_producto == product.inventario.existencias)
+      this.cart.carrito_producto[index].cantidad_producto = product.inventario.existencias
+    else
+      this.cart.carrito_producto[index].cantidad_producto += 1;
+  }
+
+  public decrementCounter(index: any) {
+    if(this.cart.carrito_producto[index].cantidad_producto <= 1) 
+      this.cart.carrito_producto[index].cantidad_producto = 1;
+    else
+      this.cart.carrito_producto[index].cantidad_producto -= 1;
+  }
+
+  public checkCounter(index: any, product: any) {
+    if(this.cart.carrito_producto[index].cantidad_producto >= product.inicio_mayoreo) {
+      this.current_price[index] = product.precio_mayoreo
+      if(this.cart.carrito_producto[index].cantidad_producto >= product.inicio_caja) 
+        this.current_price[index] = product.precio_caja
+    } 
+    else
+      this.current_price[index] = product.precio_unitario
+  }
+
+  public refreshTotalPrice() {
+    this.total_price = 0;
+    for (let index = 0; index < this.cart.carrito_producto.length; index++) {
+      this.total_price += this.current_price[index] * this.cart.carrito_producto[index].cantidad_producto
+    }
+    this.total_price = parseFloat(this.total_price.toFixed(2))
+  }
+
+  public refreshTotalProducts() {
+    this.total_allProducts = 0;
+    this.cart.carrito_producto.forEach((element: any) => {
+      this.total_allProducts += element.cantidad_producto
+    });
+  }
+
+  public actionsBtn(index: any, increment: boolean) {
+    const product = this.cart.carrito_producto[index].producto
+    if( increment == true )
+      this.incrementCounter(index, product)
+    else
+      this.decrementCounter(index)
+
+    this.checkCounter(index, product)
+    this.refreshTotalPrice()
+    this.refreshTotalProducts()
+  }
+
+  public deleteProduct(id: any) {
+    const idToRemove = this.cart.carrito_producto[id].id_carrito_producto
+    this.cartService.deleteProductOfCart( String( idToRemove ) ).subscribe( d => {
+
+      this.cartService.getCartById(this.id).subscribe( res => {
+        const { success, data } = res
+        
+        if ( success == true ) {
+          this.cart = data
+  
+          this.reloadCart()
+          this.transferDataLocalService.quantity -= 1
+          this.transferDataLocalService.emitQuantityToCart()
+        }
+
+      })
+
+    })
+  }
+
+  reloadCart() {
+    this.cartService.getCartById(this.id).subscribe( data => {
+      this.cart = data.data
+      this.cart.carrito_producto.forEach( (carrito_producto, i) => {
+        this.total_allProducts += carrito_producto.cantidad_producto;
+        this.current_price.push(0)
+        this.checkCounter(i, carrito_producto.producto)
+        this.refreshTotalPrice()
+      });
+    })
+  }
+
+  public appendQueryParams(id: number) {
+    this.router.navigate(['/site/products/detail'],{
+      queryParams: {
+        product: id
+      }
+    });
   }
 
 }
