@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Products } from '../../interfaces/products.interface';
+import { IcardData } from 'src/app/shared/interfaces/card.interface';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { BottomSheetComponent } from '../../components/bottom-sheet/bottom-sheet.component';
 
 @Component({
   selector: 'app-products',
@@ -12,248 +14,53 @@ export class ProductsComponent implements OnInit {
   categoryPanel: boolean = false;
   colorPanel: boolean = false;
   brandPanel: boolean = false;
-
-  products: Products[] = [
+  
+  openBottomSheet(): void {
+    this.bottom.open(BottomSheetComponent);
+  }
+  products: IcardData[] = [
     {
-      id_producto: 1,
-      codigo_barras: "1234567890",
-      nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-      marca: "Marca A",
-      descripcion: "Bolígrafo de tinta azul",
-      imagen: {
-        url: [
-          '/assets/img/products/img1.png', '/assets/img/products/img1.png'
-        ]
-      },
-      compra: "5",
-      precio_unitario: "569",
-      precio_mayoreo: "7",
-      precio_caja: "5",
-      inicio_mayoreo: 10,
-      inicio_caja: 20,
-      id_color: 2,
-      id_categoria: 1,
-      id_tipo: 1,
-      inventario: [
-        {
-          id_inventario: 2,
-          id_producto: 1,
-          existencias: 100,
-          unidadesPaquete: 10,
-          numPaquete: 5
-        }
-      ]
+      title: "Lapicero tres colores",
+      img: "assets/img/products/img1.png",
+      id: 1,
+      price: 30
     },
     {
-      id_producto: 2,
-      codigo_barras: "1234567890",
-      nombre: "Bolígrafo Azul",
-      marca: "Marca A",
-      descripcion: "Bolígrafo de tinta azul",
-      imagen: {
-        url: [
-          '/assets/img/products/img3.png', '/assets/img/products/img1.png'
-        ]
-      },
-      compra: "5",
-      precio_unitario: "321",
-      precio_mayoreo: "7",
-      precio_caja: "5",
-      inicio_mayoreo: 10,
-      inicio_caja: 20,
-      id_color: 2,
-      id_categoria: 1,
-      id_tipo: 1,
-      inventario: [
-        {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 100,
-          unidadesPaquete: 10,
-          numPaquete: 5
-        }
-      ]
+      title: "Lapicero azul",
+      img: "assets/img/products/img3.png",
+      id: 2,
+      price: 30
     },
     {
-      id_producto: 3,
-      codigo_barras: "1234567890",
-      nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-      marca: "Marca A",
-      descripcion: "Bolígrafo de tinta azul",
-      imagen: {
-        url: [
-          '/assets/img/products/img1.png', '/assets/img/products/img1.png'
-        ]
-      },
-      compra: "5",
-      precio_unitario: "569",
-      precio_mayoreo: "7",
-      precio_caja: "5",
-      inicio_mayoreo: 10,
-      inicio_caja: 20,
-      id_color: 2,
-      id_categoria: 1,
-      id_tipo: 1,
-      inventario: [
-        {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 100,
-          unidadesPaquete: 10,
-          numPaquete: 5
-        }
-      ]
+      title: "Lapicero verde",
+      img: "assets/img/products/img4.png",
+      id: 3,
+      price: 30
     },
     {
-      id_producto: 4,
-      codigo_barras: "1234567890",
-      nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-      marca: "Marca A",
-      descripcion: "Bolígrafo de tinta azul",
-      imagen: {
-        url: [
-          '/assets/img/products/img1.png', '/assets/img/products/img1.png'
-        ]
-      },
-      compra: "5",
-      precio_unitario: "569",
-      precio_mayoreo: "7",
-      precio_caja: "5",
-      inicio_mayoreo: 10,
-      inicio_caja: 20,
-      id_color: 2,
-      id_categoria: 1,
-      id_tipo: 1,
-      inventario: [
-        {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 100,
-          unidadesPaquete: 10,
-          numPaquete: 5
-        }
-      ]
+      title: "Lapicero rojo",
+      img: "assets/img/products/img2.png",
+      id: 4,
+      price: 30
     },
     {
-      id_producto: 5,
-      codigo_barras: "1234567890",
-      nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-      marca: "Marca A",
-      descripcion: "Bolígrafo de tinta azul",
-      imagen: {
-        url: [
-          '/assets/img/products/img2.png', '/assets/img/products/img1.png'
-        ]
-      },
-      compra: "5",
-      precio_unitario: "569",
-      precio_mayoreo: "7",
-      precio_caja: "5",
-      inicio_mayoreo: 10,
-      inicio_caja: 20,
-      id_color: 2,
-      id_categoria: 1,
-      id_tipo: 1,
-      inventario: [
-        {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 100,
-          unidadesPaquete: 10,
-          numPaquete: 5
-        }
-      ]
+      title: "Lapicero negro",
+      img: "assets/img/products/img3.png",
+      id: 5,
+      price: 30
     },
     {
-      id_producto: 6,
-      codigo_barras: "1234567890",
-      nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-      marca: "Marca A",
-      descripcion: "Bolígrafo de tinta azul",
-      imagen: {
-        url: [
-          '/assets/img/products/img3.png', '/assets/img/products/img1.png'
-        ]
-      },
-      compra: "5",
-      precio_unitario: "1000",
-      precio_mayoreo: "7",
-      precio_caja: "5",
-      inicio_mayoreo: 10,
-      inicio_caja: 20,
-      id_color: 2,
-      id_categoria: 1,
-      id_tipo: 1,
-      inventario: [
-        {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 100,
-          unidadesPaquete: 10,
-          numPaquete: 5
-        }
-      ]
+      title: "Lapicero morado",
+      img: "assets/img/products/img4.png",
+      id: 6,
+      price: 30
     },
     {
-      id_producto: 7,
-      codigo_barras: "1234567890",
-      nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-      marca: "Marca A",
-      descripcion: "Bolígrafo de tinta azul",
-      imagen: {
-        url: [
-          '/assets/img/products/img1.png', '/assets/img/products/img1.png'
-        ]
-      },
-      compra: "5",
-      precio_unitario: "569",
-      precio_mayoreo: "7",
-      precio_caja: "5",
-      inicio_mayoreo: 10,
-      inicio_caja: 20,
-      id_color: 2,
-      id_categoria: 1,
-      id_tipo: 1,
-      inventario: [
-        {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 100,
-          unidadesPaquete: 10,
-          numPaquete: 5
-        }
-      ]
-    },
-    {
-      id_producto: 8,
-      codigo_barras: "1234567890",
-      nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-      marca: "Marca A",
-      descripcion: "Bolígrafo de tinta azul",
-      imagen: {
-        url: [
-          '/assets/img/products/img1.png', '/assets/img/products/img1.png'
-        ]
-      },
-      compra: "5",
-      precio_unitario: "569",
-      precio_mayoreo: "7",
-      precio_caja: "5",
-      inicio_mayoreo: 10,
-      inicio_caja: 20,
-      id_color: 2,
-      id_categoria: 1,
-      id_tipo: 1,
-      inventario: [
-        {
-          id_inventario: 1,
-          id_producto: 1,
-          existencias: 100,
-          unidadesPaquete: 10,
-          numPaquete: 5
-        }
-      ]
-    },
+      title: "Lapicero naranja",
+      img: "assets/img/products/img2.png",
+      id: 7,
+      price: 30
+    }
   ]
 
   categories: any = [
@@ -299,7 +106,7 @@ export class ProductsComponent implements OnInit {
     'Marca 3'
   ]
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public bottom: MatBottomSheet) { }
 
   ngOnInit(): void {
   }
