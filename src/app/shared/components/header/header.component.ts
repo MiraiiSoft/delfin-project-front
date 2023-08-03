@@ -103,7 +103,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.nameUser = '';
     this.inLogin = false;
-
+    
     if( this.router.routerState.snapshot.url.includes('user') ){
       this.router.navigate(['/site/home']);
     }

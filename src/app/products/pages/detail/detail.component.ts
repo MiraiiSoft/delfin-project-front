@@ -13,24 +13,28 @@ import { IOneProduct } from 'src/app/interfaces/producto.interface';
 
 export class DetailComponent implements OnInit {
   id_product: string = ''
-  public indexSelected = 0;
-  public imgSelected: string = "";
+  public indexSelected = 0
+  public imgSelected: string = ""
   public counter = 1;
   public current_price: any;
+  unitPrice: boolean = false
+  wholeSalePrice: boolean = false
+  boxPrice: boolean = false
+  executed: boolean = false
 
   product: IOneProduct = {
     id_producto: 0,
     codigo_barras: "",
     nombre: "",
     marca: "",
-    descripcion: "Pluma Bolígarfo BIC Cláscio Dura + de Trazo Mediano Punto de Aguja 1 mm con tinta de baja viscosidad que brinda un flujo de tinta instantáneo, haciendo que la escritura sea suave, continua, con colores nítidos y brillantes.",
+    descripcion: "",
     imagen: {
       url: []
     },
     compra: "5",
     precio_unitario: "00",
     precio_mayoreo: "00",
-    precio_caja: "99",
+    precio_caja: "00",
     inicio_mayoreo: 0,
     inicio_caja: 0,
     id_color: 0,
@@ -58,15 +62,29 @@ export class DetailComponent implements OnInit {
   
   constructor(private productService: ProductosService, public cartService:CartService, public transferDataLocalService: TransferDataLocalService, private activateRoute: ActivatedRoute) {
     this.id_product = this.activateRoute.snapshot.queryParamMap.get('product') || '0'
-    
+
     this.productService.getOneProduct( parseInt(this.id_product) ).subscribe( res => {
       this.product = res.data
-
-      this.current_price = this.product.precio_unitario
-
+      
       if(this.product.imagen.url.length >= 0){
         this.selectImg(0);
       }
+
+      if( this.product.precio_caja != null ) {
+        this.current_price = this.product.precio_caja
+        this.boxPrice = true
+      }
+
+      if( this.product.precio_mayoreo != null ) {
+        this.current_price = this.product.precio_mayoreo
+        this.wholeSalePrice = true
+      } 
+
+      if( this.product.precio_unitario != null ) {
+        this.current_price = this.product.precio_unitario
+        this.unitPrice = true
+      }
+
     })
 
    }
@@ -94,13 +112,68 @@ export class DetailComponent implements OnInit {
   }
 
   public checkCounter() {
-    if(this.counter >= this.product.inicio_mayoreo) {
-      this.current_price = this.product.precio_mayoreo
-      if(this.counter >= this.product.inicio_caja) 
-        this.current_price = this.product.precio_caja
-    } 
-    else
-      this.current_price = this.product.precio_unitario
+
+    if ( this.counter < this.product.inicio_mayoreo && this.counter < this.product.inicio_caja ) {
+      
+      if ( this.unitPrice ) {
+        this.current_price = this.product.precio_unitario
+
+      } else {
+        if ( this.wholeSalePrice ) {
+          this.current_price = this.product.precio_mayoreo
+
+        } else {
+          if ( this.boxPrice ) {
+            this.current_price = this.product.precio_caja
+
+          }
+        }
+      }
+
+    } else {
+
+      if ( this.counter >= this.product.inicio_mayoreo && this.counter < this.product.inicio_caja ) {
+        
+        if ( this.wholeSalePrice ) {
+          this.current_price = this.product.precio_mayoreo
+
+        } else {
+          if ( this.unitPrice ) {
+            this.current_price = this.product.precio_unitario
+
+          } else {
+            if ( this.boxPrice ) {
+              this.current_price = this.product.precio_caja
+
+            }
+          }
+        }
+
+      } else {
+
+        if ( this.counter > this.product.inicio_mayoreo && this.counter >= this.product.inicio_caja ) {
+          
+          if ( this.boxPrice ) {
+            this.current_price = this.product.precio_caja
+
+          } else {
+            if ( this.unitPrice ) {
+              this.current_price = this.product.precio_unitario
+
+            } else {
+              if ( this.wholeSalePrice ) {
+                this.current_price = this.product.precio_mayoreo
+
+              }
+            }
+          }
+
+        }
+
+      }
+
+    }
+
   }
 
   public actionsBtn(increment: boolean) {
@@ -120,9 +193,13 @@ export class DetailComponent implements OnInit {
       cantidad_producto: this.counter
     }
     
-    this.cartService.addProductToCart(data).subscribe( () => {
-      this.transferDataLocalService.quantity += 1
-      this.transferDataLocalService.emitQuantityToCart()
+    this.cartService.addProductToCart(data).subscribe( res => {
+        const res_known:any = res
+
+        if ( res_known.data != null ) {
+          this.transferDataLocalService.quantity += 1
+          this.transferDataLocalService.emitQuantityToCart()
+        }
     })
   }
 }

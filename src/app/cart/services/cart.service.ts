@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, of } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IResCartOne, ICartProduct_add_update, IResDeleteCartProduct } from '../interfaces/cart.interface';
+import { IResCartOne, IResDeleteCartProduct, IResCartProduct_add, ICartProduct_add, ICartProduct_req } from '../interfaces/cart.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -23,16 +23,16 @@ export class CartService {
   }
 
 
-  updateCartProductById(id: string, body:ICartProduct_add_update) {
+  updateCartProductById(id: string, body:ICartProduct_add) {
     const url = `${this.urlBase}/shoppingCart/update/${ id }` 
-    return this.http.put<ICartProduct_add_update>(url, body).pipe(
+    return this.http.put<ICartProduct_add>(url, body).pipe(
       catchError( e => of( e.error ) )
     )
   }
 
-  addProductToCart(body: ICartProduct_add_update) {
+  addProductToCart(body: ICartProduct_req) {
     const url = `${this.urlBase}/shoppingCart/add/product/`
-    return this.http.post<ICartProduct_add_update>( url, body ).pipe(
+    return this.http.post<IResCartProduct_add>( url, body ).pipe(
       catchError ( e => e.error )
     )
   }

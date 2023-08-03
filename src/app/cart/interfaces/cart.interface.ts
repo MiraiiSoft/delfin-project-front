@@ -63,13 +63,20 @@ interface Tipo {
 }
 
 //Carrito_producto
-export interface IResCartProduct_add_update {
+export interface IResCartProduct_add {
     success: boolean;
-    message?: string;
-    data?:    ICartProduct_add_update;
+    message: string;
+    data:    ICartProduct_add;
 }
 
-export interface ICartProduct_add_update {
+export interface ICartProduct_req {
+    id_producto:         number;
+    id_carrito:          number;
+    cantidad_producto:   number;
+}
+
+export interface ICartProduct_add {
+    id_carrito_producto: number,
     id_producto:         number;
     id_carrito:          number;
     cantidad_producto:   number;
