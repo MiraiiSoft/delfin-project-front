@@ -1,14 +1,14 @@
 <h2 mat-dialog-title>¿Cómo deseas pagar?</h2>
 
 <mat-dialog-content>
-    <div class="pay-methotd">
+    <div class="pay-methotd" (click)="proceedToPayment('mercadopago')">
         <div class="pay-methotd__img">
             <img [src]="logoMercadoPago" alt="mercado pago">
         </div>
         <h4>Mercado Pago</h4>
     </div>
 
-    <div class="pay-methotd">
+    <div class="pay-methotd" (click)="proceedToPayment('paypal')">
         <div class="pay-methotd__img">
             <img [src]="logoPaypal" alt="paypal">
         </div>

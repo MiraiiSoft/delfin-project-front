@@ -3,7 +3,6 @@ import { ICartOne } from '../../interfaces/cart.interface';
 import { CartService } from '../../services/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransferDataLocalService } from 'src/app/services/transfer-data-local.service';
-import { PaymentService } from '../../services/services-payment.service';
 import { OrderData } from '../../interfaces/payment.interface';
 import { Item,Product } from '../../interfaces/payment.interface';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,7 +31,6 @@ export class CartComponent implements OnInit {
     public cartService: CartService,
     public transferDataLocalService: TransferDataLocalService,
     private router: Router,
-    private paymentService: PaymentService, // Inyecta el servicio PaymentService
     private dialog: MatDialog
   ) {
     this.activatedRoute.paramMap.subscribe(link => {
@@ -222,7 +220,7 @@ export class CartComponent implements OnInit {
     })
   }
 
-  public proceedToPayment() {
+  private proceedToPayment() {
     const items: Item[] = this.cart.carrito_producto.map(carrito_producto => {
       const { producto, cantidad_producto } = carrito_producto;
       return {
@@ -244,7 +242,7 @@ export class CartComponent implements OnInit {
     });
 
     const orderData: OrderData = {
-      payservice: 'paypal',
+      payservice: '',
       items: items,
       products: products,
       envio: {
@@ -252,18 +250,17 @@ export class CartComponent implements OnInit {
       }
     };
 
-    this.paymentService.iniciarPago(orderData).subscribe(
-      response => {
-        window.location.href = response.message.links[1].href;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    return orderData;
+
+    // this.paymentService.iniciarPago(orderData).subscribe(
+    //   response => {
+    //     window.location.href = response.message.links[1].href;
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   }
+    // );
   }
-
-
-
 
   public appendQueryParams(id: number) {
     this.router.navigate(['/site/products/detail'],{
@@ -274,7 +271,9 @@ export class CartComponent implements OnInit {
   }
 
   openSelectMethodPay(){
-    this.dialog.open( PaymentComponent )
+    this.dialog.open( PaymentComponent, {
+      data: this.proceedToPayment()
+    } )
   }
 
 }
