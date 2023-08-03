@@ -193,12 +193,13 @@ export class DetailComponent implements OnInit {
       cantidad_producto: this.counter
     }
     
-    this.cartService.addProductToCart(data).subscribe( () => {
-      if( !this.executed ) {
-        this.transferDataLocalService.quantity += 1
-        this.transferDataLocalService.emitQuantityToCart()
-        this.executed = true
-      }
+    this.cartService.addProductToCart(data).subscribe( res => {
+        const res_known:any = res
+
+        if ( res_known.data != null ) {
+          this.transferDataLocalService.quantity += 1
+          this.transferDataLocalService.emitQuantityToCart()
+        }
     })
   }
 }
