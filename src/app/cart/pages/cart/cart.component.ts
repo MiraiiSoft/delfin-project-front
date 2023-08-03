@@ -15,7 +15,6 @@ export class CartComponent implements OnInit {
   public current_price: number[] = []
   public total_price = 0
   public total_allProducts = 0
-  public total_everyProducts = 0
   ArrayExist: any = []
 
   cart: ICartOne = {
@@ -33,13 +32,12 @@ export class CartComponent implements OnInit {
       this.cart = data.data
 
       this.reloadCart()
-      this.total_everyProducts = transferDataLocalService.quantity
     })
-
     
   }
 
   ngOnInit(): void {
+    
   }
 
   ngOnDestroy(): void {
@@ -158,13 +156,14 @@ export class CartComponent implements OnInit {
 
   public deleteProduct(id: any) {
     const idToRemove = this.cart.carrito_producto[id].id_carrito_producto
+
     this.cartService.deleteProductOfCart( String( idToRemove ) ).subscribe( () => {
 
       this.cartService.getCartById(this.id).subscribe( res => {
        
         this.cart = res.data
 
-        this.total_everyProducts = this.transferDataLocalService.quantity-=1
+        this.transferDataLocalService.quantity-=1
         this.transferDataLocalService.emitQuantityToCart()
 
         this.total_allProducts = 0
@@ -179,7 +178,6 @@ export class CartComponent implements OnInit {
   }
 
   reloadCart() {
-
     for (let index = 0; index < this.cart.carrito_producto.length; index++) {
       const product = this.cart.carrito_producto[index].producto
       let newObjExist: any = {}
