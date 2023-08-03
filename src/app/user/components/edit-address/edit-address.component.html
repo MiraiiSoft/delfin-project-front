@@ -8,12 +8,12 @@
 <mat-dialog-content>
     <div class="content">
         <section class="section-form">
-            <form class="form">
+            <form class="form" [formGroup]="formAddres">
                 <div class="form__content">
 
                     <mat-form-field appearance="outline">
                         <mat-label>País:</mat-label>
-                        <mat-select>
+                        <mat-select >
                             <mat-option *ngFor="let pais of paises" [value]="pais.id_pais">
                                 {{pais.pais | titlecase}}
                             </mat-option>
