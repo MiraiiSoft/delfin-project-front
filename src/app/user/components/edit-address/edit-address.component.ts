@@ -45,17 +45,9 @@ export class EditAddressComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.paisService.getAllPais().subscribe( res => {
-      if( res.data ){
-        this.paises = res.data;
-      }
-    });
+    this.getPaises();    
 
-    this.ciudadService.getAllCiudades().subscribe( res => {
-      if( res.data ){
-        this.ciudades = res.data;
-      }
-    });
+    this.getCiudades( this.formAddres.get('pais')?.value );
 
     this.municipioService.getAllMunicipio().subscribe( res => {
       if( res.data ){
@@ -84,6 +76,22 @@ export class EditAddressComponent implements OnInit {
 
     
 
+  }
+
+  getPaises(){
+    this.paisService.getAllPais().subscribe( res => {
+      if( res.data ){
+        this.paises = res.data;
+      }
+    });
+  }
+
+  getCiudades( id: number ){
+    this.ciudadService.getAllCiudadesByPais( id ).subscribe( res => {
+      if( res.data ){
+        this.ciudades = res.data;
+      }
+    });
   }
 
   closeModalAddress(){
