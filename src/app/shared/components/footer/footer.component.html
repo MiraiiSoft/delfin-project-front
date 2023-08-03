@@ -9,9 +9,9 @@
         <div class="cont-explorer">
             <mat-label class="text-title-explorer">Cuenta</mat-label>
             <div class="explorer">
-                <a *ngIf="there_sesion()" class="text-cont-explorer" href="site/user/datos">Mi cuenta</a>
-                <a *ngIf="!there_sesion()" class="text-cont-explorer" href="auth/login">Iniciar sesión</a>
-                <a *ngIf="!there_sesion()" class="text-cont-explorer" href="auth/registro">Crear nueva cuenta</a>
+                <a *ngIf="there_sesion()" class="text-cont-explorer" (click)="goRoute('site/user/datos')">Mi cuenta</a>
+                <a *ngIf="!there_sesion()" class="text-cont-explorer" (click)="goRoute('auth/login')">Iniciar sesión</a>
+                <a *ngIf="!there_sesion()" class="text-cont-explorer" (click)="goRoute('auth/registro')">Crear nueva cuenta</a>
             </div>
         </div>
         <div class="cont-explorer">
