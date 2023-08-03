@@ -23,7 +23,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Ciudad:</mat-label>
                         <mat-select formControlName="id_ciudad">
-                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.ciudad">
+                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id_ciudad">
                                 {{ciudad.ciudad | titlecase}}
                             </mat-option>
                         </mat-select>
@@ -31,13 +31,13 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Código Postal:</mat-label>
-                        <input type="text" matInput placeholder="Ejem. 73173" formControlName="">
+                        <input type="text" matInput placeholder="Ejem. 73173" formControlName="codigo_postal">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Municipio:</mat-label>
-                        <mat-select formControlName="">
-                            <mat-option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">
+                        <mat-select formControlName="municipio">
+                            <mat-option *ngFor="let municipio of municipios" [value]="municipio.municipio">
                                 {{municipio.municipio | titlecase}}
                             </mat-option>
                         </mat-select>
@@ -45,17 +45,17 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Calle:</mat-label>
-                        <input type="text" matInput placeholder="Ejem. #15" formControlName="">
+                        <input type="text" matInput placeholder="Ejem. #15" formControlName="calle">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Colonia:</mat-label>
-                        <input type="text" matInput placeholder="Ejem. 14 de octubre" formControlName="">
+                        <input type="text" matInput placeholder="Ejem. 14 de octubre" formControlName="colonia">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>N° Exterior:</mat-label>
-                        <input type="text" matInput placeholder="Ejem. " formControlName="">
+                        <input type="text" matInput placeholder="Ejem. " formControlName="num">
                     </mat-form-field>
 
                     <div class="form__content-telefono">
@@ -71,7 +71,7 @@
 
                         <mat-form-field appearance="outline">
                             <mat-label>Teléfono Celular</mat-label>
-                            <input type="text" matInput placeholder="Ejem. 55 5544 6677" formControlName="">
+                            <input type="text" matInput placeholder="Ejem. 55 5544 6677" formControlName="telefono">
                         </mat-form-field>
 
                     </div>
@@ -79,12 +79,13 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Referencias de casa:</mat-label>
-                        <textarea matInput placeholder="Descripción de tu casa, entre que puntos de referencia se encuentra, etc." formControlName=""></textarea>
+                        <textarea matInput placeholder="Descripción de tu casa, entre que puntos de referencia se encuentra, etc." formControlName="referencia"></textarea>
                     </mat-form-field>
 
                 </div>
 
-                <button mat-raised-button type="button" class="form__btn">Guardar</button>
+                <button mat-raised-button type="button" class="form__btn" 
+                    [disabled]="formAddres.invalid" (click)="save()" >Guardar</button>
 
             </form>
         </section>
