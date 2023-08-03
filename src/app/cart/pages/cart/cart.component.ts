@@ -26,7 +26,12 @@ export class CartComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(link => {
       this.id = String( link.get('cartId') )
     })
-    this.reloadCart()
+
+    this.cartService.getCartById(this.id).subscribe( data => {
+      this.cart = data.data
+      this.reloadCart()
+    })
+
     this.total_everyProducts = transferDataLocalService.quantity
   }
 
@@ -96,14 +101,16 @@ export class CartComponent implements OnInit {
     this.cartService.deleteProductOfCart( String( idToRemove ) ).subscribe( d => {
 
       this.cartService.getCartById(this.id).subscribe( res => {
-        const { success, data } = res
-        
-        if ( success == true ) {
-          this.cart = data
-  
-          this.total_everyProducts = this.transferDataLocalService.quantity-=1
-          this.transferDataLocalService.emitQuantityToCart()
-        }
+       
+        this.cart = res.data
+
+        this.total_everyProducts = this.transferDataLocalService.quantity-=1
+        this.transferDataLocalService.emitQuantityToCart()
+
+        this.total_allProducts = 0
+        this.total_price = 0
+        this.current_price = []
+        this.reloadCart()
 
       })
 
@@ -111,14 +118,11 @@ export class CartComponent implements OnInit {
   }
 
   reloadCart() {
-    this.cartService.getCartById(this.id).subscribe( data => {
-      this.cart = data.data
-      this.cart.carrito_producto.forEach( (carrito_producto, i) => {
-        this.total_allProducts += carrito_producto.cantidad_producto;
-        this.current_price.push(0)
-        this.checkCounter(i, carrito_producto.producto)
-        this.refreshTotalPrice()
-      });
+    this.cart.carrito_producto.forEach( (carrito_producto, i) => {
+      this.total_allProducts += carrito_producto.cantidad_producto
+      this.current_price.push(0)
+      this.checkCounter(i, carrito_producto.producto)
+      this.refreshTotalPrice()
     })
   }
 
