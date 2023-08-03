@@ -10,7 +10,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
 export class ComprasComponent implements OnInit {
 
   constructor( private dialog: MatDialog ) { }
-
+  
   ngOnInit(): void {
   }
 
