@@ -18,7 +18,6 @@ export class PaymentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data)
   }
 
   proceedToPayment( payService: string ){
