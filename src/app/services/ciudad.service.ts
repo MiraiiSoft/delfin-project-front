@@ -25,6 +25,15 @@ export class CiudadService {
 
   }
 
+  getAllCiudadesByPais( idpais: number ){
+    const url = `${this.baseUrl}/ciudad/pais/${idpais}`;
+
+    return this.http.get<IResOneCiudad>( url )
+      .pipe(
+        catchError( err => of(err.error) )
+      )
+  }
+
   getOneCiudades( id: number ): Observable<IResOneCiudad>{
 
     const url = `${this.baseUrl}/ciudad/${id}`;

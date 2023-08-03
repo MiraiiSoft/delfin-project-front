@@ -25,6 +25,17 @@ export class MunicipioService {
 
   }
 
+  getAllMunicipioByCiudad( idciudad: number ): Observable<IResAllMunicipio>{
+
+    const url = `${this.baseUrl}/municipio/ciudad/${idciudad}`;
+
+    return this.http.get<IResAllMunicipio>( url )
+      .pipe(
+        catchError( err => of(err.error) )
+      )
+
+  }
+
   getOneMunicipio( id: number ): Observable<IResOneMunicipio>{
 
     const url = `${this.baseUrl}/municipio/${id}`;

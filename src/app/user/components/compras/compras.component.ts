@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs';
+import { IShopping } from '../../interfaces/shopping.interface';
 
 @Component({
   selector: 'app-compras',
@@ -9,241 +12,85 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
 })
 export class ComprasComponent implements OnInit {
 
-  constructor( private dialog: MatDialog ) { }
-  
-  ngOnInit(): void {
-  }
-
+  $user!: Subscription;
   compras = [
     {
-      id: 1,
+      id: 0,
       venta: {
-        id_venta: 1,
-        fecha_venta: "2023-07-01T00:00:00.000Z",
-        status_venta: "Completada",
-        id_envio: 1,
-        id_pago: 1,
+        id_venta: 0,
+        fecha_venta: "",
+        status_venta: "",
+        id_envio: 0,
+        id_pago: 0,
         pago: {
-          id_pago: 1,
-          tocken_pago: "tok_123",
-          monto: "100"
+          id_pago: 0,
+          tocken_pago: "",
+          monto: ""
         },
         envio: {
-          id_envio: 1,
-          id_login: 2,
-          fecha_envio: "2023-07-01T00:00:00.000Z",
-          fecha_entrega: "2023-08-05T00:00:00.000Z",
-          fecha_recoleccion: "2023-07-10T00:00:00.000Z",
-          paqueteria: "FedEx",
-          status_envio: "En tránsito"
+          id_envio: 0,
+          id_login: 0,
+          fecha_envio: "",
+          fecha_entrega: "",
+          fecha_recoleccion: "",
+          paqueteria: "",
+          status_envio: ""
         }
       },
       login: {
-        id_login: 1,
-        correo: "juan@example.com",
-        usuario: "juan123",
-        password: "password1",
+        id_login: 0,
+        correo: "",
+        usuario: "",
+        password: "",
         is_verified: false,
-        id_persona: 1,
-        id_roll: 1,
+        id_persona: 0,
+        id_roll: 0,
         is_active: false
       },
       producto: [
         {
-          id_producto: 1,
-          codigo_barras: "1234567890",
-          nombre: "Bolígrafo Azul",
-          marca: "Marca A",
-          descripcion: "Bolígrafo de tinta azul",
+          id_producto: 0,
+          codigo_barras: "",
+          nombre: "",
+          marca: "",
+          descripcion: "",
           imagen: {
-            url: [
-              "https://escritoriomoderno.com.mx/cdn/shop/products/metricodixon_580x.jpg?v=1628636286"
-            ]
+            url: []
           },
-          compra: "5",
-          precio_unitario: "8",
-          precio_mayoreo: "7",
-          precio_caja: "5",
-          inicio_mayoreo: 10,
-          inicio_caja: 20,
-          id_color: 2,
-          id_categoria: 1,
-          id_tipo: 1,
-          cantidad_producto: 2
+          compra: "",
+          precio_unitario: "",
+          precio_mayoreo: "",
+          precio_caja: "",
+          inicio_mayoreo: 0,
+          inicio_caja: 0,
+          id_color: 0,
+          id_categoria: 0,
+          id_tipo: 0,
+          cantidad_producto: 0
         },
-        {
-          id_producto: 1,
-          codigo_barras: "1234567890",
-          nombre: "Bolígrafo Azul",
-          marca: "Marca A",
-          descripcion: "Bolígrafo de tinta azul",
-          imagen: {
-            url: [
-              "https://escritoriomoderno.com.mx/cdn/shop/products/metricodixon_580x.jpg?v=1628636286"
-            ]
-          },
-          compra: "5",
-          precio_unitario: "8",
-          precio_mayoreo: "7",
-          precio_caja: "5",
-          inicio_mayoreo: 10,
-          inicio_caja: 20,
-          id_color: 2,
-          id_categoria: 1,
-          id_tipo: 1,
-          cantidad_producto: 2
-        },
-        {
-          id_producto: 1,
-          codigo_barras: "1234567890",
-          nombre: "Bolígrafo Azul",
-          marca: "Marca A",
-          descripcion: "Bolígrafo de tinta azul",
-          imagen: {
-            url: [
-              "https://escritoriomoderno.com.mx/cdn/shop/products/metricodixon_580x.jpg?v=1628636286"
-            ]
-          },
-          compra: "5",
-          precio_unitario: "8",
-          precio_mayoreo: "7",
-          precio_caja: "5",
-          inicio_mayoreo: 10,
-          inicio_caja: 20,
-          id_color: 2,
-          id_categoria: 1,
-          id_tipo: 1,
-          cantidad_producto: 4
-        },
-        {
-          id_producto: 1,
-          codigo_barras: "1234567890",
-          nombre: "Bolígrafo Azul",
-          marca: "Marca A",
-          descripcion: "Bolígrafo de tinta azul",
-          imagen: {
-            url: [
-              "https://escritoriomoderno.com.mx/cdn/shop/products/metricodixon_580x.jpg?v=1628636286"
-            ]
-          },
-          compra: "5",
-          precio_unitario: "8",
-          precio_mayoreo: "7",
-          precio_caja: "5",
-          inicio_mayoreo: 10,
-          inicio_caja: 20,
-          id_color: 2,
-          id_categoria: 1,
-          id_tipo: 1,
-          cantidad_producto: 4
-        }
       ],
-      monto_total: "16"
+      monto_total: ""
     },
-    {
-      id: 1,
-      venta: {
-        id_venta: 1,
-        fecha_venta: "2023-07-01T00:00:00.000Z",
-        status_venta: "Completada",
-        id_envio: 1,
-        id_pago: 1,
-        pago: {
-          id_pago: 1,
-          tocken_pago: "tok_123",
-          monto: "100"
-        },
-        envio: {
-          id_envio: 1,
-          id_login: 2,
-          fecha_envio: "2023-07-01T00:00:00.000Z",
-          fecha_entrega: "2023-08-05T00:00:00.000Z",
-          fecha_recoleccion: "2023-07-10T00:00:00.000Z",
-          paqueteria: "FedEx",
-          status_envio: "En tránsito"
-        }
-      },
-      login: {
-        id_login: 1,
-        correo: "juan@example.com",
-        usuario: "juan123",
-        password: "password1",
-        is_verified: false,
-        id_persona: 1,
-        id_roll: 1,
-        is_active: false
-      },
-      producto: [
-        {
-          id_producto: 1,
-          codigo_barras: "1234567890",
-          nombre: "Bolígrafo Azul",
-          marca: "Marca A",
-          descripcion: "Bolígrafo de tinta azul",
-          imagen: {
-            url: [
-              "https://escritoriomoderno.com.mx/cdn/shop/products/metricodixon_580x.jpg?v=1628636286"
-            ]
-          },
-          compra: "5",
-          precio_unitario: "8",
-          precio_mayoreo: "7",
-          precio_caja: "5",
-          inicio_mayoreo: 10,
-          inicio_caja: 20,
-          id_color: 2,
-          id_categoria: 1,
-          id_tipo: 1,
-          cantidad_producto: 2
-        },
-        {
-          id_producto: 1,
-          codigo_barras: "1234567890",
-          nombre: "Bolígrafo Azul",
-          marca: "Marca A",
-          descripcion: "Bolígrafo de tinta azul",
-          imagen: {
-            url: [
-              "https://escritoriomoderno.com.mx/cdn/shop/products/metricodixon_580x.jpg?v=1628636286"
-            ]
-          },
-          compra: "5",
-          precio_unitario: "8",
-          precio_mayoreo: "7",
-          precio_caja: "5",
-          inicio_mayoreo: 10,
-          inicio_caja: 20,
-          id_color: 2,
-          id_categoria: 1,
-          id_tipo: 1,
-          cantidad_producto: 4
-        },
-        {
-          id_producto: 1,
-          codigo_barras: "1234567890",
-          nombre: "Bolígrafo Azul",
-          marca: "Marca A",
-          descripcion: "Bolígrafo de tinta azul",
-          imagen: {
-            url: [
-              "https://escritoriomoderno.com.mx/cdn/shop/products/metricodixon_580x.jpg?v=1628636286"
-            ]
-          },
-          compra: "5",
-          precio_unitario: "8",
-          precio_mayoreo: "7",
-          precio_caja: "5",
-          inicio_mayoreo: 10,
-          inicio_caja: 20,
-          id_color: 2,
-          id_categoria: 1,
-          id_tipo: 1,
-          cantidad_producto: 4
-        }
-      ],
-      monto_total: "16"
-    }
-  ];
+  ]
+
+  constructor( private dialog: MatDialog, userService: UserService ) { 
+
+    this.$user = userService.getPerfil().subscribe( res => {
+
+      if ( res.data ) {
+        const { id_login } = res.data
+
+        userService.getVentasById_login( id_login ).subscribe( resVentas => {
+          this.compras = resVentas.data
+        })
+      }
+      
+    })
+  }
+  
+  ngOnInit(): void {
+
+  }
 
   openSpinner(){
     this.dialog.open( SpinnerComponent, {

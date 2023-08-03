@@ -36,7 +36,7 @@ export class EditProfileComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    console.log(this.data)
+    
     this.formUser.get('nombre')?.setValue(this.data.persona.nombre);
     this.formUser.get('apellido')?.setValue(this.data.persona.apellido);
     this.formUser.get('telefono')?.setValue(this.data.persona.telefono);
