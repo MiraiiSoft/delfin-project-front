@@ -9,7 +9,7 @@
                             <img src={{carrito_producto.producto.imagen.url[0]}} alt="product-img" class="img">
                         </div>
                         <div class="product-cont-details">
-                            <mat-label class="details-text-title" (click)="appendQueryParams(carrito_producto.id_producto)">{{carrito_producto.producto.nombre}}</mat-label> 
+                            <mat-label class="details-text-title" (click)="appendQueryParams(carrito_producto.id_producto)">{{carrito_producto.producto.nombre}}</mat-label>
                             <mat-label class="details-text-body">Color: {{carrito_producto.producto.color.color}} &nbsp;&nbsp; Tipo: {{carrito_producto.producto.tipo.tipo}}</mat-label>
                             <div class="details-cont-buttons">
                                 <button mat-raised-button class="button border-5px">
@@ -45,7 +45,7 @@
                 <mat-label>No. de productos: {{total_allProducts}}</mat-label> <br>
                 <mat-label class="total-text-price">Total: ${{total_price}} MXM</mat-label>
             </div>
-            <button mat-raised-button class="total-button border-5px">
+            <button mat-raised-button class="total-button border-5px" (click)="proceedToPayment()">
                 <mat-icon><span class="material-symbols-outlined">attach_money</span></mat-icon>
                 Comprar ahora
             </button>

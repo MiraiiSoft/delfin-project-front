@@ -159,10 +159,10 @@ export class CartComponent implements OnInit {
         paqueteria: 'DHL'
       }
     };
-    
+
     this.paymentService.iniciarPago(orderData).subscribe(
       response => {
-        window.location.href = response.message.links[1].href;
+          console.log(response);
       },
       error => {
         console.log(error);
