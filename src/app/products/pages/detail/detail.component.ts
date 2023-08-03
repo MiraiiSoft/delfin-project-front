@@ -20,6 +20,7 @@ export class DetailComponent implements OnInit {
   unitPrice: boolean = false
   wholeSalePrice: boolean = false
   boxPrice: boolean = false
+  executed: boolean = false
 
   product: IOneProduct = {
     id_producto: 0,
@@ -113,13 +114,13 @@ export class DetailComponent implements OnInit {
   public checkCounter() {
     if ( this.counter < this.product.inicio_mayoreo && this.counter < this.product.inicio_caja ) {
       
-      if ( this.unitPrice == true ) {
+      if ( this.unitPrice ) {
         this.current_price = this.product.precio_unitario
       } else {
-        if ( this.wholeSalePrice == true ) {
+        if ( this.wholeSalePrice ) {
           this.current_price = this.product.precio_mayoreo
         } else {
-          if ( this.boxPrice == true ) {
+          if ( this.boxPrice ) {
             this.current_price = this.product.precio_caja
           }
         }
@@ -129,13 +130,13 @@ export class DetailComponent implements OnInit {
 
       if ( this.counter >= this.product.inicio_mayoreo && this.counter < this.product.inicio_caja ) {
         
-        if ( this.wholeSalePrice == true ) {
+        if ( this.wholeSalePrice ) {
           this.current_price = this.product.precio_mayoreo
         } else {
-          if ( this.unitPrice == true ) {
+          if ( this.unitPrice ) {
             this.current_price = this.product.precio_unitario
           } else {
-            if ( this.boxPrice == true ) {
+            if ( this.boxPrice ) {
               this.current_price = this.product.precio_caja
             }
           }
@@ -143,15 +144,15 @@ export class DetailComponent implements OnInit {
 
       } else {
 
-        if ( this.counter > this.product.inicio_mayoreo && this.counter >= this.product.inicio_caja && this.boxPrice == true  ) {
+        if ( this.counter > this.product.inicio_mayoreo && this.counter >= this.product.inicio_caja ) {
           
-          if ( this.boxPrice == true ) {
+          if ( this.boxPrice ) {
             this.current_price = this.product.precio_caja
           } else {
-            if ( this.unitPrice == true ) {
+            if ( this.unitPrice ) {
               this.current_price = this.product.precio_unitario
             } else {
-              if ( this.wholeSalePrice == true ) {
+              if ( this.wholeSalePrice ) {
                 this.current_price = this.product.precio_mayoreo
               }
             }
@@ -180,8 +181,11 @@ export class DetailComponent implements OnInit {
     }
     
     this.cartService.addProductToCart(data).subscribe( () => {
-      this.transferDataLocalService.quantity += 1
-      this.transferDataLocalService.emitQuantityToCart()
+      if( !this.executed ) {
+        this.transferDataLocalService.quantity += 1
+        this.transferDataLocalService.emitQuantityToCart()
+        this.executed = true
+      }
     })
   }
 }
