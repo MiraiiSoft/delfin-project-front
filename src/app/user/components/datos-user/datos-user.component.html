@@ -5,7 +5,7 @@
     
         <div class="datos-user__field">
             <p class="title">Correo:</p>
-            <p class="value">example@exmple.com
+            <p class="value" *ngIf="user">{{user.correo}}
                 <button mat-icon-button (click)="openModalEditProfile()">
                     <mat-icon>edit</mat-icon>
                 </button>
@@ -23,7 +23,7 @@
     
         <div class="datos-user__field">
             <p class="title">Telefono:</p>
-            <p class="value">5587324325
+            <p class="value" *ngIf="user">{{ user.persona.telefono }}
                 <button mat-icon-button (click)="openModalEditProfile()">
                     <mat-icon>edit</mat-icon>
                 </button>
@@ -32,7 +32,8 @@
     
         <div class="datos-user__field">
             <p class="title">Dirección:</p>
-            <p class="value">av. las lomas num. 19
+            <p class="value" *ngIf="user">{{ user.persona.direccion.calle }}. {{ user.persona.direccion.colonia }}.
+                {{ user.persona.direccion.num }}
                 <button mat-icon-button (click)="openModalEditProfile()">
                     <mat-icon>edit</mat-icon>
                 </button>

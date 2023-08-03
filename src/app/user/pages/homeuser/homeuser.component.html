@@ -6,9 +6,9 @@
                 <img class="aside-icon" [src]="iconUsr" alt="user">
             </div>
     
-            <div class="content-text">
-                <h2 class="text-center">Erick Wladimir</h2>
-                <h4 class="text-center">Arevalo Navarro</h4>
+            <div class="content-text" *ngIf="nameUser">
+                <h2 class="text-center">{{nameUser.nombre| titlecase}}</h2>
+                <h4 class="text-center">{{nameUser.apellido | titlecase}}</h4>
     
             </div>
     

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Detail } from '../../interfaces/detail.interface';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/cart/services/cart.service';
 import { TransferDataLocalService } from 'src/app/services/transfer-data-local.service';
+import { ProductosService } from 'src/app/services/productos.service';
+import { IOneProduct } from 'src/app/interfaces/producto.interface';
 
 @Component({
   selector: 'app-detail',
@@ -12,109 +13,83 @@ import { TransferDataLocalService } from 'src/app/services/transfer-data-local.s
 
 export class DetailComponent implements OnInit {
   id_product: string = ''
-  public indexSelected = 0;
-  public imgSelected: string = "";
+  public indexSelected = 0
+  public imgSelected: string = ""
   public counter = 1;
-  public current_price: string;
+  public current_price: any;
+  unitPrice: boolean = false
+  wholeSalePrice: boolean = false
+  boxPrice: boolean = false
+  executed: boolean = false
 
-  product: Detail = {
-    id_producto: 1,
-    codigo_barras: "1234567890",
-    nombre: "Kit Plumas Lapiceros Bic Dura+ Punto Mediano 1 Mm 36 Piezas ",
-    marca: "Bic",
-    descripcion: "Pluma Bolígarfo BIC Cláscio Dura + de Trazo Mediano Punto de Aguja 1 mm con tinta de baja viscosidad que brinda un flujo de tinta instantáneo, haciendo que la escritura sea suave, continua, con colores nítidos y brillantes.",
+  product: IOneProduct = {
+    id_producto: 0,
+    codigo_barras: "",
+    nombre: "",
+    marca: "",
+    descripcion: "",
     imagen: {
-      url: [
-        "assets/img/products/img0.png",
-        "assets/img/products/img2.png",
-        "assets/img/products/img3.png",
-        "assets/img/products/img4.png",
-        "assets/img/products/img1.png",
-        "assets/img/products/img2.png",
-        "assets/img/products/img3.png",
-        "assets/img/products/img4.png",
-        "assets/img/products/img2.png",
-      ]
+      url: []
     },
     compra: "5",
-    precio_unitario: "42.00",
-    precio_mayoreo: "40.00",
-    precio_caja: "35.99",
-    inicio_mayoreo: 3,
-    inicio_caja: 5,
-    id_color: 2,
-    id_categoria: 1,
-    id_tipo: 1,
-    color: [
-      { 
-        id_color: 1,
-        color: "Blanco",
-        hexa: "##ffffff"
-      },
-      { 
-        id_color: 2,
-        color: "Rojo",
-        hexa: "#ff0000"
-      },
-      { 
-        id_color: 3,
-        color: "Negro",
-        hexa: "#000000"
-      },
-      { 
-        id_color: 4,
-        color: "Negro",
-        hexa: "#000000"
-      },
-      { 
-        id_color: 5,
-        color: "Negro",
-        hexa: "#000000"
-      },
-      { 
-        id_color: 6,
-        color: "Negro",
-        hexa: "#000000"
-      },
-      { 
-        id_color: 7,
-        color: "Negro",
-        hexa: "#000000"
-      },
-      { 
-        id_color: 8,
-        color: "Negro",
-        hexa: "#000000"
-      }
-    ],
+    precio_unitario: "00",
+    precio_mayoreo: "00",
+    precio_caja: "00",
+    inicio_mayoreo: 0,
+    inicio_caja: 0,
+    id_color: 0,
+    id_categoria: 0,
+    id_tipo: 0,
+    color: [],
     tipo: {
-      id_tipo: 1,
-      tipo: "Paquete"
+      id_tipo: 0,
+      tipo: ""
     },
     categoria: {
-      id_categoria: 1,
-      categoria: "Lapiceros"
+      id_categoria: 0,
+      categoria: ""
     },
     inventario: [
       {
-        id_inventario: 1,
-        id_producto: 1,
-        existencias: 10,
-        unidadesPaquete: 4,
-        numPaquete: 20
+        id_inventario: 0,
+        id_producto: 0,
+        existencias: 0,
+        unidadesPaquete: 0,
+        numPaquete: 0
       }
     ]
   }
   
-  constructor(public cartService:CartService, public transferDataLocalService: TransferDataLocalService, private activateRoute: ActivatedRoute) {
-    this.current_price = this.product.precio_unitario; 
+  constructor(private productService: ProductosService, public cartService:CartService, public transferDataLocalService: TransferDataLocalService, private activateRoute: ActivatedRoute) {
     this.id_product = this.activateRoute.snapshot.queryParamMap.get('product') || '0'
+
+    this.productService.getOneProduct( parseInt(this.id_product) ).subscribe( res => {
+      this.product = res.data
+      
+      if(this.product.imagen.url.length >= 0){
+        this.selectImg(0);
+      }
+
+      if( this.product.precio_caja != null ) {
+        this.current_price = this.product.precio_caja
+        this.boxPrice = true
+      }
+
+      if( this.product.precio_mayoreo != null ) {
+        this.current_price = this.product.precio_mayoreo
+        this.wholeSalePrice = true
+      } 
+
+      if( this.product.precio_unitario != null ) {
+        this.current_price = this.product.precio_unitario
+        this.unitPrice = true
+      }
+
+    })
+
    }
 
   ngOnInit(): void {
-    if(this.product.imagen.url.length >= 0){
-      this.selectImg(0);
-    }
   }
 
   public selectImg(index: any) {
@@ -137,13 +112,68 @@ export class DetailComponent implements OnInit {
   }
 
   public checkCounter() {
-    if(this.counter >= this.product.inicio_mayoreo) {
-      this.current_price = this.product.precio_mayoreo
-      if(this.counter >= this.product.inicio_caja) 
-        this.current_price = this.product.precio_caja
-    } 
-    else
-      this.current_price = this.product.precio_unitario
+
+    if ( this.counter < this.product.inicio_mayoreo && this.counter < this.product.inicio_caja ) {
+      
+      if ( this.unitPrice ) {
+        this.current_price = this.product.precio_unitario
+
+      } else {
+        if ( this.wholeSalePrice ) {
+          this.current_price = this.product.precio_mayoreo
+
+        } else {
+          if ( this.boxPrice ) {
+            this.current_price = this.product.precio_caja
+
+          }
+        }
+      }
+
+    } else {
+
+      if ( this.counter >= this.product.inicio_mayoreo && this.counter < this.product.inicio_caja ) {
+        
+        if ( this.wholeSalePrice ) {
+          this.current_price = this.product.precio_mayoreo
+
+        } else {
+          if ( this.unitPrice ) {
+            this.current_price = this.product.precio_unitario
+
+          } else {
+            if ( this.boxPrice ) {
+              this.current_price = this.product.precio_caja
+
+            }
+          }
+        }
+
+      } else {
+
+        if ( this.counter > this.product.inicio_mayoreo && this.counter >= this.product.inicio_caja ) {
+          
+          if ( this.boxPrice ) {
+            this.current_price = this.product.precio_caja
+
+          } else {
+            if ( this.unitPrice ) {
+              this.current_price = this.product.precio_unitario
+
+            } else {
+              if ( this.wholeSalePrice ) {
+                this.current_price = this.product.precio_mayoreo
+
+              }
+            }
+          }
+
+        }
+
+      }
+
+    }
+
   }
 
   public actionsBtn(increment: boolean) {
@@ -163,9 +193,13 @@ export class DetailComponent implements OnInit {
       cantidad_producto: this.counter
     }
     
-    this.cartService.addProductToCart(data).subscribe( () => {
-      this.transferDataLocalService.quantity += 1
-      this.transferDataLocalService.emitQuantityToCart()
+    this.cartService.addProductToCart(data).subscribe( res => {
+        const res_known:any = res
+
+        if ( res_known.data != null ) {
+          this.transferDataLocalService.quantity += 1
+          this.transferDataLocalService.emitQuantityToCart()
+        }
     })
   }
 }

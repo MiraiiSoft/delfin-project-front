@@ -56,7 +56,7 @@
 
 
         </div>
-        <button mat-raised-button type="button" (click)="register()">
+        <button mat-raised-button type="button" (click)="register()" [disabled]="registerForm.invalid">
           Registrarse
         </button>
 

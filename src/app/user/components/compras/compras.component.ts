@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-compras',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComprasComponent implements OnInit {
 
-  constructor() { }
+  constructor( private dialog: MatDialog ) { }
 
   ngOnInit(): void {
   }
@@ -242,5 +244,15 @@ export class ComprasComponent implements OnInit {
       monto_total: "16"
     }
   ];
+
+  openSpinner(){
+    this.dialog.open( SpinnerComponent, {
+      disableClose: true
+    } );
+  }
+
+  closeSpinner(){
+    this.dialog.closeAll();
+  }
 
 }

@@ -14,49 +14,55 @@
 <mat-dialog-content>
 
     <div class="container-form">
-        <form class="form">
+        <form class="form" [formGroup]="formUser">
     
             <div class="form__content">
                 <mat-form-field appearance="outline" class="form__content-input">
                     <mat-label>Nombre:</mat-label>
-                    <input type="text" matInput placeholder="Ejem. Erick">
+                    <input type="text" matInput placeholder="Ejem. Erick" formControlName="nombre">
                 </mat-form-field>
         
                 <mat-form-field appearance="outline" class="form__content-input">
                     <mat-label>Apellido:</mat-label>
-                    <input type="text" matInput placeholder="Ejem. Arevalo">
+                    <input type="text" matInput placeholder="Ejem. Arevalo" formControlName="apellido">
                 </mat-form-field>
         
                 <mat-form-field appearance="outline" class="form__content-input">
                     <mat-label>Correo:</mat-label>
-                    <input type="text" matInput placeholder="Ejem. example@example.com">
+                    <input type="text" matInput placeholder="Ejem. example@example.com" formControlName="correo">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form__content-input">
+                    <mat-label>Usuario:</mat-label>
+                    <input type="text" matInput placeholder="Ejem. erick12" formControlName="usuario">
                 </mat-form-field>
         
                 <div class="form__telefono">
-                    <mat-form-field appearance="outline" class="form__content-input">
+                    <!-- <mat-form-field appearance="outline" class="form__content-input">
                         <mat-label>Prefijo pais</mat-label>
-                        <mat-select>
+                        <mat-select formControlName="prefijo">
                             <mat-option *ngFor="let prefijo of prefijos" [value]="prefijo">
                                 {{prefijo}}
                             </mat-option>
                         </mat-select>
-                    </mat-form-field>
+                    </mat-form-field> -->
             
                     <mat-form-field appearance="outline" class="form__content-input">
                         <mat-label>Teléfono:</mat-label>
-                        <input type="tel" matInput>
+                        <input type="tel" matInput formControlName="telefono">
                     </mat-form-field>
                 </div>
         
         
                 <mat-form-field appearance="outline" class="form__content-input">
                     <mat-label>Contraseña:</mat-label>
-                    <input type="password" matInput placeholder="***********">
+                    <input type="password" matInput placeholder="***********" formControlName="password">
                 </mat-form-field>
         
                 <mat-form-field appearance="outline" class="form__content-input">
                     <mat-label>Confirmas contraseña:</mat-label>
-                    <input type="password" matInput placeholder="***********">
+                    <input type="password" matInput placeholder="***********" formControlName="confirmContra">
+                    <mat-error *ngIf="validConfirmPass()">La contraseña no coincide </mat-error>
                 </mat-form-field>
         
                 <div class="form__direccion">
@@ -69,7 +75,7 @@
     
             </div>
     
-            <button mat-raised-button type="button">
+            <button mat-raised-button type="button" (click)="save()" [disabled]="formUser.invalid">
                 Guardar
             </button>
     

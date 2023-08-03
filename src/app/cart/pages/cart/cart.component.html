@@ -3,6 +3,7 @@
         <mat-card class="cont-products-principal">
             <mat-card-title>PRODUCTOS</mat-card-title>
             <mat-card-content class="cont-products">
+                <mat-label class="there_no" *ngIf="cart.carrito_producto.length == 0">No hay productos</mat-label>
                 <div class="cont-single-product" *ngFor="let carrito_producto of cart.carrito_producto; let i = index;">
                     <div class="cont-mix-img-details">
                         <div class="cont-img" (click)="appendQueryParams(carrito_producto.id_producto)">

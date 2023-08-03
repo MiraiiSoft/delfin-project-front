@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { CartService } from 'src/app/cart/services/cart.service';
+import { Icategorias } from 'src/app/interfaces/categoria.interface';
+import { CategoriasService } from 'src/app/services/categorias.service';
 import { TransferDataLocalService } from 'src/app/services/transfer-data-local.service';
 
 @Component({
@@ -11,7 +13,8 @@ import { TransferDataLocalService } from 'src/app/services/transfer-data-local.s
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private router: Router, private authService: AuthService, public cartService:CartService, private transferDataLocal: TransferDataLocalService ) { }
+  constructor( private router: Router, private authService: AuthService, public cartService:CartService, 
+    private transferDataLocal: TransferDataLocalService, private categoriaService: CategoriasService ) { }
 
   iconUsr = "assets/img/user/iconoUsuario.png";
   imgLogo = "assets/img/auth/LogoPapeleria.png";
@@ -24,40 +27,7 @@ export class HeaderComponent implements OnInit {
   nameUser: string = '';
   carrito: string = '';
 
-  categorias = [
-    {
-      id_categoria: 1,
-      categoria: "Papelería"
-    },
-    {
-      id_categoria: 2,
-      categoria: "Electrónica"
-    },
-    {
-      id_categoria: 3,
-      categoria: "Hogar"
-    },
-    {
-      id_categoria: 4,
-      categoria: "Boligrafo"
-    },
-    {
-      id_categoria: 5,
-      categoria: "Goma"
-    },
-    {
-      id_categoria: 6,
-      categoria: "lapiz adhesivo"
-    },
-    {
-      id_categoria: 7,
-      categoria: "Lápiz"
-    },
-    {
-      id_categoria: 8,
-      categoria: "Libreta"
-    }
-  ];
+  categorias!: Icategorias[];
 
   ngOnInit(): void {
     this.nameUser = localStorage.getItem('user') || '';
@@ -72,22 +42,43 @@ export class HeaderComponent implements OnInit {
 
     }else{
       this.inLogin = true;
+
+      this.cartService.getCartById(this.carrito).subscribe( res => {
+        res.data.carrito_producto.forEach( () => {
+          this.transferDataLocal.quantity += 1
+        });
+        this.transferDataLocal.emitQuantityToCart()
+      })
+      
+      this.transferDataLocal.quantityCart.subscribe( quantity => {
+        this.quantity_products = quantity;
+      });
     }
 
-    this.cartService.getCartById(this.carrito).subscribe( res => {
-      res.data.carrito_producto.forEach( () => {
-        this.transferDataLocal.quantity += 1
-      });
-      this.transferDataLocal.emitQuantityToCart()
+    this.categoriaService.getCategorias().subscribe( res => {
+      if( res.data ){
+        this.categorias = res.data;
+      }
     })
-    
-    this.transferDataLocal.quantityCart.subscribe( quantity => {
-      this.quantity_products = quantity;
-    });
+
   }
 
-  redirectRoute( route: string ){
-    this.router.navigate([route]);
+  redirectRoute( route: string, options?: options ){
+    
+    if( !options ){
+      this.router.navigate([route]);
+    }
+
+    if( options ){
+      if( options.nameQueryParam == 'category' ){
+        this.router.navigate([route], {
+          queryParams: {
+            filter: options.nameQueryParam,
+            value: options.valueParam
+          }
+        })
+      }
+    }
   }
 
   activateNav(){
@@ -103,11 +94,17 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.nameUser = '';
     this.inLogin = false;
-
+    
     if( this.router.routerState.snapshot.url.includes('user') ){
       this.router.navigate(['/site/home']);
     }
 
   }
 
+}
+
+interface options {
+  requiredParams: boolean;
+  nameQueryParam: string;
+  valueParam: string;
 }

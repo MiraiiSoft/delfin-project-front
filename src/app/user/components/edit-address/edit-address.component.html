@@ -8,13 +8,13 @@
 <mat-dialog-content>
     <div class="content">
         <section class="section-form">
-            <form class="form">
+            <form class="form" [formGroup]="formAddres">
                 <div class="form__content">
 
                     <mat-form-field appearance="outline">
                         <mat-label>País:</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let pais of paises" [value]="pais.id_pais">
+                        <mat-select formControlName="pais">
+                            <mat-option *ngFor="let pais of paises" [value]="pais.id_pais" (click)="getCiudades(pais.id_pais)">
                                 {{pais.pais | titlecase}}
                             </mat-option>
                         </mat-select>
@@ -22,8 +22,8 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Ciudad:</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id_ciudad">
+                        <mat-select formControlName="id_ciudad">
+                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id_ciudad" (click)="getMunicipios(ciudad.id_ciudad)" >
                                 {{ciudad.ciudad | titlecase}}
                             </mat-option>
                         </mat-select>
@@ -31,43 +31,47 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Código Postal:</mat-label>
-                        <input type="text" matInput placeholder="Ejem. 73173">
+                        <input type="text" matInput placeholder="Ejem. 73173" formControlName="codigo_postal">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Municipio:</mat-label>
-                        <input type="text" matInput placeholder="Ejem. Huauchinango">
+                        <mat-select formControlName="municipio">
+                            <mat-option *ngFor="let municipio of municipios" [value]="municipio.municipio">
+                                {{municipio.municipio | titlecase}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Calle:</mat-label>
-                        <input type="text" matInput placeholder="Ejem. #15">
+                        <input type="text" matInput placeholder="Ejem. #15" formControlName="calle">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>Colonia:</mat-label>
-                        <input type="text" matInput placeholder="Ejem. 14 de octubre">
+                        <input type="text" matInput placeholder="Ejem. 14 de octubre" formControlName="colonia">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
                         <mat-label>N° Exterior:</mat-label>
-                        <input type="text" matInput placeholder="Ejem. ">
+                        <input type="text" matInput placeholder="Ejem. " formControlName="num">
                     </mat-form-field>
 
                     <div class="form__content-telefono">
 
-                        <mat-form-field appearance="outline">
+                        <!-- <mat-form-field appearance="outline">
                             <mat-label>Prefijo pais</mat-label>
                             <mat-select>
                                 <mat-option *ngFor="let prefijo of prefijos" [value]="prefijo">
                                     {{prefijo}}
                                 </mat-option>
                             </mat-select>
-                        </mat-form-field>
+                        </mat-form-field> -->
 
                         <mat-form-field appearance="outline">
                             <mat-label>Teléfono Celular</mat-label>
-                            <input type="text" matInput placeholder="Ejem. 55 5544 6677">
+                            <input type="text" matInput placeholder="Ejem. 55 5544 6677" formControlName="telefono">
                         </mat-form-field>
 
                     </div>
@@ -75,12 +79,13 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Referencias de casa:</mat-label>
-                        <textarea matInput placeholder="Descripción de tu casa, entre que puntos de referencia se encuentra, etc."></textarea>
+                        <textarea matInput placeholder="Descripción de tu casa, entre que puntos de referencia se encuentra, etc." formControlName="referencia"></textarea>
                     </mat-form-field>
 
                 </div>
 
-                <button mat-raised-button type="button" class="form__btn">Guardar</button>
+                <button mat-raised-button type="button" class="form__btn" 
+                    [disabled]="formAddres.invalid" (click)="save()" >Guardar</button>
 
             </form>
         </section>
