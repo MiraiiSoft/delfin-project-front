@@ -12,9 +12,10 @@ import { TransferDataLocalService } from 'src/app/services/transfer-data-local.s
 
 export class CartComponent implements OnInit {
   id: string = ""
-  public current_price: number[] = [];
-  public total_price = 0;
-  public total_allProducts = 0;
+  public current_price: number[] = []
+  public total_price = 0
+  public total_allProducts = 0
+  public total_everyProducts = 0
   cart: ICartOne = {
     id_carrito: 0,
     id_login: 0,
@@ -25,8 +26,8 @@ export class CartComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(link => {
       this.id = String( link.get('cartId') )
     })
-
     this.reloadCart()
+    this.total_everyProducts = transferDataLocalService.quantity
   }
 
   ngOnInit(): void {
@@ -100,8 +101,7 @@ export class CartComponent implements OnInit {
         if ( success == true ) {
           this.cart = data
   
-          this.reloadCart()
-          this.transferDataLocalService.quantity -= 1
+          this.total_everyProducts = this.transferDataLocalService.quantity-=1
           this.transferDataLocalService.emitQuantityToCart()
         }
 

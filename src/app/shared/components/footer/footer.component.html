@@ -3,14 +3,15 @@
         <div class="cont-explorer">
             <mat-label class="text-title-explorer">Explorar</mat-label>
             <div class="explorer">
-                <a class="text-cont-explorer">Home</a>
+                <a class="text-cont-explorer" href="/site/home">Home</a>
             </div>
         </div>
         <div class="cont-explorer">
             <mat-label class="text-title-explorer">Cuenta</mat-label>
             <div class="explorer">
-                <a class="text-cont-explorer">Mi cuenta</a>
-                <a class="text-cont-explorer">Crear cuenta</a>
+                <a *ngIf="there_sesion()" class="text-cont-explorer" href="site/user/datos">Mi cuenta</a>
+                <a *ngIf="!there_sesion()" class="text-cont-explorer" href="auth/login">Iniciar sesión</a>
+                <a *ngIf="!there_sesion()" class="text-cont-explorer" href="auth/registro">Crear nueva cuenta</a>
             </div>
         </div>
         <div class="cont-explorer">
