@@ -59,7 +59,8 @@ export class SliderComponent implements OnInit {
         if( this.nameQueryParam == "category" ){
           this.router.navigate([`/${this.routerName}`], { 
             queryParams: {
-              category: param
+              filter: this.nameQueryParam,
+              value: param
             }
           });
 

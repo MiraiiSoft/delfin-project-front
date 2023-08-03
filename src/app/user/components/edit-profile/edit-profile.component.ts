@@ -96,7 +96,8 @@ export class EditProfileComponent implements OnInit {
   openEditAddress(){
     this.dialog.open( EditAddressComponent, {
       data: {
-        nombrePersona: this.data.persona.nombre
+        nombrePersona: this.data.persona.nombre,
+        direccion: this.data.persona.direccion
       }
     } );
   }

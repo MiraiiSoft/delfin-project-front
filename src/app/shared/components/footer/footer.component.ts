@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor( public router:Router ) { }
   
   ngOnInit(): void {
   }
@@ -21,5 +21,8 @@ export class FooterComponent implements OnInit {
       return false
   }
 
+  public goRoute( ruta: string ) {
+    this.router.navigate( [ruta] )
+  }
 
 }
