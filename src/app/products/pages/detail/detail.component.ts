@@ -66,6 +66,10 @@ export class DetailComponent implements OnInit {
     this.productService.getOneProduct( parseInt(this.id_product) ).subscribe( res => {
       this.product = res.data
       
+      if(this.product.imagen.url.length >= 0){
+        this.selectImg(0);
+      }
+
       if( this.product.precio_caja != null ) {
         this.current_price = this.product.precio_caja
         this.boxPrice = true
@@ -79,10 +83,6 @@ export class DetailComponent implements OnInit {
       if( this.product.precio_unitario != null ) {
         this.current_price = this.product.precio_unitario
         this.unitPrice = true
-      }
-
-      if(this.product.imagen.url.length >= 0){
-        this.selectImg(0);
       }
 
     })
@@ -112,16 +112,20 @@ export class DetailComponent implements OnInit {
   }
 
   public checkCounter() {
+
     if ( this.counter < this.product.inicio_mayoreo && this.counter < this.product.inicio_caja ) {
       
       if ( this.unitPrice ) {
         this.current_price = this.product.precio_unitario
+
       } else {
         if ( this.wholeSalePrice ) {
           this.current_price = this.product.precio_mayoreo
+
         } else {
           if ( this.boxPrice ) {
             this.current_price = this.product.precio_caja
+
           }
         }
       }
@@ -132,12 +136,15 @@ export class DetailComponent implements OnInit {
         
         if ( this.wholeSalePrice ) {
           this.current_price = this.product.precio_mayoreo
+
         } else {
           if ( this.unitPrice ) {
             this.current_price = this.product.precio_unitario
+
           } else {
             if ( this.boxPrice ) {
               this.current_price = this.product.precio_caja
+
             }
           }
         }
@@ -148,19 +155,25 @@ export class DetailComponent implements OnInit {
           
           if ( this.boxPrice ) {
             this.current_price = this.product.precio_caja
+
           } else {
             if ( this.unitPrice ) {
               this.current_price = this.product.precio_unitario
+
             } else {
               if ( this.wholeSalePrice ) {
                 this.current_price = this.product.precio_mayoreo
+
               }
             }
           }
 
+        }
+
       }
-      }
+
     }
+
   }
 
   public actionsBtn(increment: boolean) {

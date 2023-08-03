@@ -16,6 +16,8 @@ export class CartComponent implements OnInit {
   public total_price = 0
   public total_allProducts = 0
   public total_everyProducts = 0
+  ArrayExist: any = []
+
   cart: ICartOne = {
     id_carrito: 0,
     id_login: 0,
@@ -29,10 +31,12 @@ export class CartComponent implements OnInit {
 
     this.cartService.getCartById(this.id).subscribe( data => {
       this.cart = data.data
+
       this.reloadCart()
+      this.total_everyProducts = transferDataLocalService.quantity
     })
 
-    this.total_everyProducts = transferDataLocalService.quantity
+    
   }
 
   ngOnInit(): void {
@@ -57,16 +61,6 @@ export class CartComponent implements OnInit {
       this.cart.carrito_producto[index].cantidad_producto = 1;
     else
       this.cart.carrito_producto[index].cantidad_producto -= 1;
-  }
-
-  public checkCounter(index: any, product: any) {
-    if(this.cart.carrito_producto[index].cantidad_producto >= product.inicio_mayoreo) {
-      this.current_price[index] = product.precio_mayoreo
-      if(this.cart.carrito_producto[index].cantidad_producto >= product.inicio_caja) 
-        this.current_price[index] = product.precio_caja
-    } 
-    else
-      this.current_price[index] = product.precio_unitario
   }
 
   public refreshTotalPrice() {
@@ -96,9 +90,75 @@ export class CartComponent implements OnInit {
     this.refreshTotalProducts()
   }
 
+  public checkCounter(i: any, product: any) {
+    const counter = this.cart.carrito_producto[i].cantidad_producto
+
+    if ( counter < product.inicio_mayoreo && counter < product.inicio_caja ) {
+      
+      if ( this.ArrayExist[i].unitPrice ) {
+        this.current_price[i] = product.precio_unitario
+
+      } else {
+        if ( this.ArrayExist[i].wholeSalePrice ) {
+          this.current_price[i] = product.precio_mayoreo
+
+        } else {
+          if ( this.ArrayExist[i].boxPrice ) {
+            this.current_price[i] = product.precio_caja
+
+          }
+        }
+      }
+
+    } else {
+
+      if ( counter >= product.inicio_mayoreo && counter < product.inicio_caja ) {
+        
+        if ( this.ArrayExist[i].wholeSalePrice ) {
+          this.current_price[i] = product.precio_mayoreo
+
+        } else {
+          if ( this.ArrayExist[i].unitPrice ) {
+            this.current_price[i] = product.precio_unitario
+
+          } else {
+            if ( this.ArrayExist[i].boxPrice ) {
+              this.current_price[i] = product.precio_caja
+
+            }
+          }
+        }
+
+      } else {
+
+        if ( counter > product.inicio_mayoreo && counter >= product.inicio_caja ) {
+          
+          if ( this.ArrayExist[i].boxPrice ) {
+            this.current_price[i] = product.precio_caja
+
+          } else {
+            if ( this.ArrayExist[i].unitPrice ) {
+              this.current_price[i] = product.precio_unitario
+
+            } else {
+              if ( this.ArrayExist[i].wholeSalePrice ) {
+                this.current_price[i] = product.precio_mayoreo
+                
+              }
+            }
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
   public deleteProduct(id: any) {
     const idToRemove = this.cart.carrito_producto[id].id_carrito_producto
-    this.cartService.deleteProductOfCart( String( idToRemove ) ).subscribe( d => {
+    this.cartService.deleteProductOfCart( String( idToRemove ) ).subscribe( () => {
 
       this.cartService.getCartById(this.id).subscribe( res => {
        
@@ -110,6 +170,7 @@ export class CartComponent implements OnInit {
         this.total_allProducts = 0
         this.total_price = 0
         this.current_price = []
+        this.ArrayExist = []
         this.reloadCart()
 
       })
@@ -118,6 +179,32 @@ export class CartComponent implements OnInit {
   }
 
   reloadCart() {
+
+    for (let index = 0; index < this.cart.carrito_producto.length; index++) {
+      const product = this.cart.carrito_producto[index].producto
+      let newObjExist: any = {}
+      newObjExist.unitPrice = false
+      newObjExist.wholeSalePrice = false
+      newObjExist.boxPrice = false
+
+      if( product.precio_caja != null ) {
+        this.current_price[index] = parseInt( product.precio_caja )
+        newObjExist.boxPrice = true
+      }
+
+      if( product.precio_mayoreo != null ) {
+        this.current_price[index] = parseInt( product.precio_mayoreo )
+        newObjExist.wholeSalePrice = true
+      } 
+
+      if( product.precio_unitario != null ) {
+        this.current_price[index] = parseInt( product.precio_unitario )
+        newObjExist.unitPrice = true
+      }
+
+      this.ArrayExist.push(newObjExist)
+    }
+
     this.cart.carrito_producto.forEach( (carrito_producto, i) => {
       this.total_allProducts += carrito_producto.cantidad_producto
       this.current_price.push(0)
