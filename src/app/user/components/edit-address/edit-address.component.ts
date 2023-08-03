@@ -52,7 +52,7 @@ export class EditAddressComponent implements OnInit {
   ]
 
   formAddres: FormGroup = this.fb.group({
-    pais: [ this.data.direccion.ciudad.id_pais ,[ Validators.required ] ],
+    pais: [ this.data.direccion.ciudad!.id_pais ,[ Validators.required ] ],
     id_ciudad: [ this.data.direccion.id_ciudad ,[ Validators.required ] ],
     codigo_postal: [ this.data.direccion.codigo_postal ,[ Validators.required, Validators.minLength(5), Validators.maxLength(5) ] ],
     municipio: [ this.data.direccion.municipio ,[ Validators.required ] ],

@@ -41,7 +41,7 @@ interface Persona {
 }
 
 export interface Direccion {
-    id_direccion:  number;
+    id_direccion?:  number;
     codigo_postal: string;
     municipio:     string;
     calle:         string;
@@ -50,7 +50,7 @@ export interface Direccion {
     telefono:      string;
     referencia:    string;
     id_ciudad:     number;
-    ciudad:        Ciudad;
+    ciudad?:        Ciudad;
 }
 
 interface Ciudad {
