@@ -40,15 +40,23 @@ interface Persona {
     direccion:    Direccion;
 }
 
-interface Direccion {
-    id_direccion:  number;
+export interface Direccion {
+    id_direccion?:  number;
     codigo_postal: string;
+    municipio:     string;
     calle:         string;
     colonia:       string;
     num:           string;
     telefono:      string;
     referencia:    string;
     id_ciudad:     number;
+    ciudad?:        Ciudad;
+}
+
+interface Ciudad {
+    id_ciudad: number;
+    ciudad:    string;
+    id_pais:   number;
 }
 
 interface Roll {
