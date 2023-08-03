@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentComponent implements OnInit {
 
+  logoMercadoPago = "assets/img/logos/mercado-pago.png";
+  logoPaypal = "assets/img/logos/paypal.png";
+
   constructor() { }
 
   ngOnInit(): void {
