@@ -23,7 +23,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Ciudad:</mat-label>
                         <mat-select>
-                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id_ciudad">
+                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.ciudad">
                                 {{ciudad.ciudad | titlecase}}
                             </mat-option>
                         </mat-select>
@@ -36,7 +36,11 @@
 
                     <mat-form-field appearance="outline">
                         <mat-label>Municipio:</mat-label>
-                        <input type="text" matInput placeholder="Ejem. Huauchinango">
+                        <mat-select>
+                            <mat-option *ngFor="let municipio of municipios" [value]="municipio.id_municipio">
+                                {{municipio.municipio | titlecase}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
 
                     <mat-form-field appearance="outline">
@@ -56,14 +60,14 @@
 
                     <div class="form__content-telefono">
 
-                        <mat-form-field appearance="outline">
+                        <!-- <mat-form-field appearance="outline">
                             <mat-label>Prefijo pais</mat-label>
                             <mat-select>
                                 <mat-option *ngFor="let prefijo of prefijos" [value]="prefijo">
                                     {{prefijo}}
                                 </mat-option>
                             </mat-select>
-                        </mat-form-field>
+                        </mat-form-field> -->
 
                         <mat-form-field appearance="outline">
                             <mat-label>Teléfono Celular</mat-label>
