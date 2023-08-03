@@ -23,7 +23,7 @@
                     <mat-form-field appearance="outline">
                         <mat-label>Ciudad:</mat-label>
                         <mat-select formControlName="id_ciudad">
-                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id_ciudad">
+                            <mat-option *ngFor="let ciudad of ciudades" [value]="ciudad.id_ciudad" (click)="getMunicipios(ciudad.id_ciudad)" >
                                 {{ciudad.ciudad | titlecase}}
                             </mat-option>
                         </mat-select>

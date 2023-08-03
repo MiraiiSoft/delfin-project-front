@@ -49,11 +49,8 @@ export class EditAddressComponent implements OnInit {
 
     this.getCiudades( this.formAddres.get('pais')?.value );
 
-    this.municipioService.getAllMunicipio().subscribe( res => {
-      if( res.data ){
-        this.municipios = res.data;
-      }
-    });
+    this.getMunicipios( this.formAddres.get('id_ciudad')?.value );
+    
   }
 
   save(){
@@ -86,10 +83,18 @@ export class EditAddressComponent implements OnInit {
     });
   }
 
-  getCiudades( id: number ){
-    this.ciudadService.getAllCiudadesByPais( id ).subscribe( res => {
+  getCiudades( idpais: number ){
+    this.ciudadService.getAllCiudadesByPais( idpais ).subscribe( res => {
       if( res.data ){
         this.ciudades = res.data;
+      }
+    });
+  }
+
+  getMunicipios( idCiudad: number ){
+    this.municipioService.getAllMunicipioByCiudad( idCiudad ).subscribe( res => {
+      if( res.data ){
+        this.municipios = res.data;
       }
     });
   }
