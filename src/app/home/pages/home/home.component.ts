@@ -27,6 +27,15 @@ export class HomeComponent implements OnInit {
 
   newProducts: IcardData[] = []
 
+  private shuffleArray<P>(array: P[]): P[] {
+    const newArray = [...array];
+    for(let i = newArray.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray
+  }
+
   constructor(private productosServices: ProductosService, private categoriasService: CategoriasService) { }
 
 
@@ -42,17 +51,7 @@ export class HomeComponent implements OnInit {
       this.categorias = categoriasData;
     })
 
-   function shuffleArray<P>(array: P[]): P[] {
-      const newArray = [...array];
-      for(let i = newArray.length - 1; i > 0; i--){
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-      }
-      return newArray
-    }
-
     this.productosServices.getProductos().subscribe(data => {
-      console.log(data);
 
       const allProductos: IsliderData[] = data.data.map(item => ({
         img: item.imagen.url[0],
@@ -62,7 +61,7 @@ export class HomeComponent implements OnInit {
 
       }));
 
-      const shuffledProductos = shuffleArray(allProductos);
+      const shuffledProductos = this.shuffleArray(allProductos);
       this.products = shuffledProductos.slice(0, 10);
 
       const productsData: IcardData[] = data.data.map(item =>{
@@ -78,9 +77,6 @@ export class HomeComponent implements OnInit {
       this.newProducts = last9Products;
 
     });
-
-
-
-
   }
+
 }
