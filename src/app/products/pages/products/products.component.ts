@@ -73,26 +73,29 @@ export class ProductsComponent implements OnInit {
       this.colors = colorData;
     })
 
-    const colorId = 1
-    this.productosServices.getProductosPorColor(colorId).subscribe(data =>{
-      console.log(data);
-    })
-
-
+    
   }
 
-  updateCategoryQueryParam(categoryId: number) {
-    const queryParams = { filter: 'category', value: categoryId };
+  filterUrlId(filter: string, value: number) {
+    const queryParams = { filter: filter, value: value };
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: queryParams,
       queryParamsHandling: 'merge'
     });
-    this.loadProducts(categoryId);
+
+    if (filter === 'category'){
+      this.loadProducts(value);
+    }else if (filter === 'color'){
+      this.loadProducts(value);
+    }else if (filter === 'brand'){
+
+    }
   }
 
-  loadProducts(categoryId: number) {
-    this.productosServices.getProductosPorCategoria(categoryId).subscribe(data => {
+  loadProducts(filterValue: number) {
+    if (this.filter === 'category') {
+      this.productosServices.getProductosPorCategoria(filterValue).subscribe(data => {
 
       const productosData: IcardData[] = data.data.map(item => {
         return {
@@ -104,6 +107,20 @@ export class ProductsComponent implements OnInit {
       });
       this.products = productosData;
     });
+    }else if (this.filter === 'color') {
+      this.productosServices.getProductosPorColor(filterValue).subscribe(data => {
+
+      const productosData: IcardData[] = data.data.map(item => {
+        return {
+          title: item.nombre,
+          img: item.imagen.url[0],
+          id: item.id_producto,
+          price: parseFloat(item.precio_unitario),
+        };
+      });
+      this.products = productosData;
+    });
+    }
 
   }
 

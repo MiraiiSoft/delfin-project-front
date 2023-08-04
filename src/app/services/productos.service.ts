@@ -34,9 +34,9 @@ export class ProductosService {
     )
   }
 
-  getProductosPorColor (id: number) {
+  getProductosPorColor (id: number): Observable<IResProductos> {
     const url = `${this.urlBase}/producto/color/${id}`
-    return this.http.get(url).pipe(
+    return this.http.get<IResProductos>(url).pipe(
       catchError (e => of(e.error))
     )
   }
