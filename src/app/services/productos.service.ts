@@ -27,4 +27,10 @@ export class ProductosService {
     )
   }
 
+  getProductosPorCategoria (id: number): Observable<IResProductos>{
+    const url = `${this.urlBase}/producto/categoria/${id}`
+    return this.http.get<IResProductos>(url).pipe(
+      catchError (e => of(e.error))
+    )
+  }
 }
