@@ -17,8 +17,7 @@ export class DatosUserComponent implements OnInit {
   $user!: Subscription;
   user!: Login;
 
-  constructor( private dialog: MatDialog, private userService: UserService, private transferDataLocal: TransferDataLocalService
-     ) { }
+  constructor( private dialog: MatDialog, private userService: UserService, private transferDataLocal: TransferDataLocalService ) { }
 
   ngOnInit(): void {
     this.getInfoUser();
@@ -28,7 +27,7 @@ export class DatosUserComponent implements OnInit {
     this.openSpinner();
 
     this.$user = this.userService.getPerfil().subscribe( res => {
-      
+
       if( res.data ){
 
         this.user = res.data;

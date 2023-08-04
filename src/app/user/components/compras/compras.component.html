@@ -17,7 +17,9 @@
                     <h4>{{compra.venta.envio.status_envio}}</h4>
                     <p>Llegó el {{compra.venta.envio.fecha_entrega | date: 'longDate'}}</p>
                     <h3>{{producto.nombre | titlecase}}</h3>
-                    <p>{{producto.cantidad_producto}} unidad</p>
+                    <p>{{producto.cantidad_producto}} 
+                        <span *ngIf="producto.cantidad_producto==1">unidad</span> <span *ngIf="producto.cantidad_producto>1">unidades</span> 
+                    </p>
                 </div>
 
             </div>

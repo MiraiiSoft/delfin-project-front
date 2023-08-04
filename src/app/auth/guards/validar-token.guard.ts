@@ -16,7 +16,7 @@ export class ValidarTokenGuard implements CanActivate, CanActivateChild, CanLoad
         tap( valid => {
           if( !valid ){
             this.authService.logout();
-            this.router.navigateByUrl('');
+            this.router.navigateByUrl('/auth/login');
           }
         })
       );
@@ -27,7 +27,7 @@ export class ValidarTokenGuard implements CanActivate, CanActivateChild, CanLoad
         tap( valid => {
           if( !valid ){
             this.authService.logout();
-            this.router.navigateByUrl('');
+            this.router.navigateByUrl('/auth/login');
           }
         })
       );
@@ -38,7 +38,7 @@ export class ValidarTokenGuard implements CanActivate, CanActivateChild, CanLoad
         tap( valid => {
           if( !valid ){
             this.authService.logout();
-            this.router.navigateByUrl('');
+            this.router.navigateByUrl('/auth/login');
           }
         })
       );

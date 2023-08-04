@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor( private fb: FormBuilder, private router: Router, private authServie: AuthService, private dialog: MatDialog ) { }
 
   loginForm: FormGroup = this.fb.group({
-    user: [ 'prueba1', [ Validators.required ] ],
+    user: [ 'prueba', [ Validators.required ] ],
     pass: [ 'prueba123', [ Validators.required, Validators.minLength(5) ] ]
   });
 
