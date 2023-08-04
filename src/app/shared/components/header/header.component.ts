@@ -44,10 +44,12 @@ export class HeaderComponent implements OnInit {
       this.inLogin = true;
 
       this.cartService.getCartById().subscribe( res => {
-        res.data.carrito_producto.forEach( () => {
-          this.transferDataLocal.quantity += 1
-        });
-        this.transferDataLocal.emitQuantityToCart()
+        if( res.data ){
+          res.data.carrito_producto.forEach( () => {
+            this.transferDataLocal.quantity += 1
+          });
+          this.transferDataLocal.emitQuantityToCart()
+        }
       })
 
       this.transferDataLocal.quantityCart.subscribe( quantity => {

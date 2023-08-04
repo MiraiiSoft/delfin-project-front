@@ -38,9 +38,11 @@ export class CartComponent implements OnInit {
     })
 
     this.cartService.getCartById().subscribe( data => {
-      this.cart = data.data
+      if( data.data ){
+        this.cart = data.data
+        this.reloadCart()
+      }
 
-      this.reloadCart()
     })
 
   }
@@ -174,11 +176,14 @@ export class CartComponent implements OnInit {
         const { success, data } = res
 
         if ( success == true ) {
-          this.cart = data
 
-          this.reloadCart()
-          this.transferDataLocalService.quantity -= 1
-          this.transferDataLocalService.emitQuantityToCart()
+          if( data ){
+            this.cart = data
+            this.reloadCart()
+            this.transferDataLocalService.quantity -= 1
+            this.transferDataLocalService.emitQuantityToCart()
+          }
+
         }
 
       })
