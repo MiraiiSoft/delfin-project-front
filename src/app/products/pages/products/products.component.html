@@ -39,7 +39,7 @@
                         <mat-icon class="single-icon-expand">expand_more</mat-icon>
                     </mat-label>
                     <ul *ngIf= "brandPanel" class="filter-second-group">
-                        <li *ngFor= "let brand of brands; let i = index" class="single-text just-one" (click)="filterUrlId('brand', brand.id_brand)">
+                        <li *ngFor= "let brand of brands; let i = index" class="single-text just-one" (click)="filterUrlId('brand', i)">
                             {{brand}}
                         </li>
                     </ul>

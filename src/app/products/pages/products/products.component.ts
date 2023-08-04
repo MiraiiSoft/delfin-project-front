@@ -7,12 +7,14 @@ import { ProductosService } from 'src/app/services/productos.service';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { IsliderData } from 'src/app/shared/interfaces/slider.interface';
 import { ColoresService } from 'src/app/services/colores.service';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
+
   selected: string = ''
   categoryPanel: boolean = false;
   colorPanel: boolean = false;
@@ -31,11 +33,7 @@ export class ProductsComponent implements OnInit {
 
   colors: any = [];
 
-  brands: any = [
-    'Bic',
-    'Marca 2',
-    'Marca 3'
-  ]
+  brands: any = [];
 
 
   constructor(private productosServices:ProductosService, private coloresServices:ColoresService, private categoriasService: CategoriasService, private router: Router, public bottom: MatBottomSheet, private route: ActivatedRoute) { }
@@ -60,10 +58,6 @@ export class ProductsComponent implements OnInit {
       });
       this.categories = categoriaData;
     });
-
-
-
-
     this.coloresServices.getColores().subscribe(data => {
       const colorData: any[] = data.data.map(item => {
         return{
@@ -73,12 +67,21 @@ export class ProductsComponent implements OnInit {
         };
       });
       this.colors = colorData;
+    });
+
+
+    this.productosServices.getMarcas().subscribe(data => {
+      if(data.success) {
+        this.brands = data.data;
+        console.log(this.brands)
+      }
     })
 
 
   }
 
   filterUrlId(filter: string, value: number) {
+    const brandName = this.brands[value]
     const queryParams = { filter: filter, value: value };
     this.router.navigate([], {
       relativeTo: this.route,
@@ -94,7 +97,6 @@ export class ProductsComponent implements OnInit {
   loadProducts(filterValue: number) {
     if (this.filter === 'category') {
       this.productosServices.getProductosPorCategoria(filterValue).subscribe(data => {
-        console.log(data)
       const productosData: IcardData[] = data.data.map(item => {
         return {
           title: item.nombre,
@@ -107,7 +109,6 @@ export class ProductsComponent implements OnInit {
     });
     }else if (this.filter === 'color') {
       this.productosServices.getProductosPorColor(filterValue).subscribe(data => {
-        console.log(data)
       const productosData: IcardData[] = data.data.map(item => {
         return {
           title: item.nombre,
@@ -118,11 +119,26 @@ export class ProductsComponent implements OnInit {
       });
       this.products = productosData;
     });
+    }else if (this.filter === 'brand') {
+      this.loadProductsByBrand(this.value);
     }
-
   }
 
 
+  loadProductsByBrand(brandName: string) {
+    this.productosServices.getProductosPorMarca(brandName).subscribe(data => {
+      console.log(data)
+      const productosData: IcardData[] = data.data.map(item => {
+        return {
+          title: item.nombre,
+          img: item.imagen.url[0],
+          id: item.id_producto,
+          price: parseFloat(item.precio_unitario),
+        };
+      });
+      this.products = productosData;
+    });
+  }
 
 
   public appendQueryParams(id: number) {
