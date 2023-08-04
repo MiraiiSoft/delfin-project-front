@@ -47,7 +47,7 @@ interface Imagen {
 
 interface Venta {
     id_venta:     number;
-    fecha_venta:  String;
+    fecha_venta:  Date;
     status_venta: string;
     id_envio:     number;
     id_pago:      number;
@@ -58,9 +58,9 @@ interface Venta {
 interface Envio {
     id_envio:          number;
     id_login:          number;
-    fecha_envio:       String | null;
-    fecha_entrega:     String | null;
-    fecha_recoleccion: String | null;
+    fecha_envio:       Date;
+    fecha_entrega:     Date;
+    fecha_recoleccion: Date;
     paqueteria:        string;
     status_envio:      string;
 }
