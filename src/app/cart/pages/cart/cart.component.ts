@@ -251,15 +251,6 @@ export class CartComponent implements OnInit {
     };
 
     return orderData;
-
-    // this.paymentService.iniciarPago(orderData).subscribe(
-    //   response => {
-    //     window.location.href = response.message.links[1].href;
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
   }
 
   public appendQueryParams(id: number) {
