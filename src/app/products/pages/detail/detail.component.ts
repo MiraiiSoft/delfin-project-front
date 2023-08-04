@@ -16,7 +16,7 @@ export class DetailComponent implements OnInit {
   public indexSelected = 0
   public imgSelected: string = ""
   public counter = 1;
-  public current_price: any;
+  public current_price: string = ""
   unitPrice: boolean = false
   wholeSalePrice: boolean = false
   boxPrice: boolean = false
@@ -71,20 +71,20 @@ export class DetailComponent implements OnInit {
       }
 
       if( this.product.precio_caja != null ) {
-        this.current_price = this.product.precio_caja
+        this.putPrice(this.product.precio_caja)
         this.boxPrice = true
       }
 
       if( this.product.precio_mayoreo != null ) {
-        this.current_price = this.product.precio_mayoreo
+        this.putPrice(this.product.precio_mayoreo)
         this.wholeSalePrice = true
       } 
 
       if( this.product.precio_unitario != null ) {
-        this.current_price = this.product.precio_unitario
+        this.putPrice(this.product.precio_unitario)
         this.unitPrice = true
       }
-
+      
     })
 
    }
@@ -116,15 +116,15 @@ export class DetailComponent implements OnInit {
     if ( this.counter < this.product.inicio_mayoreo && this.counter < this.product.inicio_caja ) {
       
       if ( this.unitPrice ) {
-        this.current_price = this.product.precio_unitario
+        this.putPrice(this.product.precio_unitario)
 
       } else {
         if ( this.wholeSalePrice ) {
-          this.current_price = this.product.precio_mayoreo
+          this.putPrice(this.product.precio_mayoreo)
 
         } else {
           if ( this.boxPrice ) {
-            this.current_price = this.product.precio_caja
+            this.putPrice(this.product.precio_caja)
 
           }
         }
@@ -135,15 +135,15 @@ export class DetailComponent implements OnInit {
       if ( this.counter >= this.product.inicio_mayoreo && this.counter < this.product.inicio_caja ) {
         
         if ( this.wholeSalePrice ) {
-          this.current_price = this.product.precio_mayoreo
+          this.putPrice(this.product.precio_mayoreo)
 
         } else {
           if ( this.unitPrice ) {
-            this.current_price = this.product.precio_unitario
+            this.putPrice(this.product.precio_unitario)
 
           } else {
             if ( this.boxPrice ) {
-              this.current_price = this.product.precio_caja
+              this.putPrice(this.product.precio_caja)
 
             }
           }
@@ -154,15 +154,15 @@ export class DetailComponent implements OnInit {
         if ( this.counter > this.product.inicio_mayoreo && this.counter >= this.product.inicio_caja ) {
           
           if ( this.boxPrice ) {
-            this.current_price = this.product.precio_caja
+            this.putPrice(this.product.precio_caja)
 
           } else {
             if ( this.unitPrice ) {
-              this.current_price = this.product.precio_unitario
+              this.putPrice(this.product.precio_unitario)
 
             } else {
               if ( this.wholeSalePrice ) {
-                this.current_price = this.product.precio_mayoreo
+                this.putPrice(this.product.precio_mayoreo)
 
               }
             }
@@ -201,6 +201,10 @@ export class DetailComponent implements OnInit {
           this.transferDataLocalService.emitQuantityToCart()
         }
     })
+  }
+
+  putPrice(price: string) {
+    this.current_price = parseFloat(price).toFixed(2)
   }
 
   public appendQueryParams( id:number ) {
