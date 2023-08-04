@@ -1,32 +1,40 @@
 <div class="mybuys">
     <h2>Mis compras</h2>
 
-    <div *ngFor="let compra of compras" class="mybuys__buy">
-        <h3>{{compra.venta.fecha_venta | date: 'longDate'}}</h3>
+    <div *ngIf="compras.length <= 0">
+        <p>No hay compras</p>
+    </div>
 
-        <mat-divider></mat-divider>
-
-        <section *ngFor="let producto of compra.producto" class="mybuys__buy-product">
-            
-            <div class="content">
-                <div class="content-image">
-                    <img [src]="producto.imagen.url[0]" [alt]="producto.nombre">
+    <ng-container *ngIf="compras.length > 0">
+        
+        <div *ngFor="let compra of compras" class="mybuys__buy">
+            <h3>{{compra.venta.fecha_venta| date: 'longDate'}}</h3>
+    
+            <mat-divider></mat-divider>
+    
+            <section *ngFor="let producto of compra.producto" class="mybuys__buy-product">
+    
+                <div class="content">
+                    <div class="content-image">
+                        <img [src]="producto.imagen.url[0]" [alt]="producto.nombre">
+                    </div>
+        
+                    <div class="content-info">
+                        <h4>{{compra.venta.envio.status_envio}}</h4>
+                        <p>Llegó el {{compra.venta.envio.fecha_entrega | date: 'longDate'}}</p>
+                        <h3>{{producto.nombre | titlecase}}</h3>
+                        <p>{{producto.cantidad_producto}} 
+                            <span *ngIf="producto.cantidad_producto==1">unidad</span> <span *ngIf="producto.cantidad_producto>1">unidades</span> 
+                        </p>
+                    </div>
+    
                 </div>
     
-                <div class="content-info">
-                    <h4>{{compra.venta.envio.status_envio}}</h4>
-                    <p>Llegó el {{compra.venta.envio.fecha_entrega | date: 'longDate'}}</p>
-                    <h3>{{producto.nombre | titlecase}}</h3>
-                    <p>{{producto.cantidad_producto}} 
-                        <span *ngIf="producto.cantidad_producto==1">unidad</span> <span *ngIf="producto.cantidad_producto>1">unidades</span> 
-                    </p>
-                </div>
+                <mat-divider></mat-divider>
+    
+            </section>
+        </div>
 
-            </div>
-
-            <mat-divider></mat-divider>
-
-        </section>
-    </div>
+    </ng-container>
 
 </div>

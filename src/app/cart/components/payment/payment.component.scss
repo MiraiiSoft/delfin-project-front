@@ -1,0 +1,32 @@
+h2{
+    text-align: center;
+}
+
+.pay-methotd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    border: 2px solid black;
+    border-radius: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-shadow: 0 3px 10px -1px black;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    transition: all 300ms;
+    height: 6rem;
+
+    cursor: pointer;
+    .pay-methotd__img{
+        width: 10rem;
+
+        img{
+            width: 100%;
+        }
+    }
+}
+
+.pay-methotd:hover {
+    transform: scale(1.02);
+}

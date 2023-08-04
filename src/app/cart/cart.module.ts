@@ -4,10 +4,12 @@ import { CartRoutingModule } from './cart-routing.module';
 import { CartComponent } from './pages/cart/cart.component';
 import { MaterialModule } from '../material/material.module';
 import { CartService } from './services/cart.service';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
-    CartComponent
+    CartComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,

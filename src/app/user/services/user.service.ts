@@ -40,10 +40,13 @@ export class UserService {
 
   }
 
-  getVentasById_login( id: number ) {
-    const url = `${this.baseUrl}/venta/login/${id}`
+  getVentasById_login( ): Observable<IResShopping> {
+    const url = `${this.baseUrl}/venta/login/get`;
 
-    return this.http.get<IResShopping>( url ).pipe(
+    const headers = new HttpHeaders()
+      .set('token', localStorage.getItem('token') || '');
+
+    return this.http.get<IResShopping>( url, { headers } ).pipe(
       catchError( e => of(e.error))
     )
   }
