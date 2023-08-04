@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/cart/services/cart.service';
 import { TransferDataLocalService } from 'src/app/services/transfer-data-local.service';
 import { ProductosService } from 'src/app/services/productos.service';
@@ -60,7 +60,7 @@ export class DetailComponent implements OnInit {
     ]
   }
   
-  constructor(private productService: ProductosService, public cartService:CartService, public transferDataLocalService: TransferDataLocalService, private activateRoute: ActivatedRoute) {
+  constructor(private productService: ProductosService, public cartService:CartService, public transferDataLocalService: TransferDataLocalService, private activateRoute: ActivatedRoute, public router: Router ) {
     this.id_product = this.activateRoute.snapshot.queryParamMap.get('product') || '0'
 
     this.productService.getOneProduct( parseInt(this.id_product) ).subscribe( res => {
@@ -200,6 +200,15 @@ export class DetailComponent implements OnInit {
           this.transferDataLocalService.quantity += 1
           this.transferDataLocalService.emitQuantityToCart()
         }
+    })
+  }
+
+  public appendQueryParams( id:number ) {
+    this.router.navigate(['/site/products'], {
+      queryParams: {
+        filter: 'category',
+        value: id
+      }
     })
   }
 }
