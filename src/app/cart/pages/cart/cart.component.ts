@@ -12,7 +12,7 @@ import { TransferDataLocalService } from 'src/app/services/transfer-data-local.s
 
 export class CartComponent implements OnInit {
   id: string = ""
-  public current_price: number[] = []
+  public current_price: string[] = []
   public total_price = 0
   public total_allProducts = 0
   ArrayExist: any = []
@@ -64,7 +64,7 @@ export class CartComponent implements OnInit {
   public refreshTotalPrice() {
     this.total_price = 0;
     for (let index = 0; index < this.cart.carrito_producto.length; index++) {
-      this.total_price += this.current_price[index] * this.cart.carrito_producto[index].cantidad_producto
+      this.total_price += parseFloat(this.current_price[index]) * this.cart.carrito_producto[index].cantidad_producto
     }
     this.total_price = parseFloat(this.total_price.toFixed(2))
   }
@@ -186,17 +186,17 @@ export class CartComponent implements OnInit {
       newObjExist.boxPrice = false
 
       if( product.precio_caja != null ) {
-        this.current_price[index] = parseInt( product.precio_caja )
+        this.current_price[index] = parseFloat( product.precio_caja ).toFixed(2)
         newObjExist.boxPrice = true
       }
 
       if( product.precio_mayoreo != null ) {
-        this.current_price[index] = parseInt( product.precio_mayoreo )
+        this.current_price[index] = parseFloat( product.precio_mayoreo ).toFixed(2)
         newObjExist.wholeSalePrice = true
       } 
 
       if( product.precio_unitario != null ) {
-        this.current_price[index] = parseInt( product.precio_unitario )
+        this.current_price[index] = parseFloat( product.precio_unitario ).toFixed(2)
         newObjExist.unitPrice = true
       }
 
@@ -205,7 +205,7 @@ export class CartComponent implements OnInit {
 
     this.cart.carrito_producto.forEach( (carrito_producto, i) => {
       this.total_allProducts += carrito_producto.cantidad_producto
-      this.current_price.push(0)
+      this.current_price.push('')
       this.checkCounter(i, carrito_producto.producto)
       this.refreshTotalPrice()
     })
