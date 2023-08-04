@@ -5,8 +5,10 @@
 
     <div class="divider"></div>
 
-    <div class="text-uppercase">
-        <p>{{data.title | titlecase}}</p>
+    <div class="cont-down">
+        <div class="cont-title">
+            <a class="text">{{data.title | titlecase}}</a>
+        </div>
         <h3>${{ data.price | currency: 'MXN' }}</h3>
     </div>
 </div>
