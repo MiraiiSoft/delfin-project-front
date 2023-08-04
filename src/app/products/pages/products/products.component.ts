@@ -48,7 +48,6 @@ export class ProductsComponent implements OnInit {
       const id = parseInt(this.value);
       this.loadProducts(id);
     }
-
     this.categoriasService.getCategorias().subscribe(data => {
       const categoriaData: any[] = data.data.map(item => {
         return {
@@ -58,10 +57,6 @@ export class ProductsComponent implements OnInit {
       });
       this.categories = categoriaData;
     });
-
-
-
-
     this.coloresServices.getColores().subscribe(data => {
       const colorData: any[] = data.data.map(item => {
         return{
@@ -71,6 +66,15 @@ export class ProductsComponent implements OnInit {
         };
       });
       this.colors = colorData;
+    });
+
+
+    this.productosServices.getMarcas().subscribe(data => {
+      console.log(data)
+
+      if(data.success) {
+        this.brands = data.data;
+      }
     })
 
 
@@ -92,7 +96,6 @@ export class ProductsComponent implements OnInit {
   loadProducts(filterValue: number) {
     if (this.filter === 'category') {
       this.productosServices.getProductosPorCategoria(filterValue).subscribe(data => {
-        console.log(data)
       const productosData: IcardData[] = data.data.map(item => {
         return {
           title: item.nombre,
@@ -105,7 +108,6 @@ export class ProductsComponent implements OnInit {
     });
     }else if (this.filter === 'color') {
       this.productosServices.getProductosPorColor(filterValue).subscribe(data => {
-        console.log(data)
       const productosData: IcardData[] = data.data.map(item => {
         return {
           title: item.nombre,
