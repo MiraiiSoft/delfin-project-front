@@ -79,6 +79,7 @@ export class HeaderComponent implements OnInit {
             value: options.valueParam
           }
         })
+        window.location.reload()
       }
     }
   }

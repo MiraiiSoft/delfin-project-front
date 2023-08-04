@@ -51,27 +51,31 @@ export class ProductsComponent implements OnInit {
     'Marca 3'
   ]
 
-  constructor(private productosServices:ProductosService, private categoriasService: CategoriasService, private router: Router, public bottom: MatBottomSheet, private route: ActivatedRoute) { }
+  constructor(private productosServices:ProductosService, private categoriasService: CategoriasService, private router: Router, public bottom: MatBottomSheet, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     const urltree = this.router.parseUrl(this.router.url)
     this.filter = urltree.queryParams['filter']
     this.value = urltree.queryParams['value']
 
-    if (this.value) {
-      const id = parseInt(this.value);
-      this.loadProducts(id);
+    if ( this.filter = 'category' ) {
+      if (this.value) {
+        const id = parseInt(this.value);
+        this.loadProducts(id);
+      }
+
+      this.categoriasService.getCategorias().subscribe(data => {
+        const categoriaData: any[] = data.data.map(item => {
+          return {
+            id_categoria: item.id_categoria.toString(),
+            categoria: item.categoria
+          };
+        });
+        this.categories = categoriaData;
+      });
     }
 
-    this.categoriasService.getCategorias().subscribe(data => {
-      const categoriaData: any[] = data.data.map(item => {
-        return {
-          id_categoria: item.id_categoria.toString(),
-          categoria: item.categoria
-        };
-      });
-      this.categories = categoriaData;
-    });
   }
 
   updateCategoryQueryParam(categoryId: number) {
