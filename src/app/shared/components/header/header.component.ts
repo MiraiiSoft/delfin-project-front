@@ -77,7 +77,8 @@ export class HeaderComponent implements OnInit {
             value: options.valueParam
           }
         })
-        window.location.reload()
+        const newUrlCategory = `${route}?filter=${options.nameQueryParam}&value=${options.valueParam}`
+        window.location.href = newUrlCategory
       }
     }
   }

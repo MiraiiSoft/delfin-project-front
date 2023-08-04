@@ -59,7 +59,6 @@ export class ProductsComponent implements OnInit {
     this.filter = urltree.queryParams['filter']
     this.value = urltree.queryParams['value']
 
-    if ( this.filter = 'category' ) {
       if (this.value) {
         const id = parseInt(this.value);
         this.loadProducts(id);
@@ -74,7 +73,7 @@ export class ProductsComponent implements OnInit {
         });
         this.categories = categoriaData;
       });
-    }
+    
 
   }
 
