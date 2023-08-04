@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { IcardData } from 'src/app/shared/interfaces/card.interface';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BottomSheetComponent } from '../../components/bottom-sheet/bottom-sheet.component';
-
+import { ProductosService } from 'src/app/services/productos.service';
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { IsliderData } from 'src/app/shared/interfaces/slider.interface';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -14,73 +16,16 @@ export class ProductsComponent implements OnInit {
   categoryPanel: boolean = false;
   colorPanel: boolean = false;
   brandPanel: boolean = false;
-  
+
+  filter: string =''
+  value: string = ''
+
   openBottomSheet(): void {
     this.bottom.open(BottomSheetComponent);
   }
-  products: IcardData[] = [
-    {
-      title: "Lapicero tres colores",
-      img: "assets/img/products/img1.png",
-      id: 1,
-      price: 30
-    },
-    {
-      title: "Lapicero azul",
-      img: "assets/img/products/img3.png",
-      id: 2,
-      price: 30
-    },
-    {
-      title: "Lapicero verde",
-      img: "assets/img/products/img4.png",
-      id: 3,
-      price: 30
-    },
-    {
-      title: "Lapicero rojo",
-      img: "assets/img/products/img2.png",
-      id: 4,
-      price: 30
-    },
-    {
-      title: "Lapicero negro",
-      img: "assets/img/products/img3.png",
-      id: 5,
-      price: 30
-    },
-    {
-      title: "Lapicero morado",
-      img: "assets/img/products/img4.png",
-      id: 6,
-      price: 30
-    },
-    {
-      title: "Lapicero naranja",
-      img: "assets/img/products/img2.png",
-      id: 7,
-      price: 30
-    }
-  ]
+  products: IcardData[] = [];
 
-  categories: any = [
-    {
-      id_categoria: 1,
-      categoria: "Lapiceros"
-    },
-    {
-      id_categoria: 1,
-      categoria: "Gomas"
-    },
-    {
-      id_categoria: 1,
-      categoria: "Tijeras"
-    },
-    {
-      id_categoria: 1,
-      categoria: "Libretas"
-    }
-  ]
+  categories: any = [];
 
   colors: any = [
     {
@@ -106,10 +51,57 @@ export class ProductsComponent implements OnInit {
     'Marca 3'
   ]
 
-  constructor(private router: Router, public bottom: MatBottomSheet) { }
+  constructor(private productosServices:ProductosService, private categoriasService: CategoriasService, private router: Router, public bottom: MatBottomSheet, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const urltree = this.router.parseUrl(this.router.url)
+    this.filter = urltree.queryParams['filter']
+    this.value = urltree.queryParams['value']
+
+    if (this.value) {
+      const id = parseInt(this.value);
+      this.loadProducts(id);
+    }
+
+    this.categoriasService.getCategorias().subscribe(data => {
+      const categoriaData: any[] = data.data.map(item => {
+        return {
+          id_categoria: item.id_categoria.toString(),
+          categoria: item.categoria
+        };
+      });
+      this.categories = categoriaData;
+    });
   }
+
+  updateCategoryQueryParam(categoryId: number) {
+    const queryParams = { filter: 'category', value: categoryId };
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: queryParams,
+      queryParamsHandling: 'merge'
+    });
+    this.loadProducts(categoryId);
+  }
+
+  loadProducts(categoryId: number) {
+    this.productosServices.getProductosPorCategoria(categoryId).subscribe(data => {
+      console.log(data);
+
+      const productosData: IcardData[] = data.data.map(item => {
+        return {
+          title: item.nombre,
+          img: item.imagen.url[0],
+          id: item.id_producto,
+          price: parseFloat(item.precio_unitario),
+        };
+      });
+      this.products = productosData;
+    });
+  }
+
+
+
 
   public appendQueryParams(id: number) {
     this.router.navigate(['/site/products/detail'],{
@@ -118,5 +110,4 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-
 }

@@ -1,11 +1,11 @@
 <main class= "mat-app-background">
     <section class="container cont-father">
-        
+
         <button mat-mini-fab color="primary" (click)= "openBottomSheet()">
             <mat-icon>filter_list</mat-icon>
-            
+
         </button>
-        
+
         <nav class="cont-left-filter">
             <mat-label class="filter-title"> Filtro </mat-label>
             <ul class="filter-first-group">
@@ -15,7 +15,7 @@
                         <mat-icon class="single-icon-expand">expand_more</mat-icon>
                     </mat-label>
                     <ul *ngIf= "categoryPanel" class= "filter-second-group">
-                        <li *ngFor= "let categorie of categories; let i = index" class="single-text just-one" (click)= "selected = categories[i].categoria">
+                        <li *ngFor="let categorie of categories; let i = index" class="single-text just-one" (click)="updateCategoryQueryParam(categories[i].id_categoria)">
                             {{categorie.categoria}}
                         </li>
                     </ul>
@@ -48,7 +48,7 @@
         </nav>
 
         <div class="content__product-cards">
-            <app-card *ngFor= "let product of products" [data]= "product" [height]= "10" [width]= "10"></app-card>
+          <app-card *ngFor="let product of products" [data]="product" [height]="10" [width]="10"></app-card>
         </div>
 
     </section>
