@@ -6,6 +6,7 @@ import { BottomSheetComponent } from '../../components/bottom-sheet/bottom-sheet
 import { ProductosService } from 'src/app/services/productos.service';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { IsliderData } from 'src/app/shared/interfaces/slider.interface';
+import { ColoresService } from 'src/app/services/colores.service';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -27,23 +28,7 @@ export class ProductsComponent implements OnInit {
 
   categories: any = [];
 
-  colors: any = [
-    {
-      id_color: 1,
-      color: 'Blanco',
-      hexa: '#fffffff'
-    },
-    {
-      id_color: 2,
-      color: 'Blanco',
-      hexa: '#fffffff'
-    },
-    {
-      id_color: 3,
-      color: 'Blanco',
-      hexa: '#fffffff'
-    },
-  ]
+  colors: any = [];
 
   brands: any = [
     'Bic',
@@ -52,7 +37,7 @@ export class ProductsComponent implements OnInit {
   ]
 
 
-  constructor(private productosServices:ProductosService, private categoriasService: CategoriasService, private router: Router, public bottom: MatBottomSheet, private route: ActivatedRoute) { }
+  constructor(private productosServices:ProductosService, private coloresServices:ColoresService, private categoriasService: CategoriasService, private router: Router, public bottom: MatBottomSheet, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const urltree = this.router.parseUrl(this.router.url)
@@ -73,6 +58,25 @@ export class ProductsComponent implements OnInit {
       });
       this.categories = categoriaData;
     });
+
+
+
+
+    this.coloresServices.getColores().subscribe(data => {
+      const colorData: any[] = data.data.map(item => {
+        return{
+          id_color: item.id_color.toString(),
+          color: item.color,
+          hexa: item.hexa
+        };
+      });
+      this.colors = colorData;
+    })
+
+    const colorId = 1
+    this.productosServices.getProductosPorColor(colorId).subscribe(data =>{
+      console.log(data);
+    })
 
 
   }
