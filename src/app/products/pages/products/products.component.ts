@@ -48,6 +48,7 @@ export class ProductsComponent implements OnInit {
       const id = parseInt(this.value);
       this.loadProducts(id);
     }
+
     this.categoriasService.getCategorias().subscribe(data => {
       const categoriaData: any[] = data.data.map(item => {
         return {
