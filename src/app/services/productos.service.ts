@@ -47,4 +47,11 @@ export class ProductosService {
       catchError (e => of (e.error))
     )
   }
+
+  getProductosPorMarca (marca: string): Observable<IResProductos>{
+    const url = `${this.urlBase}/producto/marcas/${marca}`
+    return this.http.get<IResProductos>(url).pipe(
+      catchError (e => of (e.error))
+    )
+  }
 }
