@@ -5,10 +5,10 @@
 export const environment = {
   production: false,
 
-  API_URL: "http://localhost:3000/api"
+  API_URL: "http://169.254.200.45:3000/api"
 };
 
-/*
+/*`
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *

@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { IRequestUpdateUser, IResponseUser } from '../interfaces/user.interface';
 import { catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { IResShopping } from '../interfaces/shopping.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,17 @@ export class UserService {
         catchError( err => of(err.error) )
       );
 
+  }
+
+  getVentasById_login( ): Observable<IResShopping> {
+    const url = `${this.baseUrl}/venta/login/get`;
+
+    const headers = new HttpHeaders()
+      .set('token', localStorage.getItem('token') || '');
+
+    return this.http.get<IResShopping>( url, { headers } ).pipe(
+      catchError( e => of(e.error))
+    )
   }
 
 }

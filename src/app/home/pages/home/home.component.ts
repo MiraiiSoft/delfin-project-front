@@ -77,6 +77,8 @@ export class HomeComponent implements OnInit {
       this.newProducts = last9Products;
 
     });
+
+
   }
 
 }

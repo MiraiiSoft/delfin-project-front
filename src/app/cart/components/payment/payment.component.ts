@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { OrderData } from '../../interfaces/payment.interface';
 import { PaymentService } from '../../services/services-payment.service';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-payment',
@@ -14,21 +15,33 @@ export class PaymentComponent implements OnInit {
   logoPaypal = "assets/img/logos/paypal.png";
 
   constructor( @Inject(MAT_DIALOG_DATA) public data: OrderData, 
-    private paymentService: PaymentService // Inyecta el servicio PaymentService 
+    private paymentService: PaymentService, // Inyecta el servicio PaymentService 
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data)
   }
 
   proceedToPayment( payService: string ){
+    this.openSpinner();
     this.data.payservice = payService;
 
     this.paymentService.iniciarPago(this.data).subscribe(
       response => {
-        window.location.href = response.message.links[1].href;
+        this.closeSpinner();
+        window.location.href = response.message.links[1].href
       }
     );
+  }
+
+  openSpinner(){
+    this.dialog.open( SpinnerComponent, {
+      disableClose: true
+    } )
+  }
+
+  closeSpinner(){
+    this.dialog.closeAll();
   }
 
 }
