@@ -89,7 +89,9 @@ export class ProductsComponent implements OnInit {
       queryParamsHandling: 'merge'
     });
 
+    
     this.filter = filter;
+    this.searched = value - 1
 
     this.loadProducts(value);
   }
