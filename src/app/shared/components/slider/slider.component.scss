@@ -43,9 +43,12 @@
     }
 
     .content-text {
-        width: 100%;
-        overflow: hidden;
         text-transform: uppercase;
+        width: 100%;
+        height: 2rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 }
 
