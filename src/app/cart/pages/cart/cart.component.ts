@@ -37,7 +37,7 @@ export class CartComponent implements OnInit {
       this.id = String( link.get('cartId') )
     })
 
-    this.cartService.getCartById(this.id).subscribe( data => {
+    this.cartService.getCartById().subscribe( data => {
       this.cart = data.data
 
       this.reloadCart()
@@ -170,7 +170,7 @@ export class CartComponent implements OnInit {
 
     this.cartService.deleteProductOfCart( String( idToRemove ) ).subscribe( () => {
 
-      this.cartService.getCartById(this.id).subscribe( res => {
+      this.cartService.getCartById().subscribe( res => {
         const { success, data } = res
 
         if ( success == true ) {

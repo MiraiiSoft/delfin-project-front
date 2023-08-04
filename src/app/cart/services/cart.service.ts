@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -15,9 +15,13 @@ export class CartService {
 
   constructor(private http:HttpClient) { }
 
-  getCartById( id:string ) {
-    const url = `${ this.urlBase }/shoppingcart/${ id }`
-    return this.http.get<IResCartOne>( url ).pipe(
+  getCartById( ) {
+    const url = `${ this.urlBase }/shoppingcart/user/login`;
+
+    const headers = new HttpHeaders()
+      .set('token', localStorage.getItem('token') || '');
+
+    return this.http.get<IResCartOne>( url, { headers } ).pipe(
       catchError( e => of( e.error ) )
     )
   }

@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
     }else{
       this.inLogin = true;
 
-      this.cartService.getCartById(this.carrito).subscribe( res => {
+      this.cartService.getCartById().subscribe( res => {
         res.data.carrito_producto.forEach( () => {
           this.transferDataLocal.quantity += 1
         });
@@ -94,7 +94,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.nameUser = '';
     this.inLogin = false;
-    
+    this.quantity_products = 0;
     if( this.router.routerState.snapshot.url.includes('user') || this.router.routerState.snapshot.url.includes('cart') ){
       this.router.navigate(['/site/home']);
     }
