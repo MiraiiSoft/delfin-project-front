@@ -95,7 +95,7 @@ export class HeaderComponent implements OnInit {
     this.nameUser = '';
     this.inLogin = false;
     
-    if( this.router.routerState.snapshot.url.includes('user') ){
+    if( this.router.routerState.snapshot.url.includes('user') || this.router.routerState.snapshot.url.includes('cart') ){
       this.router.navigate(['/site/home']);
     }
 
