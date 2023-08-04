@@ -13,7 +13,7 @@ import { IShopping } from '../../interfaces/shopping.interface';
 export class ComprasComponent implements OnInit {
 
   $user!: Subscription;
-  compras!: IShopping[];
+  compras: IShopping[] = [];
 
   constructor( private dialog: MatDialog, private userService: UserService ) { }
   
