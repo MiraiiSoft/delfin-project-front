@@ -73,7 +73,7 @@ export class ProductsComponent implements OnInit {
       this.colors = colorData;
     })
 
-    
+
   }
 
   filterUrlId(filter: string, value: number) {
@@ -84,19 +84,15 @@ export class ProductsComponent implements OnInit {
       queryParamsHandling: 'merge'
     });
 
-    if (filter === 'category'){
-      this.loadProducts(value);
-    }else if (filter === 'color'){
-      this.loadProducts(value);
-    }else if (filter === 'brand'){
+    this.filter = filter;
 
-    }
+    this.loadProducts(value);
   }
 
   loadProducts(filterValue: number) {
     if (this.filter === 'category') {
       this.productosServices.getProductosPorCategoria(filterValue).subscribe(data => {
-
+        console.log(data)
       const productosData: IcardData[] = data.data.map(item => {
         return {
           title: item.nombre,
@@ -109,7 +105,7 @@ export class ProductsComponent implements OnInit {
     });
     }else if (this.filter === 'color') {
       this.productosServices.getProductosPorColor(filterValue).subscribe(data => {
-
+        console.log(data)
       const productosData: IcardData[] = data.data.map(item => {
         return {
           title: item.nombre,
