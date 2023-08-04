@@ -14,8 +14,8 @@ export class PaymentComponent implements OnInit {
   logoMercadoPago = "assets/img/logos/mercado-pago.png";
   logoPaypal = "assets/img/logos/paypal.png";
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: OrderData, 
-    private paymentService: PaymentService, // Inyecta el servicio PaymentService 
+  constructor( @Inject(MAT_DIALOG_DATA) public data: OrderData,
+    private paymentService: PaymentService, // Inyecta el servicio PaymentService
     private dialog: MatDialog
   ) { }
 
@@ -29,7 +29,7 @@ export class PaymentComponent implements OnInit {
     this.paymentService.iniciarPago(this.data).subscribe(
       response => {
         this.closeSpinner();
-        window.location.href = response.message.links[1].href
+        window.location.href = response.data.payUrl
       }
     );
   }
