@@ -51,6 +51,7 @@ export class ProductsComponent implements OnInit {
     'Marca 3'
   ]
 
+
   constructor(private productosServices:ProductosService, private categoriasService: CategoriasService, private router: Router, public bottom: MatBottomSheet, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -72,6 +73,8 @@ export class ProductsComponent implements OnInit {
       });
       this.categories = categoriaData;
     });
+
+
   }
 
   updateCategoryQueryParam(categoryId: number) {
@@ -86,7 +89,6 @@ export class ProductsComponent implements OnInit {
 
   loadProducts(categoryId: number) {
     this.productosServices.getProductosPorCategoria(categoryId).subscribe(data => {
-      console.log(data);
 
       const productosData: IcardData[] = data.data.map(item => {
         return {
@@ -98,6 +100,7 @@ export class ProductsComponent implements OnInit {
       });
       this.products = productosData;
     });
+
   }
 
 

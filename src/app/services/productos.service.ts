@@ -33,4 +33,11 @@ export class ProductosService {
       catchError (e => of(e.error))
     )
   }
+
+  getProductosPorColor (id: number) {
+    const url = `${this.urlBase}/producto/color/${id}`
+    return this.http.get(url).pipe(
+      catchError (e => of(e.error))
+    )
+  }
 }
