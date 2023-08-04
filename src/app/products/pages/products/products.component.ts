@@ -20,6 +20,7 @@ export class ProductsComponent implements OnInit {
 
   filter: string =''
   value: string = ''
+  searched: number = 0
 
   openBottomSheet(): void {
     this.bottom.open(BottomSheetComponent);
@@ -43,19 +44,20 @@ export class ProductsComponent implements OnInit {
     const urltree = this.router.parseUrl(this.router.url)
     this.filter = urltree.queryParams['filter']
     this.value = urltree.queryParams['value']
+    this.searched = parseInt( this.value ) - 1
 
-      if (this.value) {
-        const id = parseInt(this.value);
-        this.loadProducts(id);
-      }
+    if (this.value) {
+      const id = parseInt(this.value);
+      this.loadProducts(id);
+    }
 
-      this.categoriasService.getCategorias().subscribe(data => {
-        const categoriaData: any[] = data.data.map(item => {
-          return {
-            id_categoria: item.id_categoria.toString(),
-            categoria: item.categoria
-          };
-        });
+    this.categoriasService.getCategorias().subscribe(data => {
+      const categoriaData: any[] = data.data.map(item => {
+        return {
+          id_categoria: item.id_categoria.toString(),
+          categoria: item.categoria
+        };
+      });
       this.categories = categoriaData;
     });
 
