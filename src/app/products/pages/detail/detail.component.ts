@@ -31,7 +31,7 @@ export class DetailComponent implements OnInit {
     imagen: {
       url: []
     },
-    compra: "5",
+    compra: "0",
     precio_unitario: "00",
     precio_mayoreo: "00",
     precio_caja: "00",

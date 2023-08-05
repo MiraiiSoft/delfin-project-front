@@ -27,7 +27,7 @@
                     </button>
     
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item *ngFor="let categoria of categorias" (click)="redirectRoute('/site/products', {
+                        <button mat-menu-item *ngFor="let categoria of categorias" (click)="redirectRoute('/site/products/', {
                             requiredParams: true,
                             nameQueryParam: 'category',
                             valueParam: categoria.id_categoria.toString()
