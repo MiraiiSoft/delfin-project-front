@@ -89,6 +89,7 @@ export class ProductsComponent implements OnInit {
     
     this.filter = filter;
     this.searched = value - 1
+    this.value = String(value)
 
     this.loadProducts(value);
   }
@@ -128,7 +129,7 @@ export class ProductsComponent implements OnInit {
 
   loadProductsByBrand(brandName: string) {
     this.productosServices.getProductosPorMarca(brandName).subscribe(data => {
-      console.log(data)
+  
       const productosData: IcardData[] = data.data.map(item => {
         return {
           title: item.nombre,

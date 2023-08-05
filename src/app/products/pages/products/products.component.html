@@ -55,7 +55,7 @@
                 Resultados para productos perteneciente al color <span class="bold">"{{ colors[searched].color }}"</span>
             </mat-label>
             <mat-label *ngIf="filter=='brand'" class="results-format">
-                Resultados para productos perteneciente a la marca <span class="bold">"{{ brands[searched] }}"</span>
+                Resultados para productos perteneciente a la marca <span class="bold">"{{ brands[value] }}"</span>
             </mat-label>
             <div class="content__product-cards">
                 <app-card *ngFor="let product of products" [data]="product" [height]="10" [width]="10"></app-card>
