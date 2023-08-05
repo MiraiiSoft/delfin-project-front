@@ -6,12 +6,15 @@ import { BottomSheetComponent } from '../../components/bottom-sheet/bottom-sheet
 import { ProductosService } from 'src/app/services/productos.service';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { IsliderData } from 'src/app/shared/interfaces/slider.interface';
+import { ColoresService } from 'src/app/services/colores.service';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
+
   selected: string = ''
   categoryPanel: boolean = false;
   colorPanel: boolean = false;
@@ -19,6 +22,7 @@ export class ProductsComponent implements OnInit {
 
   filter: string =''
   value: string = ''
+  searched: number = 0
 
   openBottomSheet(): void {
     this.bottom.open(BottomSheetComponent);
@@ -27,71 +31,105 @@ export class ProductsComponent implements OnInit {
 
   categories: any = [];
 
-  colors: any = [
-    {
-      id_color: 1,
-      color: 'Blanco',
-      hexa: '#fffffff'
-    },
-    {
-      id_color: 2,
-      color: 'Blanco',
-      hexa: '#fffffff'
-    },
-    {
-      id_color: 3,
-      color: 'Blanco',
-      hexa: '#fffffff'
-    },
-  ]
+  colors: any = [];
 
-  brands: any = [
-    'Bic',
-    'Marca 2',
-    'Marca 3'
-  ]
+  brands: any = [];
 
-  constructor(private productosServices:ProductosService, private categoriasService: CategoriasService, private router: Router, public bottom: MatBottomSheet, private route: ActivatedRoute) {
-  }
+
+  constructor(private productosServices:ProductosService, private coloresServices:ColoresService, private categoriasService: CategoriasService, private router: Router, public bottom: MatBottomSheet, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const urltree = this.router.parseUrl(this.router.url)
     this.filter = urltree.queryParams['filter']
     this.value = urltree.queryParams['value']
+    this.searched = parseInt( this.value ) - 1
 
-    if ( this.filter = 'category' ) {
-      if (this.value) {
-        const id = parseInt(this.value);
-        this.loadProducts(id);
-      }
-
-      this.categoriasService.getCategorias().subscribe(data => {
-        const categoriaData: any[] = data.data.map(item => {
-          return {
-            id_categoria: item.id_categoria.toString(),
-            categoria: item.categoria
-          };
-        });
-        this.categories = categoriaData;
-      });
+    if (this.value) {
+      const id = parseInt(this.value);
+      this.loadProducts(id);
     }
+
+    this.categoriasService.getCategorias().subscribe(data => {
+      const categoriaData: any[] = data.data.map(item => {
+        return {
+          id_categoria: item.id_categoria.toString(),
+          categoria: item.categoria
+        };
+      });
+      this.categories = categoriaData;
+    });
+    this.coloresServices.getColores().subscribe(data => {
+      const colorData: any[] = data.data.map(item => {
+        return{
+          id_color: item.id_color.toString(),
+          color: item.color,
+          hexa: item.hexa
+        };
+      });
+      this.colors = colorData;
+    });
+
+
+    this.productosServices.getMarcas().subscribe(data => {
+      if(data.success) {
+        this.brands = data.data;
+        console.log(this.brands)
+      }
+    })
+
 
   }
 
-  updateCategoryQueryParam(categoryId: number) {
-    const queryParams = { filter: 'category', value: categoryId };
+  filterUrlId(filter: string, value: number) {
+    const brandName = this.brands[value]
+    const queryParams = { filter: filter, value: value };
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: queryParams,
       queryParamsHandling: 'merge'
     });
-    this.loadProducts(categoryId);
+
+    
+    this.filter = filter;
+    this.searched = value - 1
+
+    this.loadProducts(value);
   }
 
-  loadProducts(categoryId: number) {
-    this.productosServices.getProductosPorCategoria(categoryId).subscribe(data => {
-      console.log(data);
+  loadProducts(filterValue: number) {
+    if (this.filter === 'category') {
+      this.productosServices.getProductosPorCategoria(filterValue).subscribe(data => {
+      const productosData: IcardData[] = data.data.map(item => {
+        return {
+          title: item.nombre,
+          img: item.imagen.url[0],
+          id: item.id_producto,
+          price: parseFloat(item.precio_unitario),
+        };
+      });
+      this.products = productosData;
+    });
+    }else if (this.filter === 'color') {
+      this.productosServices.getProductosPorColor(filterValue).subscribe(data => {
+      const productosData: IcardData[] = data.data.map(item => {
+        return {
+          title: item.nombre,
+          img: item.imagen.url[0],
+          id: item.id_producto,
+          price: parseFloat(item.precio_unitario),
+        };
+      });
+      this.products = productosData;
+    });
+    }else if (this.filter === 'brand') {
+      this.loadProductsByBrand(this.value);
+    }
+  }
 
+
+  loadProductsByBrand(brandName: string) {
+    this.productosServices.getProductosPorMarca(brandName).subscribe(data => {
+      console.log(data)
       const productosData: IcardData[] = data.data.map(item => {
         return {
           title: item.nombre,
@@ -103,8 +141,6 @@ export class ProductsComponent implements OnInit {
       this.products = productosData;
     });
   }
-
-
 
 
   public appendQueryParams(id: number) {

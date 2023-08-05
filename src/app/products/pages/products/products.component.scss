@@ -99,6 +99,30 @@ a {
     border-radius: 0 16px 16px 0;
     background: white;
 }
-.content__product-cards{
+
+.cont-principal-products{
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .results-format {
+        width: 93%;
+        height: fit-content;
+        font-weight: normal;
+        font-size: 110%;
+        margin: 0;
+
+        .bold {
+            font-weight: bold;
+        }
+    }
+
+    .content__product-cards{
+        margin-top: 10px;
+        width: 93%;
+    }
 }
+
+

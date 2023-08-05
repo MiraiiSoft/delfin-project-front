@@ -15,8 +15,8 @@
                         <mat-icon class="single-icon-expand">expand_more</mat-icon>
                     </mat-label>
                     <ul *ngIf= "categoryPanel" class= "filter-second-group">
-                        <li *ngFor="let categorie of categories; let i = index" class="single-text just-one" (click)="updateCategoryQueryParam(categories[i].id_categoria)">
-                            {{categorie.categoria}}
+                        <li *ngFor="let category of categories; let i = index" class="single-text just-one" (click)="filterUrlId('category', category.id_categoria)">
+                            {{category.categoria}}
                         </li>
                     </ul>
                 </li>
@@ -27,7 +27,7 @@
                         <mat-icon class="single-icon-expand">expand_more</mat-icon>
                     </mat-label>
                     <ul *ngIf= "colorPanel" class="filter-second-group">
-                        <li *ngFor= "let color of colors; let i = index" class="single-text just-one" (click)= "selected = colors[i].color">
+                        <li *ngFor="let color of colors; let i = index" class="single-text just-one" (click)="filterUrlId('color', color.id_color)">
                             {{color.color}}
                         </li>
                     </ul>
@@ -39,7 +39,7 @@
                         <mat-icon class="single-icon-expand">expand_more</mat-icon>
                     </mat-label>
                     <ul *ngIf= "brandPanel" class="filter-second-group">
-                        <li *ngFor= "let brand of brands; let i = index" class="single-text just-one" (click)= "selected = brands[i].marca">
+                        <li *ngFor= "let brand of brands; let i = index" class="single-text just-one" (click)="filterUrlId('brand', i)">
                             {{brand}}
                         </li>
                     </ul>
@@ -47,10 +47,20 @@
             </ul>
         </nav>
 
-        <div class="content__product-cards">
-          <app-card *ngFor="let product of products" [data]="product" [height]="10" [width]="10"></app-card>
+        <div class="cont-principal-products">
+            <mat-label *ngIf="filter=='category'" class="results-format">
+                Resultados para productos pertenecientes a la categoria <span class="bold">"{{ categories[searched].categoria }}"</span>
+            </mat-label>
+            <mat-label *ngIf="filter=='color'" class="results-format">
+                Resultados para productos perteneciente al color <span class="bold">{{ colors[searched].color }}"</span>
+            </mat-label>
+            <mat-label *ngIf="filter=='brand'" class="results-format">
+                Resultados para productos perteneciente a la marca <span class="bold">{{ brands[searched] }}</span>
+            </mat-label>
+            <div class="content__product-cards">
+                <app-card *ngFor="let product of products" [data]="product" [height]="10" [width]="10"></app-card>
+            </div>
         </div>
-
     </section>
 </main>
 
