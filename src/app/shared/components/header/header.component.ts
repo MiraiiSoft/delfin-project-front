@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
     }else{
       this.inLogin = true;
 
-      this.cartService.getCartById(this.carrito).subscribe( res => {
+      this.cartService.getCartById().subscribe( res => {
         res.data.carrito_producto.forEach( () => {
           this.transferDataLocal.quantity += 1
         });
