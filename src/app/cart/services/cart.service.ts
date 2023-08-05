@@ -31,7 +31,7 @@ export class CartService {
   }
 
   addProductToCart(body: ICartProduct_req) {
-    const url = `${this.urlBase}/shoppingCart/add/product/`
+    const url = `${this.urlBase}/shoppingCart/add/product`
     return this.http.post<IResCartProduct_add>( url, body ).pipe(
       catchError ( e => e.error )
     )
