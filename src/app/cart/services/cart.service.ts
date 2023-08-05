@@ -10,7 +10,7 @@ import { IResCartOne, IResDeleteCartProduct, IResCartProduct_add, ICartProduct_a
 
 
 export class CartService {
-  
+
   private urlBase = environment.API_URL;
 
   constructor(private http:HttpClient) { }
@@ -24,7 +24,7 @@ export class CartService {
 
 
   updateCartProductById(id: string, body:ICartProduct_add) {
-    const url = `${this.urlBase}/shoppingCart/update/${ id }` 
+    const url = `${this.urlBase}/shoppingCart/update/${ id }`
     return this.http.put<ICartProduct_add>(url, body).pipe(
       catchError( e => of( e.error ) )
     )
@@ -43,5 +43,5 @@ export class CartService {
       catchError( e => e.error)
     )
   }
-   
+
 }

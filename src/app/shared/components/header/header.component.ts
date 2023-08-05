@@ -13,7 +13,7 @@ import { TransferDataLocalService } from 'src/app/services/transfer-data-local.s
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private router: Router, private authService: AuthService, public cartService:CartService, 
+  constructor( private router: Router, private authService: AuthService, public cartService:CartService,
     private transferDataLocal: TransferDataLocalService, private categoriaService: CategoriasService ) { }
 
   iconUsr = "assets/img/user/iconoUsuario.png";
@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
         });
         this.transferDataLocal.emitQuantityToCart()
       })
-      
+
       this.transferDataLocal.quantityCart.subscribe( quantity => {
         this.quantity_products = quantity;
       });
@@ -64,7 +64,7 @@ export class HeaderComponent implements OnInit {
   }
 
   redirectRoute( route: string, options?: options ){
-    
+
     if( !options ){
       this.router.navigate([route]);
     }
@@ -96,7 +96,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.nameUser = '';
     this.inLogin = false;
-    
+
     if( this.router.routerState.snapshot.url.includes('user') || this.router.routerState.snapshot.url.includes('cart') ){
       this.router.navigate(['/site/home']);
     }
