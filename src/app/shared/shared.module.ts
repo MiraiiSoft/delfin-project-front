@@ -9,6 +9,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { NgxGlideModule } from 'ngx-glide';
 import { CardComponent } from './components/card/card.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     FooterComponent,
     CardComponent,
     SpinnerComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,
