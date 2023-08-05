@@ -68,15 +68,12 @@ export class ProductsComponent implements OnInit {
       });
       this.colors = colorData;
     });
-
-
     this.productosServices.getMarcas().subscribe(data => {
       if(data.success) {
         this.brands = data.data;
         console.log(this.brands)
       }
-    })
-
+    });
 
   }
 
@@ -122,10 +119,12 @@ export class ProductsComponent implements OnInit {
       this.products = productosData;
     });
     }else if (this.filter === 'brand') {
-      this.loadProductsByBrand(this.value);
+       const brandName = this.brands[filterValue];
+       console.log(filterValue)
+       this.loadProductsByBrand(brandName);
+
     }
   }
-
 
   loadProductsByBrand(brandName: string) {
     this.productosServices.getProductosPorMarca(brandName).subscribe(data => {
@@ -141,7 +140,6 @@ export class ProductsComponent implements OnInit {
       this.products = productosData;
     });
   }
-
 
   public appendQueryParams(id: number) {
     this.router.navigate(['/site/products/detail'],{
