@@ -22,6 +22,7 @@ export class ComprasComponent implements OnInit {
     this.$user = this.userService.getVentasById_login().subscribe( res => {
       if( res.data ){
         this.compras = res.data;
+        console.log(this.compras)
       }
     })
   }
