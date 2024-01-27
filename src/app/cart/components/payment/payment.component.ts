@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { OrderData } from '../../interfaces/payment.interface';
 import { PaymentService } from '../../services/services-payment.service';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { mensajeError } from 'src/app/utils/alertSwal';
 
 @Component({
   selector: 'app-payment',
@@ -29,7 +30,11 @@ export class PaymentComponent implements OnInit {
     this.paymentService.iniciarPago(this.data).subscribe(
       response => {
         this.closeSpinner();
-        window.location.href = response.data.payUrl
+        if(!response.success) {
+          mensajeError(response.message || "")
+        }else{
+          window.location.href = response.data.payUrl
+        }
       }
     );
   }
