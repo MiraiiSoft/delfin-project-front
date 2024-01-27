@@ -72,7 +72,7 @@ export class CartComponent implements OnInit {
       this.cart.carrito_producto[index].cantidad_producto -= 1;
   }
 
-  
+
 
   public refreshTotalPrice() {
     this.total_price = 0;
