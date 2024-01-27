@@ -59,10 +59,13 @@ export class CartComponent implements OnInit {
   }
 
   public incrementCounter(index: any, product: any) {
-    if(this.cart.carrito_producto[index].cantidad_producto == product.inventario.existencias)
-      this.cart.carrito_producto[index].cantidad_producto = product.inventario.existencias
-    else
+    if(this.cart.carrito_producto[index].cantidad_producto < product.inventario[0].existencias){
       this.cart.carrito_producto[index].cantidad_producto += 1;
+    }
+    // if(this.cart.carrito_producto[index].cantidad_producto == product.inventario[0].existencias)
+    //   this.cart.carrito_producto[index].cantidad_producto = product.inventario.existencias
+    // else
+    //   this.cart.carrito_producto[index].cantidad_producto += 1;
   }
 
   public decrementCounter(index: any) {
