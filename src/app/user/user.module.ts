@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HomeuserComponent } from './pages/homeuser/homeuser.component';
 import { DatosUserComponent } from './components/datos-user/datos-user.component';
 import { ComprasComponent } from './components/compras/compras.component';
@@ -25,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class UserModule { }
