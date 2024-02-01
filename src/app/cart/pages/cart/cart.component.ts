@@ -234,7 +234,7 @@ export class CartComponent implements OnInit {
       return {
         title: "productos",
         unit_price: Number(producto.precio_unitario),
-        currency_id: 'COP',
+        currency_id: 'MXN',
         quantity: cantidad_producto,
       };
     });
